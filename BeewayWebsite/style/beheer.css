@@ -1,0 +1,97 @@
+/*---------------------Beheerlijsten-------------------------*/
+
+.beewaylijst {
+  margin: 7rem 1rem 0 1rem;
+  background: #b9b9b9;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.beewaylijstteble {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.beewaylijstteble td, th {
+  padding: 10px;
+  text-align: center;
+}
+.beewaylijstteble td {
+  color: white;
+}
+
+.beewaylijstteble tr:nth-child(even) {
+  background-color: #262626;
+  border-radius: 1rem;
+}
+
+.beewaylijstopties {
+  width: 32%;
+  margin: 5px 34%;
+}
+.beewaylijstopties button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #b9b9b9;
+  font-size: 18px;
+  font-weight: bold;
+  color: #8c8c8c;
+}
+.beewaylijstopties u {
+  color: black;
+}
+.beewaylijstopties b {
+  text-align: center;
+  font-size: 20px!important;
+}
+
+/*---------------------Beheertoevoegen/aanpassen-------------------------*/
+
+
+#name {
+  text-align: center;
+  line-height: 20px;
+  color: #ffc107;
+}
+#name a{
+  text-decoration: none;
+  background: none;
+  line-height: 20px;
+  color: #ffc107;
+}
+#name a:hover {
+  color: #737373;
+}
+
+.addedit {
+  width: 1300px;
+  height: 675px;
+  background: #333333;
+  top: 52%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 20px 50px;
+  border-radius: 25px;
+}
+.addedit label {
+  color: #ffc107;
+}
+
+.addeditBy {
+  color: white;
+}
+
+#RP {
+  width: 600px;
+  height: 300px;
+  float: right;
+}
+
+#LP {
+  width: 600px;
+  height: 300px;
+  float: left;
+}

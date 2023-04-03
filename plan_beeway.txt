@@ -1,0 +1,82 @@
+LoginPagina:
+
+  Email:
+    Hier kan je het email dat je hebt gekregen van de admin invoeren.
+
+  Wachtwoord:
+    Hier kan je het wachtwoord dat je van de admin hebt gekregen invoeren.
+    Het wachtwoord is niet zichtbaar als je aan het invoeren bent.
+
+  Login knop:
+    Controleren dat er een "@" en een "." in het email zit.
+    Als 1 of meerdere vakken leeg zijn kan je niet op het knop drukken.
+    Als de email of de wachtwoord fout is krijg je een melding.
+    Als je succesvol inlogt kom je bij het menu pagina terecht.
+
+``````````````````````````````````````````````````````````````````````````````````````
+MenuPagina/Beeway lijst:
+
+  Nieuw beeway maken
+    Hier kan je een nieuwe Beeway aanmaken voor die dag of de toekomst.
+
+
+    Lijst met groepen die jij les geeft beheren.
+    Een lijst met alle beeways dat bij de groep hoort gesorteerd laten zien per week.
+    Van alle beeways in de lijst zie je de datum en de tijd, groep, vak en de docent.
+    Je kunt sorteren op groep en vak bij de geselecteerde week.
+    Bij de Lijst kan je elke Beeway waar jij les hebt gegeven bewerken en verwijderen, je kan meerdere klassen les hebben gegeven.
+
+  uitlog knop
+    Als je klaar bent met wat je hebt gedaan kan je uitloggen.
+
+``````````````````````````````````````````````````````````````````````````````````````
+  Pagina Beeway Beheren:
+
+    Op deze pagina kan je een nieuwe schema voor die dag gaan maken voor elke groep die je les geeft.
+    In de schema zet je de dingen die je gaat doen zoals:
+
+      Beoordeling voor die dag:
+        Onder de titel kan je een beoordeling geven bij de smileys.
+
+      Een Hoofdthema:
+        Bij de Hoofdthema zet je de vakken die je die dag gaat doen.
+
+      Een Vakgebied:
+        Je schrijft hiet wat je op dat moment les geeft.
+
+      Een Concreet doel:
+        In de concreet doel schrijf je wat je wilt bereiken
+
+      Een Planning:
+        De planning is de vakken die je die dag gaat doen
+
+      Acties:
+        Bij het onderwerp acties zet je de de dingen Wie, Wat gaat doen en de tijd limiet voor als je iets binnen de tijd moet hebben afgerond.als je het afgerond hebt kan je het nog aanvinken.
+
+      Datales/Observatie:
+        Bij het onderdeel Daales/Observatie kan de docent die naar de lessen kijkt beoordelen en hier schrijven.
+
+      Leerdoel:
+        Hier schrijf je wat het doel is.
+
+      Evaluatie:
+        Het onderwerp evaluatie is een kort samenvatting van de kijker zijn beoordeling heeft gegeven voor de docent die les heeft gegeven.
+
+      Werkdoel:
+        Hier komt het met wat je gaat beginnen om het doel te bereiken
+
+      Actie:
+        Het laatste onderwerp is actie, hier schrijf je wat je actie moet ondernemen om verbeteringen te laten zien.
+
+      Opslaan knop:
+        Als je klaar bent met het invoeren dan kan je het gaan opslaan.
+
+
+
+``````````````````````````````````````````````````````````````````````````````````````
+
+Admin Pagina
+
+De admin kan users beheren.
+De Admin kan de Hoofdthema beheren.
+Beeways schema kan alleen aangepast worden door de Admin en de users kunnen hun eigen beeway aanpassen.

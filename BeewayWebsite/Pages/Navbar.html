@@ -1,0 +1,37 @@
+<script src="../script/navbar.js" defer></script>
+
+
+<div class="navbar sticky" id="menulist">
+  <iconify-icon icon="ei:navicon" class="nav-icon" onclick="toggleresponsivemenu()"></iconify-icon>
+  <div id="navbar_left">
+    <a href="beewaylijst.html"><b>Home</b></a>
+    <div class="dropdown">
+      <a id="dashboard" href="beewaylijst.html"><b>dashboard</b></a>
+      <div class="dropdown-content">
+        <a href="beewaybewerken.html"><b>Beeway's</b></a>
+        <a href="klassenlijst.html"><b>Klassen</b></a>
+        <a href="vakkenlijst.html"><b>Vakken</b></a>
+        <a href="Hoofdthemalijst.html"><b>Hoofdthema's</b></a>
+        <a href="userlijst.html"><b>Users</b></a>
+      </div>
+    </div>
+  </div>
+  <div id="navbar_right">
+    <a id="menua" onclick="togglemenu()"><b><iconify-icon icon="ei:navicon" id="nav-icon_2"></iconify-icon></b></a>
+  </div>
+</div>
+<div class="menu" id="menu">
+  <div class="menu_profiel">
+    <div class="menu_profiel_foto">
+      <i class='fas fa-user-alt' style='font-size:66px'></i>
+    </div>
+    <div class="menu_profiel_rechts">
+      <h3 id="menu_profiel_naam" style="font-weight: none;">goedemiddag,
+        <b style="font-weight: bold;">Robin</b></h3>
+      <a id="menu_profiel_knop" href="#" class="editbutton">Profiel</a>
+    </div>
+  </div>
+  <div class="menu_Buttons">
+    <a href="loginpage.html" class="editbutton">Uitloggen</a>
+  </div>
+</div>

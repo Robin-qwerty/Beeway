@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset = "UTF-8">
+  <title>beeway - bewerken </title>
+  <link href="../style/style.css" rel="stylesheet">
+  <link href="../style/beewaystyle.css" rel="stylesheet">
+  <script src="../script/navbar.js" defer></script>
+  <script src="../script/beeway.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#navmenu').load('Navbar.html');
+      // alert("test");
+    });
+  </script>
+</head>
+<body>
+
+  <div class="navmenu" id="navmenu"></div>
+
+
+
+
+  <form class="beewayeditform" method="POST" action="#">
+
+    <div class="beewayedit">
+      <div><input type="text" placeholder="BeewayNaam" name="BeewayNaam"></div>
+      <div><button type="submit" class="addbutton" style="font-size: 16px;">Opslaan</button></div>
+      <div><a onclick='return confirm("Weet je zekker dat je deze beeway wilt verwijderen!?")' href="##" class="deletebutton" style="font-size: 16px;">Verwijderen</a></div>
+      <div>
+        <p>Aangemaakt door: <b>Robin</b></p>
+        <p>Als laast bewerkt door: <b>Robin</b></p>
+      </div>
+      <div class="BeewayAddRows">
+        <a class="addbutton">Planning rij toevoegen <b>+</b></a>
+        <a class="addbutton">Observatie rij toevoegen <b>+</b></a>
+      </div>
+    </div>
+
+    <div class="helebeeway">
+      <div id="grid-line">
+        <div class="cell BEEWAY">
+          <h1>BEEWAY</h1>
+          <h2>Iedere dag ’n beetje beter</h2>
+          <div id="groepen">
+            <label>Groepen</label>
+            <input type="text" name="Groepen" maxlength="5"></input>
+          </div>
+        </div>
+
+        <div class="cell HOOFDTHEMA">
+          <h2 id="orange">HOOFDTHEMA</h2>
+          <input type="radio" name="Hoofdthema" value="HoofdthemaP1">
+          <label for="html">P1: EDI</label><br>
+          <input type="radio" name="Hoofdthema" value="HoofdthemaP2">
+          <label for="html">P2: BEGELEIDENDE INOEFENING</label><br>
+          <input type="radio" name="Hoofdthema" value="HoofdthemaP3">
+          <label for="html">P3: LEZEN</label><br>
+          <input type="radio" name="Hoofdthema" value="HoofdthemaP4">
+          <label for="html">P4: DIFFERENTIATIE EDI</label><br>
+          <input type="radio" name="Hoofdthema" value="HoofdthemaP5">
+          <label for="html">P5: DOELENPLANNER</label><br>
+        </div>
+        <div class="cell CONCREETDOEL">
+          <h2 id="orange">CONCREET DOEL</h2>
+          <textarea type="text" name="ConcreetdoelText" maxlength="2500"></textarea>
+        </div>
+        <div class="cell beoordeling">
+          <div class="beoordeling-item beoordeling-item1"><i class='far fa-smile' style='font-size:62px'></i></div>
+          <div class="beoordeling-item beoordeling-item2">
+            <input type="number" name="beoordeling-item2"  min="0" max="999"></input>
+          </div>
+          <div class="beoordeling-item beoordeling-item3"><i class='far fa-meh' style='font-size:62px'></i></div>
+          <div class="beoordeling-item beoordeling-item4">
+            <input type="number" name="beoordeling-item4"  min="0" max="999"></input>
+          </div>
+          <div class="beoordeling-item beoordeling-item5"><i class='far fa-frown' style='font-size:62px'></i></div>
+          <div class="beoordeling-item beoordeling-item6">
+            <input type="number" name="beoordeling-item6" min="1" max="5"></input>
+          </div>
+        </div>
+        <div class="cell vakgebied">
+          <h2 id="orange">VAKGEBIED</h2>
+          <select name="vakgebied" id="vakgebied">
+            <optgroup label="Selecteer een vakgebied">
+              <option value=""></option>
+              <option value="1">Rekenen</option>
+              <option value="2">Lezen</option>
+              <option value="3">taal</option>
+              <option value="4">engels</option>
+              <option value="5">gym</option>
+            </optgroup>
+          </select>
+        </div>
+
+
+
+        <div class="cell PLANNING">
+          <h2 id="orange3">PLANNING</h2>
+          <div class="textareaplaning">
+            <div>
+              <textarea type="text" name="PlaningTxt1" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="PlaningTxt2" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="PlaningTxt3" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="PlaningTxt4" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="PlaningTxt5" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="PlaningTxt6" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="PlaningTxt7" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="PlaningTxt8" rows="2" maxlength="74"></textarea></div>
+          </div>
+        </div>
+        <div class="cell Acties">
+          <h2>ACTIES</h2>
+        </div>
+        <div class="cell WAT">
+          <h2 id="orange2">WAT</h2>
+          <div class="textareaplaning">
+            <div><textarea type="text" name="WatTxt1" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WatTxt2" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WatTxt3" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WatTxt4" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WatTxt5" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WatTxt6" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WatTxt7" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WatTxt8" rows="2" maxlength="74"></textarea></div>
+          </div>
+        </div>
+        <div class="cell WIE">
+          <h2 id="orange2">WIE</h2>
+          <div class="textareaplaning">
+            <div><textarea type="text" name="WieTxt1 WieTxt" id="WieTxt" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WieTxt2 WieTxt" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WieTxt3 WieTxt" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WieTxt4 WieTxt" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WieTxt5 WieTxt" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WieTxt6 WieTxt" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WieTxt7 WieTxt" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="WieTxt8 WieTxt" rows="2" maxlength="74"></textarea></div>
+          </div>
+        </div>
+        <div class="cell DEADLINE">
+          <h2 id="orange2">DEADLINE</h2>
+          <div class="textareaplaning">
+            <div><textarea type="text" name="DeadlineTxt1" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="DeadlineTxt2" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="DeadlineTxt3" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="DeadlineTxt4" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="DeadlineTxt5" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="DeadlineTxt6" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="DeadlineTxt7" rows="2" maxlength="74"></textarea></div>
+            <div><textarea type="text" name="DeadlineTxt8" rows="2" maxlength="74"></textarea></div>
+          </div>
+        </div>
+        <div class="cell done">
+          <h2 id="orange2">&#x2714;</h2>
+          <div><input type="radio" id="done" name="done1" value="#"></div>
+          <div><input type="radio" id="done" name="done2" value="#"></div>
+          <div><input type="radio" id="done" name="done3" value="#"></div>
+          <div><input type="radio" id="done" name="done4" value="#"></div>
+          <div><input type="radio" id="done" name="done5" value="#"></div>
+          <div><input type="radio" id="done" name="done6" value="#"></div>
+          <div><input type="radio" id="done" name="done7" value="#"></div>
+          <div><input type="radio" id="done" name="done8" value="#"></div>
+        </div>
+
+
+
+        <div class="cell observatie">
+          <h2 id="orange">DATA LES/OBSERVATIE</h2>
+          <div class="textareaobservatie">
+            <div><textarea type="text" name="ObservatieTxt1" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ObservatieTxt2" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ObservatieTxt3" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ObservatieTxt4" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ObservatieTxt5" rows="3" maxlength="155"></textarea></div>
+          </div>
+        </div>
+        <div class="cell LEERDOEL">
+          <h2 id="orange">LEERDOEL</h2>
+          <div class="textareaobservatie">
+            <div><textarea type="text" name="LeerdoelTxt1" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="LeerdoelTxt2" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="LeerdoelTxt3" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="LeerdoelTxt4" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="LeerdoelTxt5" rows="3" maxlength="155"></textarea></div>
+          </div>
+        </div>
+        <div class="cell EVALUATIe">
+          <h2 id="orange">EVALUATIE</h2>
+          <div class="textareaobservatie">
+            <div><textarea type="text" name="EvaluatieTxt1" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="EvaluatieTxt2" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="EvaluatieTxt3" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="EvaluatieTxt4" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="EvaluatieTxt5" rows="3" maxlength="155"></textarea></div>
+          </div>
+        </div>
+        <div class="cell Werkdoel">
+          <h2 id="orange">Werkdoel</h2>
+          <div class="textareaobservatie">
+            <div><textarea type="text" name="WerkdoelTxt1" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="WerkdoelTxt2" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="WerkdoelTxt3" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="WerkdoelTxt4" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="WerkdoelTxt5" rows="3" maxlength="155"></textarea></div>
+          </div>
+        </div>
+        <div class="cell Actie">
+          <h2 id="orange">Actie</h2>
+          <div class="textareaobservatie">
+            <div><textarea type="text" name="ActieTxt1" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ActieTxt2" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ActieTxt3" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ActieTxt4" rows="3" maxlength="155"></textarea></div>
+            <div><textarea type="text" name="ActieTxt5" rows="3" maxlength="155"></textarea></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+</body>
+</html>
