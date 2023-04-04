@@ -5,14 +5,13 @@
   <title>dashboard - beewaylijst</title>
   <link href="../style/style.css" rel="stylesheet">
   <link href="../style/beheer.css" rel="stylesheet">
-  <script src="../script/navbar.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
-      $('#navmenu').load('Navbar.html');
+      $('#navmenu').load('../views/Navbar.html');
       // alert("test");
     });
   </script>
@@ -23,18 +22,18 @@
 
 
   <div class="beewaylijst">
-    <div class="beewaylijsttitel"><h1>Welkom op de admin page</h1></div>
+    <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
     <h2>Klassen beheeren</h2>
     <div class="beewaylijstopties">
-      <button onclick="window.location.href='http://192.168.1.100//Beeway/BeewayWebsite/pages/beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
+      <button onclick="window.location.href='beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
-      <button onclick="window.location.href='http://192.168.1.100//Beeway/BeewayWebsite/pages/klassenlijst.html';" id="beewaylijstopties4"><u>Klassen</u></button>
+      <button onclick="window.location.href='klassenlijst.html';" id="beewaylijstopties4"><u>Klassen</u></button>
       <b>|</b>
-      <button onclick="window.location.href='http://192.168.1.100//Beeway/BeewayWebsite/pages/vakkenlijst.html';" id="beewaylijstopties2">Vakken</button>
+      <button onclick="window.location.href='vakkenlijst.html';" id="beewaylijstopties2">Vakken</button>
       <b>|</b>
-      <button onclick="window.location.href='http://192.168.1.100//Beeway/BeewayWebsite/pages/Hoofdthemalijst.html';" id="beewaylijstopties3">Hoofdthema's</button>
+      <button onclick="window.location.href='Hoofdthemalijst.html';" id="beewaylijstopties3">Hoofdthema's</button>
       <b>|</b>
-      <button onclick="window.location.href='http://192.168.1.100//Beeway/BeewayWebsite/pages/userlijst.html';" id="beewaylijstopties5">Users</button>
+      <button onclick="window.location.href='userlijst.html';" id="beewaylijstopties5">Users</button>
     </div>
     <hr>
     <br>

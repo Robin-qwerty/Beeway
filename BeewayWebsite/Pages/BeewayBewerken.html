@@ -2,19 +2,16 @@
 <html>
 <head>
   <meta charset = "UTF-8">
-  <title>beeway - bewerken </title>
+  <title>beeway bewerken </title>
   <link href="../style/style.css" rel="stylesheet">
   <link href="../style/beewaystyle.css" rel="stylesheet">
-  <script src="../script/navbar.js" defer></script>
   <script src="../script/beeway.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
-      $('#navmenu').load('Navbar.html');
-      // alert("test");
+      $('#navmenu').load('../views/Navbar.html');
     });
   </script>
 </head>
@@ -23,10 +20,7 @@
   <div class="navmenu" id="navmenu"></div>
 
 
-
-
   <form class="beewayeditform" method="POST" action="#">
-
     <div class="beewayedit">
       <div><input type="text" placeholder="BeewayNaam" name="BeewayNaam"></div>
       <div><button type="submit" class="addbutton" style="font-size: 16px;">Opslaan</button></div>
@@ -41,6 +35,8 @@
       </div>
     </div>
 
+
+
     <div class="helebeeway">
       <div id="grid-line">
         <div class="cell BEEWAY">
@@ -51,7 +47,6 @@
             <input type="text" name="Groepen" maxlength="5"></input>
           </div>
         </div>
-
         <div class="cell HOOFDTHEMA">
           <h2 id="orange">HOOFDTHEMA</h2>
           <input type="radio" name="Hoofdthema" value="HoofdthemaP1">
@@ -222,7 +217,5 @@
       </div>
     </div>
   </form>
-
-
 </body>
 </html>

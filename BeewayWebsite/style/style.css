@@ -326,6 +326,7 @@ html {
   display: inline-block;
   border: none;
   background: #4d4d4d;
+  color: white;
 }
 .form input[type=text]:focus, .form input[type=number]:focus, .form input[type=email]:focus, .form input[type=password]:focus, .form #selectaddedit:focus, .form #textaddedit:focus {
   background-color: #ffc107;
