@@ -33,13 +33,7 @@ CREATE TABLE `Vakgebied`
  `DeletedAt`     datetime NULL ,
  `DeletedBy`     int NULL ,
 
-PRIMARY KEY (`VakId`),
-KEY `FK_2` (`CreatedBy`),
-CONSTRAINT `FK_14` FOREIGN KEY `FK_2` (`CreatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_3` (`UpdatedBy`),
-CONSTRAINT `FK_17` FOREIGN KEY `FK_3` (`UpdatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_4` (`DeletedBy`),
-CONSTRAINT `FK_21_1` FOREIGN KEY `FK_4` (`DeletedBy`) REFERENCES `Users` (`UserId`)
+PRIMARY KEY (`VakId`)
 );
 
 -- ************************************** `Hoofdthema`
@@ -58,13 +52,7 @@ CREATE TABLE `Hoofdthema`
  `DeletedAt`  datetime NULL ,
  `DeletedBy`  int NULL ,
 
-PRIMARY KEY (`ThemaId`),
-KEY `FK_2` (`CreatedBy`),
-CONSTRAINT `FK_13` FOREIGN KEY `FK_2` (`CreatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_3` (`UpdatedBy`),
-CONSTRAINT `FK_18` FOREIGN KEY `FK_3` (`UpdatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_4` (`DeletedBy`),
-CONSTRAINT `FK_20` FOREIGN KEY `FK_4` (`DeletedBy`) REFERENCES `Users` (`UserId`)
+PRIMARY KEY (`ThemaId`)
 );
 
 -- ************************************** `Klassen`
@@ -81,13 +69,7 @@ CREATE TABLE `Klassen`
  `DeletedAt` datetime NULL ,
  `DeletedBy` int NULL ,
 
-PRIMARY KEY (`KlasId`),
-KEY `FK_2` (`CreatedBy`),
-CONSTRAINT `FK_15` FOREIGN KEY `FK_2` (`CreatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_3` (`UpdatedBy`),
-CONSTRAINT `FK_19` FOREIGN KEY `FK_3` (`UpdatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_4` (`DeletedBy`),
-CONSTRAINT `FK_22` FOREIGN KEY `FK_4` (`DeletedBy`) REFERENCES `Users` (`UserId`)
+PRIMARY KEY (`KlasId`)
 );
 
 -- ************************************** `Beeway`
@@ -111,17 +93,7 @@ CREATE TABLE `Beeway`
  `DeletedAt`     datetime NULL ,
  `DeletedBy`     int NULL ,
 
-PRIMARY KEY (`BeewayId`),
-KEY `FK_2` (`Vakgebied_Id`),
-CONSTRAINT `FK_1` FOREIGN KEY `FK_2` (`Vakgebied_Id`) REFERENCES `Vakgebied` (`VakId`),
-KEY `FK_4` (`Hoofdthema_Id`),
-CONSTRAINT `FK_5` FOREIGN KEY `FK_4` (`Hoofdthema_Id`) REFERENCES `Hoofdthema` (`ThemaId`),
-KEY `FK_5` (`CreatedBy`),
-CONSTRAINT `FK_8` FOREIGN KEY `FK_5` (`CreatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_6` (`UpdatedBy`),
-CONSTRAINT `FK_9` FOREIGN KEY `FK_6` (`UpdatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_7` (`DeletedBy`),
-CONSTRAINT `FK_21` FOREIGN KEY `FK_7` (`DeletedBy`) REFERENCES `Users` (`UserId`)
+PRIMARY KEY (`BeewayId`)
 );
 
 -- ************************************** `BeewayObservatie`
@@ -143,15 +115,7 @@ CREATE TABLE `BeewayObservatie`
  `DeletedAt`     datetime NULL ,
  `DeletedBy`     int NULL ,
 
-PRIMARY KEY (`BObservatieId`),
-KEY `FK_2` (`DeletedBy`),
-CONSTRAINT `FK_3` FOREIGN KEY `FK_2` (`DeletedBy`) REFERENCES `Beeway` (`BeewayId`),
-KEY `FK_3` (`CreatedBy`),
-CONSTRAINT `FK_12` FOREIGN KEY `FK_3` (`CreatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_4` (`UpdatedBy`),
-CONSTRAINT `FK_16` FOREIGN KEY `FK_4` (`UpdatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_5` (`Beeway_Id`),
-CONSTRAINT `FK_23` FOREIGN KEY `FK_5` (`Beeway_Id`) REFERENCES `Users` (`UserId`)
+PRIMARY KEY (`BObservatieId`)
 );
 
 -- ************************************** `BeewayPlanning`
@@ -173,15 +137,7 @@ CREATE TABLE `BeewayPlanning`
  `DeletedAt`        datetime NULL ,
  `DeletedBy`        int NULL ,
 
-PRIMARY KEY (`BPlanningId`),
-KEY `FK_2` (`Beeway_Id`),
-CONSTRAINT `FK_2` FOREIGN KEY `FK_2` (`Beeway_Id`) REFERENCES `Beeway` (`BeewayId`),
-KEY `FK_3` (`UpdatedBy`),
-CONSTRAINT `FK_10` FOREIGN KEY `FK_3` (`UpdatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_4` (`CreatedBy`),
-CONSTRAINT `FK_11` FOREIGN KEY `FK_4` (`CreatedBy`) REFERENCES `Users` (`UserId`),
-KEY `FK_5` (`DeletedBy`),
-CONSTRAINT `FK_24` FOREIGN KEY `FK_5` (`DeletedBy`) REFERENCES `Users` (`UserId`)
+PRIMARY KEY (`BPlanningId`)
 );
 
 
@@ -192,9 +148,5 @@ CREATE TABLE `Koppeling_Klassen`
  `User_Id`    int NOT NULL AUTO_INCREMENT,
  `Klassen_Id` int NOT NULL ,
 
-PRIMARY KEY (`User_Id`, `Klassen_Id`),
-KEY `FK_2` (`User_Id`),
-CONSTRAINT `FK_6` FOREIGN KEY `FK_2` (`User_Id`) REFERENCES `Users` (`UserId`),
-KEY `FK_3` (`Klassen_Id`),
-CONSTRAINT `FK_7` FOREIGN KEY `FK_3` (`Klassen_Id`) REFERENCES `Klassen` (`KlasId`)
+PRIMARY KEY (`User_Id`, `Klassen_Id`)
 );

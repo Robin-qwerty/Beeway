@@ -298,6 +298,19 @@ html {
 
 /*---------------------Login-------------------------*/
 
+.admin_adduser {
+  width: 600px;
+  height: 700px;
+  background: #333333;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
 .login {
   width: 550px;
   height: 450px;
@@ -310,7 +323,7 @@ html {
   border-radius: 25px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
-.login label {
+.login label, .admin_adduser label {
   color: #ffc107;
 }
 
@@ -319,7 +332,7 @@ html {
   text-align: center;
 }
 
-.form input[type=number], .form input[type=email], .form input[type=password], .form #selectaddedit, .form #textaddedit {
+.form input[type=text], .form input[type=number], .form input[type=email], .form input[type=password], .form #selectaddedit, .form #textaddedit, .form #rolselect {
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
