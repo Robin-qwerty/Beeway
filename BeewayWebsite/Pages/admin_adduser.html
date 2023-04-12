@@ -4,15 +4,14 @@
   <meta charset = "UTF-8">
   <title>user toevoegen</title>
   <link href="../style/style.css" rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script scr="../script/serialize.js"></script>
-  <script scr="adduser.js"></script>
+  <script scr="serie.js"></script>
+  <script src="../script/site.js"></script>
   <script>
     $(document).ready(function(){
-      $('#navmenu').load('../views/Navbar.html');
+ 
     });
   </script>
 </head>
@@ -21,7 +20,7 @@
   <div class="navmenu" id="navmenu"></div>
 
 
-  <form class="form adduserform" method="POST" action="#">
+  <form class="form adduserform" method="POST">
     <div class="admin_adduser form">
       <div id="logintittle"><h1>admin - gebruiker toevoegen <iconify-icon icon="akar-icons:person"></iconify-icon></h1></div>
       <hr>
