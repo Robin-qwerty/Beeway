@@ -18,3 +18,17 @@ function allowUncheck(e) {
     elem.previous = elem.checked;
   });
 }
+
+
+function addobservatie() {
+  alert("dfsadf");
+  var inputsDiv = document.getElementById("textareaobservatie");
+  var inputCount = inputsDiv.getElementsByTagName("input").length + 1;
+  var newInput = document.createElement("div");
+  newInput.innerHTML = '<label for="ingredient' + inputCount + '">ingredient ' + inputCount + ':</label> <br> <input type="text" placeholder="Enter ingredient ' + inputCount + '" name="ingredient' + inputCount + '" required> <button type="button" class="deletebutton" onclick="removeInput(this)">-</button>';
+  inputsDiv.appendChild(newInput);
+}
+
+function removeInput(button) {
+  button.parentNode.remove();
+}

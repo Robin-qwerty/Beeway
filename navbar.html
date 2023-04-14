@@ -1,4 +1,9 @@
 <script src="script/navbar.js" defer></script>
+<script>
+  // if (!sessionStorage.getItem("token") && window.location.pathname !== "///Beeway/loginpage.html"){
+	// 			location.replace("loginpage.html");
+	// 		};
+</script>
 
 <div class="navbar sticky" id="menulist">
   <iconify-icon icon="ei:navicon" class="nav-icon" onclick="toggleresponsivemenu()"></iconify-icon>
@@ -7,10 +12,10 @@
     <div class="dropdown">
       <a id="dashboard" href="beewaylijst.html"><b>dashboard</b></a>
       <div class="dropdown-content">
-        <a href="beewaybewerken.html"><b>Beeway's</b></a>
+        <a href="beewaylijst.html"><b>Beeway's</b></a>
         <a href="klassenlijst.html"><b>Klassen</b></a>
         <a href="vakkenlijst.html"><b>Vakken</b></a>
-        <a href="Hoofdthemalijst.html"><b>Hoofdthema's</b></a>
+        <a href="hoofdthemalijst.html"><b>Hoofdthema's</b></a>
         <a href="userlijst.html"><b>Users</b></a>
       </div>
     </div>
