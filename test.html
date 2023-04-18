@@ -4,32 +4,35 @@
   <meta charset = "UTF-8">
   <title>home</title>
   <link href="css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="script/serialize.js"></script>
+  <script src="script/beeway.js"></script>
   <script>
     $(document).ready(function(){
+      $("#opslaan").click(function(){
 
-      $("#addplanning").click(function(){
-        event.preventDefault();
-
-        var done = "";
-
-        for (var i = 0; i < 5; i++) {
-          done += "<div><input type=radio id=done name=done8></div>";
-        }
-
-        $("#done").html(done);
-      });
+        var object = $("#form1").serializeToJSON();
+        var jsonString = JSON.stringify(object);
+        console.log(jsonString);
+      })
     });
   </script>
 </head>
 <body>
 
-  <button id="addplanning">Planning rij toevoegen <b>+</b></button>
 
-
-<div id="done"></div>
+  <form id="form1" method="POST">
+    <div><textarea type="text" name="DeadlineTxt1" rows="2" maxlength="74"></textarea></div>
+    <div><textarea type="text" name="DeadlineTxt2" rows="2" maxlength="74"></textarea></div>
+    <div><textarea type="text" name="DeadlineTxt3" rows="2" maxlength="74"></textarea></div>
+    <div><textarea type="text" name="DeadlineTxt4" rows="2" maxlength="74"></textarea></div>
+    <div><textarea type="text" name="DeadlineTxt5" rows="2" maxlength="74"></textarea></div>
+    <div><textarea type="text" name="DeadlineTxt6" rows="2" maxlength="74"></textarea></div>
+    <div><textarea type="text" name="DeadlineTxt7" rows="2" maxlength="74"></textarea></div>
+    <div><textarea type="text" name="DeadlineTxt8" rows="2" maxlength="74"></textarea></div>
+  </form>
+  <div><button id="opslaan" class="addbutton" style="font-size: 16px;">Opslaan</button></div>
 
 
 </body>

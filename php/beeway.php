@@ -3,17 +3,17 @@
   header('Access-Control-Allow-Methods: POST GET');
   require ("./dbconnect.php");
 
-  if (isset($_POST['Test']))
-  {
-
-    $json = $_POST['Test'];
-    $json = json_decode($json, true);
-
-    $name = $json['Name'];
-    $pwd = $json['Pwd'];
-
-    echo $name . "  " . $pwd;
-  }
+  // if (isset($_POST['Test']))
+  // {
+  //
+  //   $json = $_POST['Test'];
+  //   $json = json_decode($json, true);
+  //
+  //   $name = $json['Name'];
+  //   $pwd = $json['Pwd'];
+  //
+  //   echo $name . "  " . $pwd;
+  // }
 
 
   if (isset($_POST['User']))
@@ -38,25 +38,34 @@
   }
 
 
-  if (isset($_POST['SelectName']))
+  if (isset($_POST['beeway']))
   {
-    $sql = "SELECT * FROM nameoptiens";
-    $result = $conn->query($sql);
 
-    if ($result !== false && $result -> num_rows > 0)
-    {
-      $text = "";
+    $json = $_POST['beeway'];
+    $json = json_decode($json, true);
+    $gen = $json['gen'];
+    $plan = $json['plan'];
+    $obs = $json['obs'];
 
-      while ($row = $result->fetch_assoc())
-      {
-        $text = $text . '<option value="'.$row['Id'].'">'.$row['Name'].'</option>';
-      }
-      echo $text;
-    }
-    else
-    {
-      echo "NOK";
-    }
+    echo $gen;
+
+    // $sql = "SELECT * FROM nameoptiens";
+    // $result = $conn->query($sql);
+    //
+    // if ($result !== false && $result -> num_rows > 0)
+    // {
+    //   $text = "";
+    //
+    //   while ($row = $result->fetch_assoc())
+    //   {
+    //     $text = $text . '<option value="'.$row['Id'].'">'.$row['Name'].'</option>';
+    //   }
+    //   echo $text;
+    // }
+    // else
+    // {
+    //   echo "NOK";
+    // }
   }
 
 

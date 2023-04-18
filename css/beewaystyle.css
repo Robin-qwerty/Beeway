@@ -28,7 +28,7 @@
 #grid-line {
   display: grid;
   grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 7% 3%;
-  grid-template-rows: 180px 80px 38px auto auto;
+  grid-template-rows: 180px 80px 38px 310px 340px;
   grid-gap: 1px;
   background-color: black;
   padding-right: 9px;
@@ -56,8 +56,8 @@ input[type='radio'] {
   background: white;
   outline: 2px solid #333;
   border: 3px solid white;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 input[type='radio']:checked {
   background: #333;
@@ -265,7 +265,7 @@ div.cell h2 {
   font-size: 21px;
 }
 .done input {
-  margin: 0.35rem;
+  margin: 0.36rem;
   height: 18px;
   width: 18px;
 }

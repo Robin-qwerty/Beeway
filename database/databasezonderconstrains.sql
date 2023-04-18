@@ -3,6 +3,7 @@
 CREATE TABLE `users`
 (
  `userid`     int NOT NULL AUTO_INCREMENT,
+ `schoolid`   int NOT NULL ,
  `voornaam`   varchar(55) NOT NULL ,
  `achternaam` varchar(55) NOT NULL ,
  `email`      varchar(255) NOT NULL ,
@@ -17,6 +18,23 @@ CREATE TABLE `users`
  `deletedby`  int NULL ,
 
 PRIMARY KEY (`userid`)
+);
+
+-- ************************************** `schoolen`
+
+CREATE TABLE `schoolen`
+(
+ `schoolid`   int NOT NULL ,
+ `naamschool` varchar(155) NOT NULL ,
+ `createdat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+ `createdby`  int NOT NULL ,
+ `updatedat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+ `updatedby`  int NOT NULL ,
+ `archive`    tinyint NOT NULL DEFAULT '0' ,
+ `deletedat`  datetime NULL ,
+ `deletedby`  int NULL ,
+
+PRIMARY KEY (`schoolid`)
 );
 
 -- ************************************** `Vakgebied`
@@ -57,19 +75,19 @@ PRIMARY KEY (`themaid`)
 
 -- ************************************** `Klassen`
 
-CREATE TABLE `klassen`
+CREATE TABLE `groepen`
 (
- `klasid`    int NOT NULL AUTO_INCREMENT ,
- `klas`      varchar(3) NOT NULL ,
- `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
- `createdby` int NOT NULL ,
- `updatedat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
- `updatedby` int NOT NULL ,
- `archive`   tinyint NOT NULL DEFAULT '0' ,
- `deletedat` datetime NULL ,
- `deletedby` int NULL ,
+ `groepenid` int NOT NULL ,
+ `groepen`   varchar(3) NOT NULL ,
+ `createdat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+ `createdby`  int NOT NULL ,
+ `updatedat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+ `updatedby`  int NOT NULL ,
+ `archive`    tinyint NOT NULL DEFAULT '0' ,
+ `deletedat`  datetime NULL ,
+ `deletedby`  int NULL ,
 
-PRIMARY KEY (`klasid`)
+PRIMARY KEY (`groepenid`)
 );
 
 -- ************************************** `Beeway`
@@ -77,13 +95,13 @@ PRIMARY KEY (`klasid`)
 CREATE TABLE `beeway`
 (
  `beewayid`      int NOT NULL AUTO_INCREMENT ,
- `startdatum`    datetime NULL ,
- `groepen`       varchar(9) NULL ,
+ `groepen`       varchar(9) NOT NULL ,
+ `beewaynaam`    varchar(155) NOT NULL ,
  `begoed`        int(3) NULL ,
  `bevoldoende`   int(3) NULL ,
  `beonvoldoende` int(3) NULL ,
- `hoofdthemaid` int NULL ,
- `vakgebiedid`  int NULL ,
+ `hoofdthemaid`  int NOT NULL ,
+ `vakgebiedid`   int NOT NULL ,
  `concreetdoel`  varchar(2500) NULL ,
  `createdat`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `createdby`     int NOT NULL ,
@@ -141,17 +159,15 @@ PRIMARY KEY (`planningid`)
 );
 
 
--- ************************************** `Koppeling_Klassen`
+-- ************************************** `koppelinggroepen`
 
-CREATE TABLE `koppelingklassen`
+CREATE TABLE `koppelinggroepen`
 (
- `userid`    int NOT NULL AUTO_INCREMENT,
- `klassenid` int NOT NULL ,
-
-PRIMARY KEY (`userid`, `klassenid`)
+ `beewayid`  int NOT NULL ,
+ `groepenid` int NOT NULL
 );
 
--- ************************************** `Koppeling_Klassen`
+-- ************************************** `session`
 
 CREATE TABLE `session`
 (

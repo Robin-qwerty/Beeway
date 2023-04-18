@@ -304,7 +304,7 @@ html {
 
 .login {
   width: 550px;
-  height: 450px;
+  height: 510px;
   background: #333333;
   top: 50%;
   left: 50%;
@@ -334,6 +334,14 @@ html {
 .form input[type=text]:focus, .form input[type=number]:focus, .form input[type=email]:focus, .form input[type=password]:focus, .form #selectaddedit:focus, .form #textaddedit:focus {
   background-color: #ffc107;
   outline: none;
+}
+
+#rolselect {
+  font-size: 17px;
+}
+#rolselect option {
+  font-size: 15px;
+  text-align: center;
 }
 
 .registerbtn {

@@ -18,7 +18,63 @@
   <div class="navmenu" id="navmenu"></div>
 
 
+  <form class="form adduserform" method="POST">
+    <div class="admin_adduser form">
+      <div id="logintittle"><h1>admin - gebruiker toevoegen <iconify-icon icon="akar-icons:person"></iconify-icon></h1></div>
+      <hr>
 
+      <label for="name"><b>voornaam</b></label>
+      <br>
+      <input type="text" placeholder="Enter voornaam" name="name" required>
+      <br>
+      <label for="lastname"><b>achternaam</b></label>
+      <br>
+      <input type="text" placeholder="Enter achternaam" name="lastname" required>
+      <br>
+      <label for="rol"><b>rol</b></label>
+      <br>
+      <select id="rolselect">
+        <option value="1" selected="selected">docent</option>
+        <option value="2">admin</option>
+      </select>
+
+      <div class="klassenselect">
+        <br>
+        <label for="lastname"><b>klassen</b></label>
+        <br>
+
+        <div class="multiselect">
+          <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+              <option>Selecteer een klas</option>
+            </select>
+            <div class="overSelect"></div>
+          </div>
+          <div id="checkboxes">
+            <label for="one">
+              <input type="checkbox" id="one" />First checkbox</label>
+            <label for="two">
+              <input type="checkbox" id="two" />Second checkbox</label>
+            <label for="three">
+              <input type="checkbox" id="three" />Third checkbox</label>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <br>
+      <label for="email"><b>Email</b></label>
+      <br>
+      <input type="email" placeholder="Enter Email" name="email" required>
+      <br>
+      <label for="psw"><b>Password</b></label>
+      <br>
+      <input type="password" placeholder="Enter Password" name="password" required>
+
+      <button type="submit" id="adduserbtn" class="registerbtn">aanmaken</button>
+      <hr>
+    </div>
+  </form>
 
 </body>
 </html>
