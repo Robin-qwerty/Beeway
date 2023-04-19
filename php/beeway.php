@@ -47,25 +47,44 @@
     $plan = $json['plan'];
     $obs = $json['obs'];
 
-    echo $gen;
+    $plan = json_decode($plan, true);
 
-    // $sql = "SELECT * FROM nameoptiens";
-    // $result = $conn->query($sql);
+    $keys = "";
+    $values = "";
+
+    foreach ($plan as $key => $value) {
+      $keys = $keys . "" . $key . ", " ;
+      $values = $values . "'" . $value . "', " ;
+    }
+
+    echo $keys;
+
+    // $sql = "INSERT INTO `beeway` (" . substr($keys, 0, -2) . ") VALUES (" . substr($values, 0, -2) . ")";
     //
-    // if ($result !== false && $result -> num_rows > 0)
-    // {
-    //   $text = "";
+    // if ($conn->query($sql) === TRUE) {
+    //   $last_id = $conn->insert_id;
+    //   echo "New record created successfully. Last inserted ID is: " . $last_id;
+    // } else {
+    //   echo "Error: " . $sql . "<br>" . $conn->error;
+    // }
+
+
+
+
+    // foreach ($gen as $key => $value) {
+    //   $keys = $keys . "" . $key . ", " ;
+    //   $values = $values . "'" . $value . "', " ;
+    // }
     //
-    //   while ($row = $result->fetch_assoc())
-    //   {
-    //     $text = $text . '<option value="'.$row['Id'].'">'.$row['Name'].'</option>';
-    //   }
-    //   echo $text;
+    // $sql = "INSERT INTO `beeway` (" . substr($keys, 0, -2) . ") VALUES (" . substr($values, 0, -2) . ")";
+    //
+    // if ($conn->query($sql) === TRUE) {
+    //   $last_id = $conn->insert_id;
+    //   echo "New record created successfully. Last inserted ID is: " . $last_id;
+    // } else {
+    //   echo "Error: " . $sql . "<br>" . $conn->error;
     // }
-    // else
-    // {
-    //   echo "NOK";
-    // }
+
   }
 
 

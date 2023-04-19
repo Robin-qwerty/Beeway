@@ -1,51 +1,39 @@
-document.querySelectorAll(
-  'input[type=radio][name=Hoofdthema]').forEach((elem) => {
-    elem.addEventListener('click', allowUncheck);
-});
-
-document.querySelectorAll(
-  'input[type=radio][id=done]').forEach((elem) => {
-    elem.addEventListener('click', allowUncheck);
-});
-
-function allowUncheck(e) {
-  if (this.previous) {
-    this.checked = false;
-}
-
-document.querySelectorAll(
-    `input[type=radio][name=${this.name}]`).forEach((elem) => {
-    elem.previous = elem.checked;
-  });
-}
-
-
-// let num = 9;
-//
-// $(document).ready(function(){
-//   $("#addplanning").click(function(){
-//
-//     event.preventDefault();
-//
-//     var planning = "<div><textarea type=text name=PlaningTxt" + num + " rows=2 maxlength=74></textarea></div>";
-//     var wat = "<div><textarea type=text name=WatTxt" + num + " rows=2 maxlength=74></textarea></div>";
-//     var wie = "<div><textarea type=text name=WieTxt" + num + " WieTxt rows=2 maxlength=74></textarea></div>";
-//     var deadline = "<div><textarea type=text name=DeadlineTxt" + num + " rows=2 maxlength=74></textarea></div>";
-//     var done = "<div><input type=radio id=done name=done" + num + "></div>";
-//
-//     $("#planning").append(planning);
-//     $("#wat").append(wat);
-//     $("#wie").append(wie);
-//     $("#deadline").append(deadline);
-//     $("#done").append(done);
-//
-//     num ++;
-//     console.log(num);
-//   });
-// });
-
-
 $(document).ready(function(){
+  let num = 1;
+
+  while (num < 9) {
+    var planning = "<div><input type=hidden name=planingid value=" + num + "><textarea type=text name=planning" + num + " rows=2 maxlength=74></textarea></div>";
+    var wat = "<div><textarea type=text name=planningwat" + num + " rows=2 maxlength=74></textarea></div>";
+    var wie = "<div><textarea type=text name=planningwie" + num + " WieTxt rows=2 maxlength=74></textarea></div>";
+    var deadline = "<div><textarea type=text name=planningdeadline" + num + " rows=2 maxlength=74></textarea></div>";
+    var done = "<div><input type=checkbox name=planninggedaan" + num + "></div>";
+
+    $("#planning").append(planning);
+    $("#wat").append(wat);
+    $("#wie").append(wie);
+    $("#deadline").append(deadline);
+    $("#done").append(done);
+
+    num ++;
+  }
+
+  while (num !== 14) {
+    var observatie = "<div><input type=hidden name=observatieid value=" + num + "><textarea type=text name=observatietxt" + num + " rows=3 maxlength=155></textarea></div>";
+    var leerdoel = "<div><textarea type=text name=leerdoeltxt" + num + " rows=3 maxlength=155></textarea></div>";
+    var evaluatie = "<div><textarea type=text name=evaluatietxt" + num + " rows=3 maxlength=155></textarea></div>";
+    var werkdoel = "<div><textarea type=text name=werkdoeltxt" + num + " rows=3 maxlength=155></textarea></div>";
+    var actie = "<div><textarea type=text name=actietxt" + num + " rows=3 maxlength=155></textarea></div>";
+
+    $("#observatie").append(observatie);
+    $("#leerdoel").append(leerdoel);
+    $("#evaluatie").append(evaluatie);
+    $("#werkdoel").append(werkdoel);
+    $("#actie").append(actie);
+
+    num ++;
+  }
+
+
   $("#opslaan").click(function(){
     event.preventDefault();
 
@@ -57,8 +45,6 @@ $(document).ready(function(){
     // var beoordeling1 = $("#beoordeling1").val();
     // var beoordeling2 = $("#beoordeling2").val();
     // var beoordeling3 = $("#beoordeling3").val();
-    //
-    //
     //
     // console.log(naam + ", " + groepen + ", " + thema + ", " + vak + ", " + doel + ", " + beoordeling1 + ", " + beoordeling2 + ", " + beoordeling3);
 

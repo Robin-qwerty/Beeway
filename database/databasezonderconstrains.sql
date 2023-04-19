@@ -110,6 +110,7 @@ CREATE TABLE `beeway`
  `archive`       tinyint NOT NULL DEFAULT '0' ,
  `deletedat`     datetime NULL ,
  `deletedby`     int NULL ,
+ `locked`        tinyint NOT NULL DEFAULT '0' ,
 
 PRIMARY KEY (`beewayid`)
 );

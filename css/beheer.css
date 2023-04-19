@@ -7,27 +7,27 @@
   border-radius: 1rem;
 }
 
-.beewaylijstteble {
+.beewaylijsttable {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-.beewaylijstteble td, th {
+.beewaylijsttable td, th {
   padding: 10px;
   text-align: center;
 }
-.beewaylijstteble td {
+.beewaylijsttable td {
   color: white;
 }
 
-.beewaylijstteble tr:nth-child(even) {
+.beewaylijsttable tr:nth-child(even) {
   background-color: #262626;
   border-radius: 1rem;
 }
 
 .beewaylijstopties {
-  width: 32%;
+  width: 42%;
   margin: 5px 34%;
 }
 .beewaylijstopties button {
