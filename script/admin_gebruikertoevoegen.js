@@ -12,6 +12,13 @@ function showCheckboxes() {
 }
 
 
-var x = document.getElementById("rolselect").value;
-
-console.log(x);
+// const select = document.getElementById("rolselect");
+// const input = document.getElementById("klassenselect");
+//
+// select.addEventListener("change", function() {
+//   if (select.value === "2") {
+//     input.style.display = "none";
+//   } else {
+//     input.style.display = "";
+//   }
+// });

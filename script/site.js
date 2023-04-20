@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function(){ // gaat acties van knopen over de hele site afhandelen (?)
   $("#adduserbtn").on("click", function(){
     alert("test");
 

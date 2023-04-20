@@ -5,14 +5,12 @@
   <title>dashboard - schoollijst</title>
   <link href="css/style.css" rel="stylesheet">
   <link href="css/beheer.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="script/tablesearch.js"></script>
   <script>
     $(document).ready(function(){
       $('#navmenu').load('navbar.html');
-      // alert("test");
     });
   </script>
 </head>
@@ -37,27 +35,29 @@
       <button onclick="window.location.href='scholenlijst.html';" id="beewaylijstopties5"><u>Scholen</u></button>
     </div>
     <hr>
+    <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
+
     <br>
     <table class="beewaylijsttable">
       <tr>
         <th><h3>school naam</h3></th>
         <th><h3>Archive</h3></th>
-        <th><a href="beewaybewerken.html" class="addbutton">toevoegen</a></th>
+        <th><a href="schooltoevoegen.html" class="addbutton">toevoegen</a></th>
       </tr>
       <tr>
         <td><b>'.$school->naam.'</b></td>
         <td><b>'.$school->Archive.'</b></td>
-        <td><a href="beewaybewerken.html" class="editbutton">aanpassen</a></td>
+        <td><a href="schoolaanpassen.html" class="editbutton">aanpassen</a></td>
       </tr>
       <tr>
         <td><b>'.$school->naam.'</b></td>
         <td><b>'.$school->Archive.'</b></td>
-        <td><a href="beewaybewerken.html" class="editbutton">aanpassen</a></td>
+        <td><a href="schoolaanpassen.html" class="editbutton">aanpassen</a></td>
       </tr>
       <tr>
         <td><b>'.$school->naam.'</b></td>
         <td><b>'.$school->Archive.'</b></td>
-        <td><a href="beewaybewerken.html" class="editbutton">aanpassen</a></td>
+        <td><a href="schoolaanpassen.html" class="editbutton">aanpassen</a></td>
       </tr>
     </table>
     <hr>

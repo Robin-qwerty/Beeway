@@ -1,4 +1,4 @@
-function HandelApiCall(callback, func, txtJSON, target = "") {
+function HandelApiCall(callback, func, txtJSON, target = "") { // dynamische HandelApiCall functie om api aan te roepen
 
   const key = func;
   const data = {[key] : txtJSON};

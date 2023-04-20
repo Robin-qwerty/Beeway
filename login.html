@@ -4,7 +4,9 @@
   <meta charset = "UTF-8">
   <title>Login</title>
   <link href="css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body{ background: linear-gradient(to bottom right, #c18ac1, #da9f71, #71d3f4, #c4de87); }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script>
@@ -17,13 +19,20 @@
 
   <div class="navmenu" id="navmenu"></div>
 
+  <div class="header">
+    <div class="title">
+      <h1 id="title" data-value="BEEWAY">BEEWAY</h1>
+    </div>
+    <script src="script/login.js"></script>
+  </div>
 
   <form class="form" method="POST" action="#  ">
     <div class="login">
       <div id="logintittle"><h1>login <iconify-icon icon="akar-icons:person"></iconify-icon></h1></div>
       <hr>
+      <br>
 
-      <label for="rol"><b>School</b></label>
+      <label for="rol"><b>Je School</b></label>
       <br>
       <select id="rolselect">
         <option value="0" selected="selected">-- selecteer je school --</option>
@@ -46,6 +55,10 @@
       <hr>
 
       <button type="submit" class="registerbtn">Login</button>
+
+      <div class="tooltip">Nog geen account?
+        <span class="tooltiptext">Vraag de admin van je school om een account voor je aan te maken</span>
+      </div>
     </div>
   </form>
 

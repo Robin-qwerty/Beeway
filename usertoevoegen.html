@@ -2,11 +2,15 @@
 <html>
 <head>
   <meta charset = "UTF-8">
-  <title>user toevoegen</title>
+  <title>gebruiker toevoegen</title>
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/beheer.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script scr="script/serialize.js"></script>
+  <script src="script/site.js"></script>
+  <script src="script/admin_gebruikertoevoegen.js"></script>
   <script>
     $(document).ready(function(){
       $('#navmenu').load('navbar.html');
@@ -34,19 +38,19 @@
       <label for="rol"><b>rol</b></label>
       <br>
       <select id="rolselect">
-        <option value="1" selected="selected">docent</option>
+        <option value="1">docent</option>
         <option value="2">admin</option>
       </select>
 
-      <div class="klassenselect">
+      <div class="klassenselect" id="klassenselect">
         <br>
-        <label for="lastname"><b>klassen</b></label>
+        <label for="lastname"><b>groep</b></label>
         <br>
 
         <div class="multiselect">
           <div class="selectBox" onclick="showCheckboxes()">
             <select>
-              <option>Selecteer een klas</option>
+              <option>Selecteer een groep</option>
             </select>
             <div class="overSelect"></div>
           </div>
@@ -60,6 +64,18 @@
           </div>
         </div>
       </div>
+      <script>
+        const select = document.getElementById("rolselect");
+        const input = document.getElementById("klassenselect");
+
+        select.addEventListener("change", function() {
+          if (select.value === "2") {
+            input.style.display = "none";
+          } else {
+            input.style.display = "";
+          }
+        });
+      </script>
       <hr>
 
       <br>
@@ -70,6 +86,9 @@
       <label for="psw"><b>Password</b></label>
       <br>
       <input type="password" placeholder="Enter Password" name="password" required>
+
+      <div id="errormsg"></div>
+
 
       <button type="submit" id="adduserbtn" class="registerbtn">aanmaken</button>
       <hr>

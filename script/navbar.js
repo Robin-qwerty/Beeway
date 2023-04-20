@@ -3,6 +3,7 @@ var menu = document.getElementById('menu')
 
 menulist.style.height = '60px';
 menu.style.display = 'none';
+menu1.style.display = 'none';
 
 function toggleresponsivemenu() {
   if (menulist.style.height == '60px') {
@@ -22,6 +23,14 @@ function togglemenu() {
     menu.style.display = 'none';
   }
 }
+function togglemenu1() {
+  if (menu1.style.display == 'none') {
+      menu1.style.display = 'block';
+  }
+  else {
+    menu1.style.display = 'none';
+  }
+}
 
 
 var radios = document.getElementsByTagName('input');
@@ -31,4 +40,21 @@ for(i=0; i<radios.length; i++ ) {
             this.checked = false;
         }
     }
+}
+
+// display Good Morning/Afternoon/Evening
+
+$(document).ready(function() {
+  function dateTime() {
+    var ndate = new Date();
+    var hours = ndate.getHours();
+    var message = hours < 12 ? 'Good Morning!' : hours < 18 ? 'Good Afternoon!' : 'Good Evening!';
+    $("h2.day-message").text(message);
+  }
+
+  setInterval(dateTime, 1000);
+});
+
+Number.prototype.leadingZeroes = function(len) {
+  return (new Array(len).fill('0', 0).join('') + this).slice(-Math.abs(len));
 }

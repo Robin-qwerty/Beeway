@@ -45,22 +45,9 @@
 label, input {
   /* added because a second click to unselect radio often
      appears as a double click to select text */
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-
-input[type='radio'], input[type='checkbox'] {
-  box-sizing: border-box;
-  appearance: none;
-  background: white;
-  outline: 2px solid #333;
-  border: 3px solid white;
-  width: 18px;
-  height: 18px;
-}
-input[type='radio']:checked, input[type='checkbox']:checked {
-  background: #333;
+   -webkit-user-select: none; /* Safari */
+   -ms-user-select: none; /* IE 10 and IE 11 */
+   user-select: none; /* Standard syntax */
 }
 
 div.cell {
@@ -295,7 +282,6 @@ div.cell h2 {
   grid-column-end: 12;
   background: white;
 }
-
 
 .BeewayAddRows {
   float: right;

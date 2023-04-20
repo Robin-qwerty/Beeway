@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // dynamisch beewaybewerken.html inladen
   let num = 1;
 
   while (num < 9) {
@@ -34,7 +35,7 @@ $(document).ready(function(){
   }
 
 
-  $("#opslaan").click(function(){
+  $("#opslaan").click(function(){ // data afhandelen en sturen naar api als je op opslaan knop klikt
     event.preventDefault();
 
     // var naam = $("#BeewayNaam").val();

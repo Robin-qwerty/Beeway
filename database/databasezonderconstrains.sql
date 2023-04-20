@@ -8,7 +8,7 @@ CREATE TABLE `users`
  `achternaam` varchar(55) NOT NULL ,
  `email`      varchar(255) NOT NULL ,
  `wachtwoord` varchar(100) NOT NULL ,
- `rol`        tinyint NOT NULL ,
+ `rol`        varchar(1) NOT NULL ,
  `createdat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `createdby`  int NOT NULL ,
  `updatedat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -60,7 +60,7 @@ CREATE TABLE `hoofdthema`
 (
  `themaid`    int NOT NULL AUTO_INCREMENT,
  `naamthema`  varchar(55) NOT NULL ,
- `periode`    int(2) NOT NULL ,
+ `periode`    varchar(2) NOT NULL ,
  `schooljaar` varchar(10) NOT NULL ,
  `createdat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `createdby`  int NOT NULL ,
@@ -77,8 +77,8 @@ PRIMARY KEY (`themaid`)
 
 CREATE TABLE `groepen`
 (
- `groepenid` int NOT NULL ,
- `groepen`   varchar(3) NOT NULL ,
+ `groepenid`  int NOT NULL ,
+ `groepen`    varchar(3) NOT NULL ,
  `createdat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `createdby`  int NOT NULL ,
  `updatedat`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
@@ -97,11 +97,11 @@ CREATE TABLE `beeway`
  `beewayid`      int NOT NULL AUTO_INCREMENT ,
  `groepen`       varchar(9) NOT NULL ,
  `beewaynaam`    varchar(155) NOT NULL ,
- `begoed`        int(3) NULL ,
- `bevoldoende`   int(3) NULL ,
- `beonvoldoende` int(3) NULL ,
- `hoofdthemaid`  int NOT NULL ,
- `vakgebiedid`   int NOT NULL ,
+ `begoed`        varchar(3) NULL ,
+ `bevoldoende`   varchar(3) NULL ,
+ `beonvoldoende` varchar(3) NULL ,
+ `hoofdthemaid`  varchar(11) NOT NULL ,
+ `vakgebiedid`   varchar(11) NOT NULL ,
  `concreetdoel`  varchar(2500) NULL ,
  `createdat`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `createdby`     int NOT NULL ,
@@ -119,8 +119,8 @@ PRIMARY KEY (`beewayid`)
 
 CREATE TABLE `beewayobservatie`
 (
- `observatieid` int NOT NULL AUTO_INCREMENT,
- `beewayid`     int NOT NULL ,
+ `observatieid`  int NOT NULL AUTO_INCREMENT,
+ `beewayid`      varchar(11) NOT NULL ,
  `datales`       varchar(2500) NULL ,
  `leerdoel`      varchar(2500) NULL ,
  `evaluatie`     varchar(2500) NULL ,
@@ -141,8 +141,8 @@ PRIMARY KEY (`observatieid`)
 
 CREATE TABLE `beewayplanning`
 (
- `planningid`      int NOT NULL AUTO_INCREMENT,
- `beewayid`        int NOT NULL ,
+ `planningid`       int NOT NULL AUTO_INCREMENT,
+ `beewayid`         varchar(11) NOT NULL ,
  `planning`         varchar(155) NULL ,
  `planningwat`      varchar(2500) NULL ,
  `planningwie`      varchar(2500) NULL ,

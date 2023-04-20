@@ -5,14 +5,12 @@
   <title>dashboard - beewaylijst</title>
   <link href="css/style.css" rel="stylesheet">
   <link href="css/beheer.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="script/tablesearch.js"></script>
   <script>
     $(document).ready(function(){
       $('#navmenu').load('navbar.html');
-      // alert("test");
     });
   </script>
 </head>
@@ -37,10 +35,12 @@
       <button onclick="window.location.href='scholenlijst.html';" id="beewaylijstopties5">Scholen</button>
     </div>
     <hr>
+    <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
+
     <br>
     <table class="beewaylijsttable">
       <tr>
-        <th><h3>Datum</h3></th>
+        <th><h3>Beeway Naam</h3></th>
         <th><h3>Groep(en)</h3></th>
         <th><h3>Docent</h3></th>
         <th><h3>Vakgebied</h3></th>
@@ -50,7 +50,7 @@
         <th><a href="beewaybewerken.html" class="addbutton">toevoegen</a></th>
       </tr>
       <tr>
-        <td><b>'.$Beeway->Datum.'</b></td>
+        <td><b>'.$Beeway->test.'</b></td>
         <td><b>'.$Beeway->Groep.'</b></td>
         <td><b>'.$Beeway->Docent.'</b></td>
         <td><b>'.$Beeway->Vakgebied.'</b></td>
@@ -59,26 +59,7 @@
         <td><b>'.$Beeway->Archive.'</b></td>
         <td><a href="beewaybewerken.html" class="editbutton">bekijken</a></td>
       </tr>
-      <tr>
-        <td><b>'.$Beeway->Datum.'</b></td>
-        <td><b>'.$Beeway->Groep.'</b></td>
-        <td><b>'.$Beeway->Docent.'</b></td>
-        <td><b>'.$Beeway->Vakgebied.'</b></td>
-        <td><b>'.$Beeway->Hoofdthema.'</b></td>
-        <td><b>'.$Beeway->Status.'</b></td>
-        <td><b>'.$Beeway->Archive.'</b></td>
-        <td><a href="beewaybewerken.html" class="editbutton">bekijken</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Beeway->Datum.'</b></td>
-        <td><b>'.$Beeway->Groep.'</b></td>
-        <td><b>'.$Beeway->Docent.'</b></td>
-        <td><b>'.$Beeway->Vakgebied.'</b></td>
-        <td><b>'.$Beeway->Hoofdthema.'</b></td>
-        <td><b>'.$Beeway->Status.'</b></td>
-        <td><b>'.$Beeway->Archive.'</b></td>
-        <td><a href="beewaybewerken.html" class="editbutton">bekijken</a></td>
-      </tr>
+      
     </table>
     <hr>
   </div>
