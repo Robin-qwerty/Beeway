@@ -23,7 +23,7 @@
     }
   }
 
-  if (isset($_POST['AllBeeways'])) //data ophalen voor beeway lijst
+  if (isset($_POST['AllBeeways'])) //data ophalen voor Beeway lijst
   {
     $json = $_POST['AllBeeways'];
     $json = json_decode($json, true);
@@ -62,9 +62,33 @@
     $sql = "SELECT * FROM beeway WHERE groepenid = '$groepenid' AND schoolid='$schoolid'";
   }
 
-  if (isset($_POST['beeway'])) //data afhandelen voor opslaan beeway
+  if (isset($_POST['AllKlassen'])) //data ophalen voor Klassen lijst
   {
 
+  }
+
+  if (isset($_POST['AllVakken'])) //data ophalen voor Vakken lijst
+  {
+
+  }
+
+  if (isset($_POST['AllHoofdthemas'])) //data ophalen voor Hoofdthema's lijst
+  {
+
+  }
+
+  if (isset($_POST['AllUsers'])) //data ophalen voor Users lijst
+  {
+
+  }
+
+  if (isset($_POST['AllScholen'])) //data ophalen voor scholen lijst
+  {
+
+  }
+
+  if (isset($_POST['beeway'])) //data afhandelen voor opslaan beeway
+  {
     $json = $_POST['beeway'];
     $json = json_decode($json, true);
     $gen = $json['gen'];

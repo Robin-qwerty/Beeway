@@ -1,4 +1,4 @@
-/*---------------------Beheerlijsten-------------------------*/
+/*---------------------Beheerlijsten---------------------------------*/
 
 .beewaylijst {
   margin: 7rem 1rem 0 1rem;
@@ -27,6 +27,7 @@
 .beewaylijstopties {
   width: 42%;
   margin: 5px 34%;
+  text-align: center;
 }
 .beewaylijstopties button {
   border: none;
@@ -45,14 +46,14 @@
   font-size: 20px!important;
 }
 
-/*---------------------Beheertoevoegen/aanpassen-------------------------*/
+/*----------------Beheertoevoegen/aanpassen--------------------------*/
 
 #name {
   text-align: center;
   line-height: 20px;
   color: #ffc107;
 }
-#name a{
+#name a {
   text-decoration: none;
   background: none;
   line-height: 20px;
@@ -91,13 +92,13 @@
   float: left;
 }
 
-/*---------------------klassen toevoegen/aanpassen-------------------------*/
+/*---------------------klassen toevoegen/aanpassen-------------------*/
 
-/*---------------------vakken toevoegen/aanpassen-------------------------*/
+/*---------------------vakken toevoegen/aanpassen--------------------*/
 
-/*---------------------hoofdthema toevoegen/aanpassen-------------------------*/
+/*---------------------hoofdthema toevoegen/aanpassen----------------*/
 
-/*---------------------users toevoegen/aanpassen-------------------------*/
+/*---------------------users toevoegen/aanpassen---------------------*/
 
 .admin_adduser {
   width: 600px;
@@ -141,17 +142,20 @@
   width: 75%;
   font-size: 20px;
 }
-
 #checkboxes label {
+  margin: 4px 0px;
   display: block;
   color: white;
 }
-
 #checkboxes label:hover {
   background-color: #1e90ff;
 }
+#checkboxes input {
+  margin: 0px 9px;
+}
 
-input[type='radio'], input[type='checkbox'] {
+input[type='radio'],
+input[type='checkbox'] {
   box-sizing: border-box;
   appearance: none;
   background: white;
@@ -160,8 +164,9 @@ input[type='radio'], input[type='checkbox'] {
   width: 18px;
   height: 18px;
 }
-input[type='radio']:checked, input[type='checkbox']:checked {
+input[type='radio']:checked,
+input[type='checkbox']:checked {
   background: #333;
 }
 
-/*---------------------scholen toevoegen/aanpassen-------------------------*/
+/*---------------------scholen toevoegen/aanpassen-------------------*/

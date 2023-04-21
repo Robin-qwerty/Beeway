@@ -1,11 +1,11 @@
-/*------------------------------main---------------------------------*/
+/*------------------------------main---------------------------------------------*/
 
 :root{
---clr-neutral-900: hsl(207, 19%, 9%);
---clr-neutral-100: hsl(0, 0%, 100%);
---clr-accent-400: hsl(142, 90%, 61%);
---clr-neon: hsl(317 100% 54%);
---clr-bg: hsl(323 21% 16%);
+  --clr-neutral-900: hsl(207, 19%, 9%);
+  --clr-neutral-100: hsl(0, 0%, 100%);
+  --clr-accent-400: hsl(142, 90%, 61%);
+  --clr-neon: hsl(317 100% 54%);
+  --clr-bg: hsl(323 21% 16%);
 }
 
 body {
@@ -28,7 +28,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/*------------------------------buttons---------------------------------*/
+/*------------------------------buttons------------------------------------------*/
 
 .button {
   cursor: pointer;
@@ -107,9 +107,10 @@ html {
   background-color: #008ae6;
 }
 
-/*---------------------navbar-------------------------*/
+/*---------------------navbar----------------------------------------------------*/
 
-.navbar, .navmenu {
+.navbar,
+.navmenu {
   width: 100%;
   overflow: hidden;
   background-color: #1a1a1a;
@@ -127,12 +128,16 @@ html {
   z-index: 1;
   left: 345px;
 }
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown-content a{
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a {
   font-size: 20px!important;
 }
 
-#navbar_left a, #navbar_right a, .dropdown-content a{
+#navbar_left a,
+#navbar_right a,
+.dropdown-content a{
   float: left;
   display: block;
   color: #f2f2f2;
@@ -146,7 +151,8 @@ html {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
-#navbar_left a:hover, .dropdown-content a:hover {
+#navbar_left a:hover,
+.dropdown-content a:hover {
   background-color: #333333;
   padding-left: 2.1rem;
   padding-right: 2.1rem;
@@ -159,7 +165,8 @@ html {
   transition: 0.5s;
 }
 
-#navbar_left a:active, #navbar_right a:active {
+#navbar_left a:active,
+#navbar_right a:active {
   background-color: #04AA6D;
   color: white;
 }
@@ -286,21 +293,22 @@ html {
   }
 }
 
-/*---------------------Login-------------------------*/
+/*---------------------Login-----------------------------------------------------*/
 
 .login {
   width: 550px;
-  height: 550px;
+  height: 575px;
   background: #333333;
-  top: 50%;
+  top: 55%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  padding: 50px;
+  padding: 40px;
   border-radius: 25px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
-.login label, .admin_adduser label {
+.login label,
+.admin_adduser label {
   color: #ffc107;
 }
 #logintittle {
@@ -308,7 +316,16 @@ html {
   text-align: center;
 }
 
-.form input[type=text], .form input[type=number], .form input[type=email], .form input[type=password], .form #selectaddedit, .form #textaddedit, .form #rolselect, .form .multiselect select {
+/* --- style voor alle form inputs --- */
+
+.form input[type=text],
+.form input[type=number],
+.form input[type=email],
+.form input[type=password],
+.form #selectaddedit,
+.form #textaddedit,
+.form #rolselect,
+.form .multiselect select {
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -317,7 +334,12 @@ html {
   background: #4d4d4d;
   color: white;
 }
-.form input[type=text]:focus, .form input[type=number]:focus, .form input[type=email]:focus, .form input[type=password]:focus, .form #selectaddedit:focus, .form #textaddedit:focus {
+.form input[type=text]:focus,
+.form input[type=number]:focus,
+.form input[type=email]:focus,
+.form input[type=password]:focus,
+.form #selectaddedit:focus,
+.form #textaddedit:focus {
   background-color: #ffc107;
   outline: none;
 }
@@ -408,25 +430,27 @@ html {
   margin-top: -40px;
 }
 
-/* beeway letters op login.html */
+/* --- beeway letters op login.html --- */
 
 .header {
   text-align: center;
-  font-family: 'Sofia';
-  font-size: 35px;
+  font-family: "Space Mono", monospace;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+.header h2 {
+  margin: 0;
 }
 .title {
   display: grid;
   place-items: center;
 }
 .title h1 {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
   font-family: "Space Mono", monospace;
   font-weight: bold;
   font-size: 140px;
-  margin: 25px 0;
+  margin: 0;
   max-width: 100%;
   max-height: 200px;
   padding: 5px;

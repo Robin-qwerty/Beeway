@@ -2,26 +2,25 @@
 <html>
 <head>
   <meta charset = "UTF-8">
-  <title>test</title>
+  <title>Profiel</title>
   <link rel="icon" type="image/x-icon" href="media/favicon.ico">
   <link href="css/style.css" rel="stylesheet">
+  
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="script/serialize.js"></script>
-  <script src="script/beeway.js"></script>
   <script>
-    $(document).ready(function(){
-      $("#opslaan").click(function(){
+    // if (!sessionStorage.getItem("token") && window.location.pathname !== "///Beeway/login.html"){
+    //   location.replace("login.html");
+    // };
 
-        var object = $("#form1").serializeToJSON();
-        var jsonString = JSON.stringify(object);
-        console.log(jsonString);
-      })
+    $(document).ready(function(){
+      $('#navmenu').load('navbar.html');
     });
   </script>
 </head>
 <body>
 
+  <div class="navmenu" id="navmenu"></div>
 
 
 

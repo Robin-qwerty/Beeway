@@ -2,9 +2,11 @@
 <html>
 <head>
   <meta charset = "UTF-8">
-  <title>beeway bewerken </title>
+  <title>beeway bewerken</title>
+  <link rel="icon" type="image/x-icon" href="media/favicon.ico">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/beewaystyle.css" rel="stylesheet">
+  <link href="css/beheer.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="script/serialize.js"></script>
@@ -30,8 +32,15 @@
           <p>Aangemaakt door: <b>Robin</b></p>
           <p>Als laast bewerkt door: <b>Robin</b></p>
         </div>
+        <div>
+
+          <label for="status" style="font-size:20px;"><b>beeway Markeren als afgerond</b></label>
+          <input id="my-checkbox" type="checkbox" name="status" value="1">
+
+        </div>
       </div>
 
+      <hr>
 
       <div class="helebeeway">
         <div id="grid-line">
@@ -47,15 +56,20 @@
           <div class="cell HOOFDTHEMA">
             <h2 id="orange">HOOFDTHEMA</h2>
             <input type="radio" name="hoofdthemaid" value="1" required>
-            <label for="html">P1: EDI</label><br>
+            <label for="html">P1: EDI</label>
+            <br>
             <input type="radio" name="hoofdthemaid" value="2">
-            <label for="html">P2: BEGELEIDENDE INOEFENING</label><br>
+            <label for="html">P2: BEGELEIDENDE INOEFENING</label>
+            <br>
             <input type="radio" name="hoofdthemaid" value="3">
-            <label for="html">P3: LEZEN</label><br>
+            <label for="html">P3: LEZEN</label>
+            <br>
             <input type="radio" name="hoofdthemaid" value="4">
-            <label for="html">P4: DIFFERENTIATIE EDI</label><br>
+            <label for="html">P4: DIFFERENTIATIE EDI</label>
+            <br>
             <input type="radio" name="hoofdthemaid" value="5">
-            <label for="html">P5: DOELENPLANNER</label><br>
+            <label for="html">P5: DOELENPLANNER</label>
+            <br>
           </div>
 
           <div class="cell CONCREETDOEL">
@@ -171,8 +185,13 @@
 
             </div>
           </div>
+
         </form>
       </div>
     </div>
+
+    <hr>
+
+
 </body>
 </html>

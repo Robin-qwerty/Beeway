@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    // dynamisch beewaybewerken.html inladen
+  // dynamisch beewaybewerken.html inladen
   let num = 1;
 
   while (num < 9) {
@@ -35,7 +35,7 @@ $(document).ready(function(){
   }
 
 
-  $("#opslaan").click(function(){ // data afhandelen en sturen naar api als je op opslaan knop klikt
+  $("#opslaan").click(function(){ // handle data and send it to api when you click save button
     event.preventDefault();
 
     // var naam = $("#BeewayNaam").val();
@@ -74,6 +74,25 @@ $(document).ready(function(){
     // console.log(jsonString3);
 
   })
+
+
+
+  // send alerts if try to check/uncheck the status checkbox for beeway
+
+  const checkbox = document.getElementById("my-checkbox");
+
+  checkbox.addEventListener("click", function(event) {
+    if (checkbox.checked) {
+      if (!window.confirm("Weet je zekker dat je deze beeway als afgerond wilt markeren!? Je kan deze dan niet meer bewerken")) {
+        event.preventDefault();
+      }
+    } else {
+      if (!window.confirm("Weet je zekker dat je deze beeway niet langer wilt markeren als afgerond!?")) {
+        event.preventDefault();
+      }
+    }
+  });
+
 });
 
 

@@ -3,9 +3,9 @@
 <head>
   <meta charset = "UTF-8">
   <title>gebruiker toevoegen</title>
+  <link rel="icon" type="image/x-icon" href="media/favicon.ico">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/beheer.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script scr="script/serialize.js"></script>
@@ -44,38 +44,27 @@
 
       <div class="klassenselect" id="klassenselect">
         <br>
-        <label for="lastname"><b>groep</b></label>
+        <label for="lastname"><b>groepen</b></label>
         <br>
 
         <div class="multiselect">
           <div class="selectBox" onclick="showCheckboxes()">
             <select>
-              <option>Selecteer een groep</option>
+              <option>-- Selecteer groepen die bij de docent horen --</option>
             </select>
             <div class="overSelect"></div>
           </div>
           <div id="checkboxes">
-            <label for="one">
-              <input type="checkbox" id="one" />First checkbox</label>
-            <label for="two">
-              <input type="checkbox" id="two" />Second checkbox</label>
-            <label for="three">
-              <input type="checkbox" id="three" />Third checkbox</label>
+            <label for="groepen">
+              <input type="checkbox" name="1" />groepen 1</label>
+            <label for="groepen">
+              <input type="checkbox" name="2" />groepen 2</label>
+            <label for="groepen">
+              <input type="checkbox" name="3" />groepen 3</label>
           </div>
         </div>
       </div>
-      <script>
-        const select = document.getElementById("rolselect");
-        const input = document.getElementById("klassenselect");
 
-        select.addEventListener("change", function() {
-          if (select.value === "2") {
-            input.style.display = "none";
-          } else {
-            input.style.display = "";
-          }
-        });
-      </script>
       <hr>
 
       <br>

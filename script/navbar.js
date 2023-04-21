@@ -14,7 +14,6 @@ function toggleresponsivemenu() {
   }
 }
 
-
 function togglemenu() {
   if (menu.style.display == 'none') {
       menu.style.display = 'block';
@@ -23,6 +22,7 @@ function togglemenu() {
     menu.style.display = 'none';
   }
 }
+
 function togglemenu1() {
   if (menu1.style.display == 'none') {
       menu1.style.display = 'block';
@@ -31,7 +31,6 @@ function togglemenu1() {
     menu1.style.display = 'none';
   }
 }
-
 
 var radios = document.getElementsByTagName('input');
 for(i=0; i<radios.length; i++ ) {

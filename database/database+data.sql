@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 20 apr 2023 om 14:48
+-- Gegenereerd op: 21 apr 2023 om 13:40
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -38,6 +38,7 @@ CREATE TABLE `beeway` (
   `hoofdthemaid` varchar(11) NOT NULL,
   `vakgebiedid` varchar(11) NOT NULL,
   `concreetdoel` varchar(2500) DEFAULT NULL,
+  `status` varchar(1) NOT NULL DEFAULT '0',
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) DEFAULT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -51,10 +52,10 @@ CREATE TABLE `beeway` (
 -- Gegevens worden geëxporteerd voor tabel `beeway`
 --
 
-INSERT INTO `beeway` (`beewayid`, `schoolid`, `groepenid`, `beewaynaam`, `begoed`, `bevoldoende`, `beonvoldoende`, `hoofdthemaid`, `vakgebiedid`, `concreetdoel`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(15, 1, '1', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '2023-04-20 08:48:07', NULL, '2023-04-20 08:48:07', NULL, 0, NULL, NULL),
-(16, 2, '2', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '2023-04-20 08:48:18', NULL, '2023-04-20 08:48:18', NULL, 0, NULL, NULL),
-(17, 3, '3', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '2023-04-20 08:48:44', NULL, '2023-04-20 08:48:44', NULL, 0, NULL, NULL);
+INSERT INTO `beeway` (`beewayid`, `schoolid`, `groepenid`, `beewaynaam`, `begoed`, `bevoldoende`, `beonvoldoende`, `hoofdthemaid`, `vakgebiedid`, `concreetdoel`, `status`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(15, 1, '1', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '0', '2023-04-20 08:48:07', NULL, '2023-04-20 08:48:07', NULL, 0, NULL, NULL),
+(16, 2, '2', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '0', '2023-04-20 08:48:18', NULL, '2023-04-20 08:48:18', NULL, 0, NULL, NULL),
+(17, 3, '3', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '0', '2023-04-20 08:48:44', NULL, '2023-04-20 08:48:44', NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 

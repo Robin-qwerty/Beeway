@@ -1,4 +1,4 @@
-function myFunction() {
+function myFunction() { //search funtcion on dashboard
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();

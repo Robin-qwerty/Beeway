@@ -3,6 +3,7 @@
 <head>
   <meta charset = "UTF-8">
   <title>dashboard - schoollijst</title>
+  <link rel="icon" type="image/x-icon" href="media/favicon.ico">
   <link href="css/style.css" rel="stylesheet">
   <link href="css/beheer.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.0-beta.3/dist/iconify-icon.min.js"></script>
@@ -20,7 +21,7 @@
 
   <div class="beewaylijst">
     <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
-    <h2>scholen beheeren</h2>
+    <h2>scholen beheeren <iconify-icon icon="mdi:office-building-marker" style="font-size:35px;"></iconify-icon></h2>
     <div class="beewaylijstopties">
       <button onclick="window.location.href='beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
@@ -41,7 +42,7 @@
     <table class="beewaylijsttable">
       <tr>
         <th><h3>school naam</h3></th>
-        <th><h3>Archive</h3></th>
+        <th><h3>geblokkeerd/verwijderd</h3></th>
         <th><a href="schooltoevoegen.html" class="addbutton">toevoegen</a></th>
       </tr>
       <tr>
