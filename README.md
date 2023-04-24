@@ -10,5 +10,5 @@ Wil be hosted at http://beeway.nl/
 
 ### back end</h3>
 - `Javascript/Jquery` and `ajax`
-- api made in`PHP`
+- api made in `PHP`
 - Database: `MySQL`

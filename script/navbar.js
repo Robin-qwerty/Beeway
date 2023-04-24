@@ -47,7 +47,7 @@ $(document).ready(function() {
   function dateTime() {
     var ndate = new Date();
     var hours = ndate.getHours();
-    var message = hours < 12 ? 'Good Morning!' : hours < 18 ? 'Good Afternoon!' : 'Good Evening!';
+    var message = hours < 12 ? 'Goedemorgen!' : hours < 18 ? 'Goedemiddag!' : 'Goedeavond!';
     $("h2.day-message").text(message);
   }
 
