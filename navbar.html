@@ -1,7 +1,7 @@
 <script src="script/navbar.js"></script>
-<!-- <script>
-  if (!sessionStorage.getItem("token") && window.location.pathname !== "///Beeway/login.html"){
-    // location.replace("login.html");
+<script>
+  if (!sessionStorage.getItem("token") && window.location.pathname !== "/Beeway/login.html"){
+    location.replace("login.html");
     document.getElementById('menua').style.display = 'none';
     document.getElementById('navbuttons').style.display = 'none';
     document.getElementById('navlogo').style.display = 'block';
@@ -9,8 +9,9 @@
 	} else {
     document.getElementById('navlogo').style.display = 'none';
     document.getElementById('menua1').style.display = 'none';
+    document.getElementById('gmnavbar').style.display = 'none';
   }
-</script> -->
+</script>
 
 <div class="navbar sticky" id="menulist">
   <iconify-icon icon="ei:navicon" class="nav-icon" onclick="toggleresponsivemenu()"></iconify-icon>
@@ -34,6 +35,11 @@
   </div>
 
 
+  <div id="gmnavbar">
+    <h3 style="color:white;"><h2 style="font-weight:none;color:white;" class="day-message">Hallo!</h2>En welkom bij</h3>
+  </div>
+
+
   <div id="navbar_right">
     <a id="menua" onclick="togglemenu()"><b><iconify-icon icon="ei:navicon" id="nav-icon_2"></iconify-icon></b></a>
     <a id="menua1" onclick="togglemenu1()"><b><iconify-icon icon="ic:sharp-question-answer"></iconify-icon><iconify-icon icon="material-symbols:question-mark-rounded"></iconify-icon></b></a>
@@ -46,12 +52,20 @@
       <iconify-icon icon="material-symbols:person" style="font-size:80px;"></iconify-icon>
     </div>
     <div class="menu_profiel_rechts" style="margin-top:20px;">
-      <h2 id="menu_profiel_naam" style="font-weight: none;" class="day-message">Hallo!</h2>
+      <h2 id="menu_profiel_naam" style="font-weight:none;" class="day-message">Hallo</h2>
+      <h3 id="voornaam" style="margin:0;margin-left:35px;"></h3>
+      <script type='text/javascript'>
+        // Get the value from session storage
+        var sessionData = sessionStorage.getItem("voornaam");
+        console.log(sessionData);
+        // Set the value as the innerHTML of the div element
+        document.getElementById("voornaam").innerHTML = sessionData;
+      </script>
       <a id="menu_profiel_knop" href="profiel.html" class="editbutton">Profiel</a>
     </div>
   </div>
   <div class="menu_Buttons">
-    <a href="login.html" class="editbutton">Uitloggen</a>
+    <a class="editbutton" id="logoutbtn">Uitloggen</a>
   </div>
 </div>
 

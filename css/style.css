@@ -230,9 +230,9 @@ html {
   padding: 0.5rem;
 }
 
-#menu_profiel_naam {
+#menu_profiel_naam,
+#voornaam {
   position: absolute;
-  left: 40px;
   color: white;
 }
 
@@ -324,6 +324,7 @@ html {
 .form input[type=password],
 .form #selectaddedit,
 .form #textaddedit,
+.form #schoolselect,
 .form #rolselect,
 .form .multiselect select {
   width: 90%;
@@ -344,9 +345,11 @@ html {
   outline: none;
 }
 
+#schoolselect,
 #rolselect {
   font-size: 17px;
 }
+#schoolselect option,
 #rolselect option {
   font-size: 20px;
   text-align: center;
@@ -369,7 +372,7 @@ html {
 
 #errormsg {
   color: red;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   font-weight: 900;
 }
@@ -427,7 +430,8 @@ html {
 }
 
 .day-message {
-  margin-top: -40px;
+  margin-top: -40px!important;
+  margin: 0;
 }
 
 /* --- beeway letters op login.html --- */
@@ -461,6 +465,7 @@ html {
   background-size: cover;
   -webkit-background-clip: text;
   color: transparent;
+  z-index: 1;
 
   animation: fadename 1.5s ease-in;
 }
@@ -469,4 +474,18 @@ html {
     font-size: 40px;
     border: 15px solid rgba(0,0,0,0.9);
   }
+}
+@media screen and (max-height:780px){
+  .title h1 {
+    display: none;
+  }
+}
+#gmnavbar {
+  width: 60%;
+  margin-left: 20%;
+  display: grid;
+  place-items: center;
+  position: fixed;
+  color: white;
+  text-align: center;
 }

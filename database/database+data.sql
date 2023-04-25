@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 21 apr 2023 om 13:40
+-- Gegenereerd op: 25 apr 2023 om 11:24
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -169,10 +169,10 @@ INSERT INTO `koppelinggroepen` (`userid`, `groepenid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `schoolen`
+-- Tabelstructuur voor tabel `scholen`
 --
 
-CREATE TABLE `schoolen` (
+CREATE TABLE `scholen` (
   `schoolid` int(11) NOT NULL,
   `naamschool` varchar(155) NOT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -185,10 +185,10 @@ CREATE TABLE `schoolen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `schoolen`
+-- Gegevens worden geëxporteerd voor tabel `scholen`
 --
 
-INSERT INTO `schoolen` (`schoolid`, `naamschool`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+INSERT INTO `scholen` (`schoolid`, `naamschool`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
 (1, 'ict@paul', '2023-04-20 09:48:32', 1, '2023-04-20 09:48:32', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -209,7 +209,14 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`sessionid`, `userid`, `stmp`, `token`) VALUES
-(1, 1, 1234, 'qwerty');
+(3, 1, 1682411386, 'hGEnZO3R1cffGakKUeyOBA5zt87m62nAs67U1exUpAQojwum39'),
+(5, 2, 1682411612, 'UdIpU8UNkCEMJaAasXRnTaeLHhxDZlUiR0zDqkFkKqnSquFm94'),
+(6, 1, 1682411818, '9E9YkyGLFbZcboMtGiEfxqqOx0Mm8Mm38rsd3RnbsAif0odzai'),
+(7, 1, 1682413137, '96xpxJ5LoN780HD4x5ARCfCDLRFmppIcT4LCZorV9CswhP6wX0'),
+(8, 1, 1682413204, 'vfkMPVCRHcb8E3jwmhkb47X2yiknpbdrfGbye8yturfPZ1KxM6'),
+(9, 1, 1682413500, 'I1IJRMmiqOB7Fg4gQbS4QqDqLC4LP4NTYLnAi1khd28APcwC2x'),
+(10, 1, 1682413560, 'Yn8ZpYp2lQjxfVAg82NLyk6omnOembcO9JGyIedtsWR1vOYnRR'),
+(11, 1, 1682414549, 'jMH8e8Ya2ZwttsIMVyVTFCqoCyp3rjvdb5M764itI4ZW5S6nGE');
 
 -- --------------------------------------------------------
 
@@ -219,7 +226,7 @@ INSERT INTO `session` (`sessionid`, `userid`, `stmp`, `token`) VALUES
 
 CREATE TABLE `users` (
   `userid` int(11) NOT NULL,
-  `schoolid` int(11) NOT NULL,
+  `schoolid` int(11) DEFAULT NULL,
   `voornaam` varchar(55) NOT NULL,
   `achternaam` varchar(55) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -239,7 +246,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `schoolid`, `voornaam`, `achternaam`, `email`, `wachtwoord`, `rol`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, 1, 'test', 'test', 'test', 'test', 1, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL);
+(1, NULL, 'test', 'test', 'test@test.nl', '098f6bcd4621d373cade4e832627b4f6', 2, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
+(2, 1, 'test', 'test', 'een@test.nl', '098f6bcd4621d373cade4e832627b4f6', 1, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -294,9 +302,9 @@ ALTER TABLE `hoofdthema`
   ADD PRIMARY KEY (`themaid`);
 
 --
--- Indexen voor tabel `schoolen`
+-- Indexen voor tabel `scholen`
 --
-ALTER TABLE `schoolen`
+ALTER TABLE `scholen`
   ADD PRIMARY KEY (`schoolid`);
 
 --
@@ -349,13 +357,13 @@ ALTER TABLE `hoofdthema`
 -- AUTO_INCREMENT voor een tabel `session`
 --
 ALTER TABLE `session`
-  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `vakgebied`

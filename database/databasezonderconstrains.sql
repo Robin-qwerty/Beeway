@@ -20,9 +20,9 @@ CREATE TABLE `users`
 PRIMARY KEY (`userid`)
 );
 
--- ************************************** `schoolen`
+-- ************************************** `scholen`
 
-CREATE TABLE `schoolen`
+CREATE TABLE `scholen`
 (
  `schoolid`   int NOT NULL ,
  `naamschool` varchar(155) NOT NULL ,
