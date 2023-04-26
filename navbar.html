@@ -1,7 +1,9 @@
 <script src="script/navbar.js"></script>
 <script>
-  if (!sessionStorage.getItem("token") && window.location.pathname !== "/Beeway/login.html"){
-    location.replace("login.html");
+  if (!sessionStorage.getItem("token")){
+    if (window.location.pathname !== "/Beeway/login.html") {
+      location.replace("login.html");
+    }
     document.getElementById('menua').style.display = 'none';
     document.getElementById('navbuttons').style.display = 'none';
     document.getElementById('navlogo').style.display = 'block';
@@ -57,7 +59,6 @@
       <script type='text/javascript'>
         // Get the value from session storage
         var sessionData = sessionStorage.getItem("voornaam");
-        console.log(sessionData);
         // Set the value as the innerHTML of the div element
         document.getElementById("voornaam").innerHTML = sessionData;
       </script>
@@ -71,7 +72,7 @@
 
 <div class="menu" id="menu1">
   <div class="menu_login">
-    <h2 id="menu_profiel_naam" style="font-weight: none;" class="day-message">Hallo!</h2>
+    <h2 id="menu_profiel_naam" style="font-weight:none;margin-left: 40px;" class="day-message">Hallo!</h2>
     <div class="menu_login_info">
       <h3 class="menu_login_info_txt"><b>Wat is beeway?</b> <br> blah blah blah</h3>
       <h3 class="menu_login_info_txt"><b>Waarvoor kan ik het gebruiken?</b> <br> blah blah blah <br> <a href="#"><u>bekijk voorbeeld</u></a> </h3>

@@ -297,7 +297,7 @@ html {
 
 .login {
   width: 550px;
-  height: 575px;
+  height: 595px;
   background: #333333;
   top: 55%;
   left: 50%;
@@ -345,6 +345,19 @@ html {
   outline: none;
 }
 
+input[type='checkbox'] {
+  box-sizing: border-box;
+  appearance: none;
+  background: white;
+  outline: 2px solid #333;
+  border: 3px solid white;
+  width: 18px;
+  height: 18px;
+}
+input[type='checkbox']:checked {
+  background: #333;
+}
+
 #schoolselect,
 #rolselect {
   font-size: 17px;
@@ -372,7 +385,7 @@ html {
 
 #errormsg {
   color: red;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
   font-weight: 900;
 }
@@ -461,7 +474,7 @@ html {
   background: transparent;
   border-radius: 25px;
   background: #ffccff;
-  background-image: url(https://robin.humilis.net/media/giphy.gif);
+  background-image: url(../media/giphy.gif);
   background-size: cover;
   -webkit-background-clip: text;
   color: transparent;

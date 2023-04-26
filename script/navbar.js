@@ -41,10 +41,21 @@ for(i=0; i<radios.length; i++ ) {
     }
 }
 
-// display Good Morning/Afternoon/Evening
 
 $(document).ready(function() {
-  function dateTime() {
+  $("#logoutbtn").on("click", function(){
+    event.preventDefault();
+
+    var obj = {'Token' : sessionStorage.getItem("token")};
+    const myJSON = JSON.stringify(obj);
+    HandelApiCall(handellogoutdata, "Logout", myJSON);
+
+    sessionStorage.clear();
+    window.location.replace("http://192.168.1.100/Beeway/login.html");
+  })
+
+
+  function dateTime() { // display Good Morning/Afternoon/Evening
     var ndate = new Date();
     var hours = ndate.getHours();
     var message = hours < 12 ? 'Goedemorgen!' : hours < 18 ? 'Goedemiddag!' : 'Goedeavond!';
@@ -52,7 +63,13 @@ $(document).ready(function() {
   }
 
   setInterval(dateTime, 1000);
-});
+}); // end document ready
+
+function handellogoutdata (result, div){
+  if (result == "NOK") {
+    $("#errormsg").html("er was iets mis gegaan, pech!");
+  }
+}
 
 Number.prototype.leadingZeroes = function(len) {
   return (new Array(len).fill('0', 0).join('') + this).slice(-Math.abs(len));

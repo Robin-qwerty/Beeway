@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 25 apr 2023 om 11:24
+-- Gegenereerd op: 26 apr 2023 om 10:51
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -216,7 +216,37 @@ INSERT INTO `session` (`sessionid`, `userid`, `stmp`, `token`) VALUES
 (8, 1, 1682413204, 'vfkMPVCRHcb8E3jwmhkb47X2yiknpbdrfGbye8yturfPZ1KxM6'),
 (9, 1, 1682413500, 'I1IJRMmiqOB7Fg4gQbS4QqDqLC4LP4NTYLnAi1khd28APcwC2x'),
 (10, 1, 1682413560, 'Yn8ZpYp2lQjxfVAg82NLyk6omnOembcO9JGyIedtsWR1vOYnRR'),
-(11, 1, 1682414549, 'jMH8e8Ya2ZwttsIMVyVTFCqoCyp3rjvdb5M764itI4ZW5S6nGE');
+(11, 1, 1682414549, 'jMH8e8Ya2ZwttsIMVyVTFCqoCyp3rjvdb5M764itI4ZW5S6nGE'),
+(12, 1, 1682415637, 'ATBK2KB9PE47GGLTxA4BVJzyMYPo3Bbvm0WsBob0WL1sJ0wxtd'),
+(13, 1, 1682416044, 'aiCJY2YgQJ0mzQRLZdia09zhMYYz5kQQvRIt5YDQZc35iSO6xM'),
+(14, 1, 1682416533, 'eBH8itjho1PqcKT2FZI4XCfaAIkmAuWdTy1ysMftlpLGr27ZS0'),
+(15, 1, 1682416535, 'OKPOYvYABHu5qw2mMBKt1YuRDLUUzXJMKkFVXcaUjMhBVmWWWz'),
+(16, 1, 1682416576, 'lfjKrl0oak9sVPyJ3KeO6Xu7jFafqkjBm3LmHurp4UaFEu0O0T'),
+(17, 1, 1682416626, 'U5I6yNBhkCw9sMmPNi3ZJyD9Xe9vv1al22InCxtcieMhidojZe'),
+(18, 1, 1682416641, 'LilMIeHzIVeCdBDazFqbbCkwo9Y0Y54DKlPk7FnDuuCb2MJrJt'),
+(19, 1, 1682416682, '8Z5jVODxy7ljXKEdIQNoDlRerxT6LjhJTjKVGtE0DkwyNwl6Lc'),
+(20, 1, 1682419867, 'jefKUpyDzhUdgO8BHJccsAVR4mvAsHEhdDFMFGiqENHC0x3DlH'),
+(21, 2, 1682419906, 'JJQ9LhFKhmv9Q5crZ9ffy3AcPfnDZBXZr3tUc0UNU6PRDdBPK3'),
+(22, 2, 1682419908, 'CzMDsBUkSVBCuBP25gXihAB3wKhKJEAQq0ZclmK6jOsAYJc2TS'),
+(23, 2, 1682419915, 'ZYfk4I9LYmpueicMFVSvX6hDl3n539Kc2XDzYy2Bjv6LpAEbJP'),
+(24, 2, 1682420077, '7O48sczNMIW6wWVazyL04cQZ8CKjmsBJ1eXs85fTfLn5Ic4n7V'),
+(25, 2, 1682420077, 'j6X78PHrKg2gjsQ9uJaTo7IOVWjm2lWShKm3xKEdXrbRFxx4PD'),
+(26, 2, 1682420077, '6uLlDvsrUPEzxm8Xi5mctedO4pyGp063BD2JhBcTBFFYEP3TQU'),
+(27, 2, 1682420078, 'fzMBnv0o087OeIxRLD2Tg6Zl1IdDSx8Vcl0JCXe94IZ4R6t9VT'),
+(28, 2, 1682420078, 'xRV1tFTU8kfByoQ7qmhvXNLF0S0gREOQqvxfBK4deuebBSFLDA'),
+(29, 2, 1682420078, 'iyq2efuWzKqWYPK0Mtv6aQgi5yoge8ARa35qanvJbMySLlvlKh'),
+(30, 2, 1682420078, 'yWYeORAqWD8jZdWaWsCDaERSJY14Sct5SvUT57ZbwwHn8V0x2Y'),
+(31, 2, 1682420078, 'hwAYCUprremR6RThR1pfSL5Fpm6iIcxq6co3PwhvROsn3j1s75'),
+(32, 2, 1682420240, 'Jhuf0vUcz0Vw92wDzsZT9xCjDw2puJaJKJvlftawpbWWQebY6c'),
+(33, 3, 1682420294, 'N59EpWtT0DgBbA6pkhtiHYUOb4hn2BH5jvDwWJ1talCsYtShym'),
+(34, 1, 1682378212, 'yzDrVGznLPZJXQaL0TPUbhBOHHyeBYvprleNl4H9ggaubyVdKY'),
+(35, 2, 1682378479, 'bLXox6GjwpMEYDbyrkWDzJoXK68JJRuxYbWvuckSzL3cSlotb9'),
+(36, 1, 1682379370, 'JCYNJJEDLVnElZzqryCwRjPGiRnv5nJEw2UbACyVM6AesJQeph'),
+(37, 1, 1682497913, 'mc6pG8g0Kk9cbyo9QqiBU9Ext5WhrJotIDXAeqKGHscWMhDYCVlsK0Ff1V4v1aDnbHn3F3PftaJqCynAf8SmZvRKTygn'),
+(38, 1, 1682497934, 'FgSsvJ3yHerkVlxmGWs8D3viIM29Q3HhqFiyewGqQjMJCIkvfalPVveP'),
+(39, 1, 1682497976, 'pZazClFGXvYnj3hpAN7WMOJ8Fpz6mA1AzkajEtYF5eYIYX1OlQA4eSKNQOVds0KKsjFPNxdX8BwnFhufGgos5ugHd'),
+(40, 1, 1682498227, 'lhnaTcfrSOwLWQDooRUxe2Kfxc8fRgByEMrQi9rkjaKL87ccySSAM'),
+(41, 1, 1682498954, '9CcNTCkqI9kBZ6Z3P2em52Cm4ZzXtt0zH6I56kUzW1pjweEERSWTwc5Bvx8EtesSKcly9AAm8yaX85mVVdu3GtS');
 
 -- --------------------------------------------------------
 
@@ -247,7 +277,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userid`, `schoolid`, `voornaam`, `achternaam`, `email`, `wachtwoord`, `rol`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
 (1, NULL, 'test', 'test', 'test@test.nl', '098f6bcd4621d373cade4e832627b4f6', 2, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
-(2, 1, 'test', 'test', 'een@test.nl', '098f6bcd4621d373cade4e832627b4f6', 1, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL);
+(2, 1, 'test', 'test', 'een@test.nl', '098f6bcd4621d373cade4e832627b4f6', 1, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
+(3, 1, 'test', 'test', 'twee@test.nl', '098f6bcd4621d373cade4e832627b4f6', 0, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -357,13 +388,13 @@ ALTER TABLE `hoofdthema`
 -- AUTO_INCREMENT voor een tabel `session`
 --
 ALTER TABLE `session`
-  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `vakgebied`

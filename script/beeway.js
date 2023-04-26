@@ -96,6 +96,6 @@ $(document).ready(function(){
 });
 
 
-function handeldata (result, div){
-  alert(result);
+function handeldata(result, div){
+  // alert(result);
 }
