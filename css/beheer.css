@@ -2,7 +2,7 @@
 
 .beewaylijst {
   margin: 7rem 1rem 0 1rem;
-  background: #b9b9b9;
+  background: #7197a9;
   padding: 1.5rem;
   border-radius: 1rem;
 }
@@ -20,7 +20,7 @@
   color: white;
 }
 .beewaylijsttable tr:nth-child(even) {
-  background-color: #262626;
+  background-color: #172a32;
   border-radius: 1rem;
 }
 
@@ -33,10 +33,10 @@
   border: none;
   outline: none;
   cursor: pointer;
-  background-color: #b9b9b9;
+  background-color: #7197a9;
   font-size: 18px;
   font-weight: bold;
-  color: #8c8c8c;
+  color: #596970;
 }
 .beewaylijstopties u {
   color: black;

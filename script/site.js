@@ -31,20 +31,21 @@ function handelsessioncheckdata (result){
     HandelApiCall(handellogoutdata, "Logout", myJSON);
 
     sessionStorage.clear();
+    sessionStorage.setItem("error", "session verlopen, log opnieuw in");
     window.location.replace("http://192.168.1.100/Beeway/login.html");
-    $("#errormsg").html("session verlopen, log opnieuw in");
   } else if (result == "NOK2") { // session not found
     sessionStorage.clear();
+    sessionStorage.setItem("error", "session error, log opnieuw in");
     window.location.replace("http://192.168.1.100/Beeway/login.html");
-    $("#errormsg").html("session error, log opnieuw in");
   } else {
     sessionStorage.clear();
+    sessionStorage.setItem("error", "session error, log opnieuw in");
     window.location.replace("http://192.168.1.100/Beeway/login.html");
-    $("#errormsg").html("session error, log opnieuw in");
   }
 }
 
 function handellogindata (result, div){
+  // alert(result);
   if (result == "NOK1") {
     $("#errormsg").html("Selecteer een school!");
   } else if (result == "NOK2") {
@@ -54,6 +55,6 @@ function handellogindata (result, div){
 
     sessionStorage.setItem("token", obj['Token']);
     sessionStorage.setItem("voornaam", obj['Voornaam']);
-    window.location.replace("http://192.168.1.100/Beeway/scholenlijst.html");
+    window.location.replace("http://192.168.1.100/Beeway/beewaylijst.html");
   }
 }

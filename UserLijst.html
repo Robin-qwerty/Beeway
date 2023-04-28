@@ -25,6 +25,10 @@
   <div class="beewaylijst">
     <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
     <h2>Users beheeren <iconify-icon icon="material-symbols:person" style="font-size:35px;"></iconify-icon></h2>
+
+    <script src="script/error.js"></script>
+    <div id="errormsg"></div>
+
     <div class="beewaylijstopties">
       <button onclick="window.location.href='beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
@@ -42,7 +46,7 @@
     <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
 
     <br>
-    <table class="beewaylijsttable">
+    <!-- <table class="beewaylijsttable">
       <tr>
         <th><h3>Naam</h3></th>
         <th><h3>Email</h3></th>
@@ -50,32 +54,11 @@
         <th><h3>groepen</h3></th>
         <th><h3>geblokkeerd/verwijderd</h3></th>
         <th><a href="usertoevoegen.html" class="addbutton">toevoegen</a></th>
-      </tr>
-      <tr>
-        <td><b>'.$Users->Naam.'</b></td>
-        <td><b>'.$Users->Email.'</b></td>
-        <td><b>'.$Users->Rol.'</b></td>
-        <td><b>'.$Users->groepen.'</b></td>
-        <td><b>'.$Users->archive.'</b></td>
-        <td><a href="useraanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Users->Naam.'</b></td>
-        <td><b>'.$Users->Email.'</b></td>
-        <td><b>'.$Users->Rol.'</b></td>
-        <td><b>'.$Users->groepen.'</b></td>
-        <td><b>'.$Users->archive.'</b></td>
-        <td><a href="useraanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Users->Naam.'</b></td>
-        <td><b>'.$Users->Email.'</b></td>
-        <td><b>'.$Users->Rol.'</b></td>
-        <td><b>'.$Users->groepen.'</b></td>
-        <td><b>'.$Users->archive.'</b></td>
-        <td><a href="useraanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-    </table>
+      </tr> -->
+
+      <div id="userlijstdata"></div>
+
+    <!-- </table> -->
     <hr>
   </div>
 </body>
