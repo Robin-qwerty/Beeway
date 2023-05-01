@@ -70,9 +70,7 @@ $(document).ready(function(){
     var jsonString3 = JSON.stringify(data);
 
     HandelApiCall(handeldata, "beeway", jsonString3);
-
     // console.log(jsonString3);
-
   })
 
 
@@ -93,7 +91,7 @@ $(document).ready(function(){
     }
   });
 
-});
+}); // end document ready
 
 
 function handeldata(result, div){

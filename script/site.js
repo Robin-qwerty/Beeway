@@ -14,6 +14,7 @@ $(document).ready(function(){
     var psw = $("#psw").val();
 
     var psw5 = $.md5(psw);
+
     var obj = {'Email' : email, 'Psw' : psw5, 'School' : school};
     const myJSON = JSON.stringify(obj);
 
@@ -22,7 +23,7 @@ $(document).ready(function(){
 
 }); // end document ready
 
-function handelsessioncheckdata (result){
+function handelsessioncheckdata (result) {
   if (result == "OK") { // session valid
     // nothing happens
   } else if (result == "NOK1") { // session expired
@@ -44,7 +45,7 @@ function handelsessioncheckdata (result){
   }
 }
 
-function handellogindata (result, div){
+function handellogindata (result, div) {
   // alert(result);
   if (result == "NOK1") {
     $("#errormsg").html("Selecteer een school!");

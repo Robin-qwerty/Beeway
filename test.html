@@ -11,24 +11,26 @@
   <script src="script/handelapicall.js"></script>
   <script src="script/site.js"></script> -->
   <script>
-    $(document).ready(function(){
-      $.ajax({
-        type: "POST",
-        url: "http://192.168.1.100//beeway/php/beeway.php",
-        data: { test : "" },
-        cache: false,
-        crossDomain: true,
-        success: function (msg) {
-           $("#test").append(msg);
-           console.log(msg);
-        }
+    $(document).ready(function() {
+      $('#button-container').on('click', '.my-btn', function() {
+        // Handle click event here
+        console.log('Button clicked');
       });
+
+      // Dynamically load buttons after 5 seconds
+      setTimeout(function() {
+        $('#button-container').append('<button class="my-btn">Button 1</button>');
+        $('#button-container').append('<button class="my-btn">Button 2</button>');
+        $('#button-container').append('<button class="my-btn">Button 3</button>');
+      }, 5000);
     });
   </script>
 </head>
 <body>
 
-  <div id="test"></div>
+  <div id="button-container">
+    <!-- Initially empty -->
+  </div>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 26 apr 2023 om 10:51
+-- Gegenereerd op: 01 mei 2023 om 15:52
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -53,9 +53,11 @@ CREATE TABLE `beeway` (
 --
 
 INSERT INTO `beeway` (`beewayid`, `schoolid`, `groepenid`, `beewaynaam`, `begoed`, `bevoldoende`, `beonvoldoende`, `hoofdthemaid`, `vakgebiedid`, `concreetdoel`, `status`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(15, 1, '1', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '0', '2023-04-20 08:48:07', NULL, '2023-04-20 08:48:07', NULL, 0, NULL, NULL),
-(16, 2, '2', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '0', '2023-04-20 08:48:18', NULL, '2023-04-20 08:48:18', NULL, 0, NULL, NULL),
-(17, 3, '3', 'test beeway', '12', '13', '14', '3', '2', 'doel doel', '0', '2023-04-20 08:48:44', NULL, '2023-04-20 08:48:44', NULL, 0, NULL, NULL);
+(15, 1, '1', 'test beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:07', 1, '2023-04-20 08:48:07', NULL, 0, NULL, NULL),
+(16, 1, '1', 'test2 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:18', 1, '2023-04-20 08:48:18', NULL, 0, NULL, NULL),
+(17, 1, '1', 'test3 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:44', 1, '2023-04-20 08:48:44', NULL, 0, NULL, NULL),
+(18, 1, '1', 'test4 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:44', 1, '2023-04-20 08:48:44', NULL, 0, NULL, NULL),
+(19, 1, '1', 'test5 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:44', 1, '2023-04-20 08:48:44', NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -148,6 +150,13 @@ CREATE TABLE `hoofdthema` (
   `deletedby` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `hoofdthema`
+--
+
+INSERT INTO `hoofdthema` (`themaid`, `naamthema`, `periode`, `schooljaar`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(3, 'naam thema', 1, '1', '2023-04-28 11:34:17', 1, '2023-04-28 11:34:17', 1, 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -164,7 +173,9 @@ CREATE TABLE `koppelinggroepen` (
 --
 
 INSERT INTO `koppelinggroepen` (`userid`, `groepenid`) VALUES
-(1, 1);
+(1, 1),
+(2, 1),
+(3, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +200,7 @@ CREATE TABLE `scholen` (
 --
 
 INSERT INTO `scholen` (`schoolid`, `naamschool`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, 'ict@paul', '2023-04-20 09:48:32', 1, '2023-04-20 09:48:32', 1, 0, NULL, NULL);
+(1, 'mijnschool', '2023-04-20 09:48:32', 1, '2023-04-20 09:48:32', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,44 +220,18 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`sessionid`, `userid`, `stmp`, `token`) VALUES
-(3, 1, 1682411386, 'hGEnZO3R1cffGakKUeyOBA5zt87m62nAs67U1exUpAQojwum39'),
-(5, 2, 1682411612, 'UdIpU8UNkCEMJaAasXRnTaeLHhxDZlUiR0zDqkFkKqnSquFm94'),
-(6, 1, 1682411818, '9E9YkyGLFbZcboMtGiEfxqqOx0Mm8Mm38rsd3RnbsAif0odzai'),
-(7, 1, 1682413137, '96xpxJ5LoN780HD4x5ARCfCDLRFmppIcT4LCZorV9CswhP6wX0'),
-(8, 1, 1682413204, 'vfkMPVCRHcb8E3jwmhkb47X2yiknpbdrfGbye8yturfPZ1KxM6'),
-(9, 1, 1682413500, 'I1IJRMmiqOB7Fg4gQbS4QqDqLC4LP4NTYLnAi1khd28APcwC2x'),
-(10, 1, 1682413560, 'Yn8ZpYp2lQjxfVAg82NLyk6omnOembcO9JGyIedtsWR1vOYnRR'),
-(11, 1, 1682414549, 'jMH8e8Ya2ZwttsIMVyVTFCqoCyp3rjvdb5M764itI4ZW5S6nGE'),
-(12, 1, 1682415637, 'ATBK2KB9PE47GGLTxA4BVJzyMYPo3Bbvm0WsBob0WL1sJ0wxtd'),
-(13, 1, 1682416044, 'aiCJY2YgQJ0mzQRLZdia09zhMYYz5kQQvRIt5YDQZc35iSO6xM'),
-(14, 1, 1682416533, 'eBH8itjho1PqcKT2FZI4XCfaAIkmAuWdTy1ysMftlpLGr27ZS0'),
-(15, 1, 1682416535, 'OKPOYvYABHu5qw2mMBKt1YuRDLUUzXJMKkFVXcaUjMhBVmWWWz'),
-(16, 1, 1682416576, 'lfjKrl0oak9sVPyJ3KeO6Xu7jFafqkjBm3LmHurp4UaFEu0O0T'),
-(17, 1, 1682416626, 'U5I6yNBhkCw9sMmPNi3ZJyD9Xe9vv1al22InCxtcieMhidojZe'),
-(18, 1, 1682416641, 'LilMIeHzIVeCdBDazFqbbCkwo9Y0Y54DKlPk7FnDuuCb2MJrJt'),
-(19, 1, 1682416682, '8Z5jVODxy7ljXKEdIQNoDlRerxT6LjhJTjKVGtE0DkwyNwl6Lc'),
-(20, 1, 1682419867, 'jefKUpyDzhUdgO8BHJccsAVR4mvAsHEhdDFMFGiqENHC0x3DlH'),
-(21, 2, 1682419906, 'JJQ9LhFKhmv9Q5crZ9ffy3AcPfnDZBXZr3tUc0UNU6PRDdBPK3'),
-(22, 2, 1682419908, 'CzMDsBUkSVBCuBP25gXihAB3wKhKJEAQq0ZclmK6jOsAYJc2TS'),
-(23, 2, 1682419915, 'ZYfk4I9LYmpueicMFVSvX6hDl3n539Kc2XDzYy2Bjv6LpAEbJP'),
-(24, 2, 1682420077, '7O48sczNMIW6wWVazyL04cQZ8CKjmsBJ1eXs85fTfLn5Ic4n7V'),
-(25, 2, 1682420077, 'j6X78PHrKg2gjsQ9uJaTo7IOVWjm2lWShKm3xKEdXrbRFxx4PD'),
-(26, 2, 1682420077, '6uLlDvsrUPEzxm8Xi5mctedO4pyGp063BD2JhBcTBFFYEP3TQU'),
-(27, 2, 1682420078, 'fzMBnv0o087OeIxRLD2Tg6Zl1IdDSx8Vcl0JCXe94IZ4R6t9VT'),
-(28, 2, 1682420078, 'xRV1tFTU8kfByoQ7qmhvXNLF0S0gREOQqvxfBK4deuebBSFLDA'),
-(29, 2, 1682420078, 'iyq2efuWzKqWYPK0Mtv6aQgi5yoge8ARa35qanvJbMySLlvlKh'),
-(30, 2, 1682420078, 'yWYeORAqWD8jZdWaWsCDaERSJY14Sct5SvUT57ZbwwHn8V0x2Y'),
-(31, 2, 1682420078, 'hwAYCUprremR6RThR1pfSL5Fpm6iIcxq6co3PwhvROsn3j1s75'),
-(32, 2, 1682420240, 'Jhuf0vUcz0Vw92wDzsZT9xCjDw2puJaJKJvlftawpbWWQebY6c'),
-(33, 3, 1682420294, 'N59EpWtT0DgBbA6pkhtiHYUOb4hn2BH5jvDwWJ1talCsYtShym'),
-(34, 1, 1682378212, 'yzDrVGznLPZJXQaL0TPUbhBOHHyeBYvprleNl4H9ggaubyVdKY'),
-(35, 2, 1682378479, 'bLXox6GjwpMEYDbyrkWDzJoXK68JJRuxYbWvuckSzL3cSlotb9'),
-(36, 1, 1682379370, 'JCYNJJEDLVnElZzqryCwRjPGiRnv5nJEw2UbACyVM6AesJQeph'),
-(37, 1, 1682497913, 'mc6pG8g0Kk9cbyo9QqiBU9Ext5WhrJotIDXAeqKGHscWMhDYCVlsK0Ff1V4v1aDnbHn3F3PftaJqCynAf8SmZvRKTygn'),
-(38, 1, 1682497934, 'FgSsvJ3yHerkVlxmGWs8D3viIM29Q3HhqFiyewGqQjMJCIkvfalPVveP'),
-(39, 1, 1682497976, 'pZazClFGXvYnj3hpAN7WMOJ8Fpz6mA1AzkajEtYF5eYIYX1OlQA4eSKNQOVds0KKsjFPNxdX8BwnFhufGgos5ugHd'),
-(40, 1, 1682498227, 'lhnaTcfrSOwLWQDooRUxe2Kfxc8fRgByEMrQi9rkjaKL87ccySSAM'),
-(41, 1, 1682498954, '9CcNTCkqI9kBZ6Z3P2em52Cm4ZzXtt0zH6I56kUzW1pjweEERSWTwc5Bvx8EtesSKcly9AAm8yaX85mVVdu3GtS');
+(117, 3, 1682927755, 'tsk6mXBSImuXYH7oxkhtxlfOKpTBYIcSxuMkJSI9W70jJnD7lyVNOUQ3JbrZ'),
+(118, 3, 1682928540, '7jVmjmR2POEnCuWhN3MTdp3SzV3Gjid1OPbELnV5lGfSnJdrM5n'),
+(119, 1, 1682933343, 'K7lzSOLoWDWK5NOZtTuXPZTWc031qu7RbVjaLqvjLBrheo2rBe3Kdv3qUO5X97sQsgN5y0ZHHe7HpuV1700cmubPMJ0'),
+(120, 1, 1682933354, 'RZUjCFFfPUGnEEPzbFgIMC0NjLuPNtS0MD0Yl9RwKVyy2Y5aEwcMJNHMbe8hSS2xOiVOTpjCTnmZRhC4'),
+(121, 1, 1682933403, 'Gri9DZoXZlV9XBOLTDJmmekPex9Uxab9GhVT5HqTvPN6QPyKkLTGvJRh1DuMQQiXef1G42bClLL5qMn'),
+(122, 1, 1682933411, 'hrFrTIG2IGRamBNbnLBKYlthyniUm5yHTXiyqumn36E0L4ZOgKedps292aZj0BnX6SIzu0vQJqKkMohs'),
+(123, 1, 1682933424, 'qpGT0LhJZOSBl5LQ3TCUF35S1wTPy1tWCVSV8UIU6jt1RzTsrIbNHGX1Knl6m5duqPUcbs6MwTbOdTers'),
+(124, 1, 1682933928, 'tBbzpwu3p0f4lchBeuQ1fdgOgC0Z7i7O8VmZZagyyuQKGY4b9UJDcP5q7OvzNM4PWf'),
+(125, 1, 1682933935, '3UHMXlBxTBV1lv8DAS8b2iwePU9O0Nk7sroDletTJvtwn3CGoAdNFwYWuO2y'),
+(126, 1, 1682934015, '2106DfxPmIIbVKVXqxuWLiZZ3MpefRduBUWxA3Df9CDt6y3R1jAaRBBBAY7o0NsYwBJItzPU69H7l8Wdym1AvqVOKAF4WxrH'),
+(127, 1, 1682934023, '8A24effYpxpiQ19mSf9mGNlE9Ep6hrcjD8XAzqwVrxTMXKaLKRz'),
+(128, 1, 1682934181, 'qPCe1yIbUgCuniJaH4oWxg0zqH1unyZwPPOhltciny3ajVgu2L8Ux7tEckVdKG8UXKHVC5jjI4TBBO71OOIzEVmL2');
 
 -- --------------------------------------------------------
 
@@ -276,9 +261,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `schoolid`, `voornaam`, `achternaam`, `email`, `wachtwoord`, `rol`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, NULL, 'test', 'test', 'test@test.nl', '098f6bcd4621d373cade4e832627b4f6', 2, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
-(2, 1, 'test', 'test', 'een@test.nl', '098f6bcd4621d373cade4e832627b4f6', 1, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
-(3, 1, 'test', 'test', 'twee@test.nl', '098f6bcd4621d373cade4e832627b4f6', 0, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL);
+(1, NULL, 'superuser', 'test', 'test@test.nl', '098f6bcd4621d373cade4e832627b4f6', 2, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
+(2, 1, 'admin', 'test', 'een@test.nl', '098f6bcd4621d373cade4e832627b4f6', 1, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
+(3, 1, 'docent', 'test', 'twee@test.nl', '098f6bcd4621d373cade4e832627b4f6', 0, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -297,6 +282,13 @@ CREATE TABLE `vakgebied` (
   `deletedat` datetime DEFAULT NULL,
   `deletedby` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `vakgebied`
+--
+
+INSERT INTO `vakgebied` (`vakid`, `naamvakgebied`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, 'rekenen', '2023-04-28 11:30:02', 1, '2023-04-28 11:30:02', 1, 0, NULL, NULL);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -364,7 +356,7 @@ ALTER TABLE `vakgebied`
 -- AUTO_INCREMENT voor een tabel `beeway`
 --
 ALTER TABLE `beeway`
-  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT voor een tabel `beewayobservatie`
@@ -382,13 +374,13 @@ ALTER TABLE `beewayplanning`
 -- AUTO_INCREMENT voor een tabel `hoofdthema`
 --
 ALTER TABLE `hoofdthema`
-  MODIFY `themaid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `themaid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT voor een tabel `session`
 --
 ALTER TABLE `session`
-  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
@@ -400,7 +392,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `vakgebied`
 --
 ALTER TABLE `vakgebied`
-  MODIFY `vakid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vakid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,6 +24,10 @@
   <div class="beewaylijst">
     <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
     <h2>scholen beheeren <iconify-icon icon="mdi:office-building-marker" style="font-size:35px;"></iconify-icon></h2>
+
+    <script src="script/error.js"></script>
+    <div id="errormsg"></div>
+
     <div class="beewaylijstopties">
       <button onclick="window.location.href='beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
@@ -41,28 +45,16 @@
     <input style="width:200px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="zoek op naam..." title="Type in a name">
 
     <br>
-    <table class="beewaylijsttable">
+    <!-- <table class="beewaylijsttable">
       <tr>
         <th><h3>school naam</h3></th>
         <th><h3>geblokkeerd/verwijderd</h3></th>
         <th><a href="schooltoevoegen.html" class="addbutton">toevoegen</a></th>
-      </tr>
-      <tr>
-        <td><b>'.$school->naam.'</b></td>
-        <td><b>'.$school->Archive.'</b></td>
-        <td><a href="schoolaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$school->naam.'</b></td>
-        <td><b>'.$school->Archive.'</b></td>
-        <td><a href="schoolaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$school->naam.'</b></td>
-        <td><b>'.$school->Archive.'</b></td>
-        <td><a href="schoolaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-    </table>
+      </tr> -->
+
+      <div id="scholenlijstdata"></div>
+
+    <!-- </table> -->
     <hr>
   </div>
 
