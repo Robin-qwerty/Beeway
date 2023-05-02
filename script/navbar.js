@@ -48,7 +48,7 @@ $(document).ready(function() {
 
     var obj = {'Token' : sessionStorage.getItem("token")};
     const myJSON = JSON.stringify(obj);
-    HandelApiCall(handellogoutdata, "Logout", myJSON);
+    handleApiCall(handlelogoutdata, "Logout", myJSON);
 
     sessionStorage.clear();
     window.location.replace("http://192.168.1.100/Beeway/login.html");
@@ -65,7 +65,7 @@ $(document).ready(function() {
   setInterval(dateTime, 1000);
 }); // end document ready
 
-function handellogoutdata (result, div){
+function handlelogoutdata (result, div){
   if (result == "NOK") {
     $("#errormsg").html("er was iets mis gegaan, pech!");
   }

@@ -4,22 +4,6 @@
   require ("./dbconnect.php");
 
 
-  // if (isset($_POST['test'])) // test
-  // {
-  //   $sql = "SELECT voornaam FROM users";
-  //   $result = $conn->query($sql);
-  //
-  //   if ($result !== false && $result -> num_rows > 0) {
-  //     $text = "<table border=1> <tr><th>naam</th></tr>";
-  //
-  //     while ($row = $result->fetch_assoc()) {
-  //         $text = $text . "<tr><td>".$row['voornaam']."</td></tr>";
-  //     }
-  //     echo $text = $text . "</table>";
-  //   } else {
-  //     echo "string";
-  //   }
-  // }
 
   if (isset($_POST['DashboardCheck'])) // Check if user session token is stil valid
   {
@@ -27,9 +11,7 @@
       $json = json_decode($json, true);
       $token = $json['Token'];
 
-      $sql = "SELECT stmp
-              FROM session
-              WHERE token=?";
+      $sql = "SELECT stmp FROM session WHERE token=?";
       $stmt = $conn->prepare($sql);
       $stmt->bind_param("s", $token);
       $stmt->execute();
@@ -44,11 +26,11 @@
           if ($dt >= $stmp) {
             echo "NOK1"; // session expierd
 
-            $sql = "DELETE FROM session WHERE token=?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $token);
-            $stmt->execute();
-            $result = $stmt->get_result();
+            $sql2 = "DELETE FROM session WHERE token=?";
+            $stmt1 = $conn->prepare($sql2);
+            $stmt1->bind_param("s", $token);
+            $stmt1->execute();
+            $result2 = $stmt1->get_result();
           } else {
             echo "OK"; // session valid
           }
@@ -85,6 +67,7 @@
             $voornaam = $row['voornaam'];
 
             $token = SetSession($conn, $userid);
+
             $jsonArrayObject = (array('Token' => $token,
                         						  'Voornaam' => $voornaam
                               ));
@@ -145,7 +128,7 @@
   }
 
 
-  if (isset($_POST['AllBeeways'])) // data ophalen voor Beeway lijst
+  if (isset($_POST['AllBeeways'])) // get data for beeway table (school admin and teachers only)
   {
       $json = $_POST['AllBeeways'];
       $json = json_decode($json, true);
@@ -264,7 +247,7 @@
 
 
 
-  if (isset($_POST['AllKlassen'])) //data ophalen voor Klassen lijst
+  if (isset($_POST['AllKlassen'])) // get data for classes table
   {
       $json = $_POST['AllKlassen'];
       $json = json_decode($json, true);
@@ -286,7 +269,7 @@
 
 
 
-  if (isset($_POST['AllVakken'])) //data ophalen voor Vakken lijst
+  if (isset($_POST['AllVakken'])) // get data for discipline table (super user and school admin only)
   {
       $json = $_POST['AllVakken'];
       $json = json_decode($json, true);
@@ -308,7 +291,7 @@
 
 
 
-  if (isset($_POST['AllHoofdthemas'])) //data ophalen voor Hoofdthema's lijst
+  if (isset($_POST['AllHoofdthemas'])) // get data for mainthemes table
   {
       $json = $_POST['AllHoofdthemas'];
       $json = json_decode($json, true);
@@ -330,75 +313,55 @@
 
 
 
-  if (isset($_POST['AllUsers'])) //data ophalen voor Users lijst
+  if (isset($_POST['AllUsers'])) // get data for user table (school admins and super users only)
   {
       $json = $_POST['AllUsers'];
       $json = json_decode($json, true);
       $token = $json['Token'];
 
-      $sql = "SELECT s.userid, u.rol, u.schoolid
+      $sql1 = "SELECT s.userid, u.rol, u.schoolid
               FROM session as s, users as u
               WHERE s.token='$token'
               AND u.userid=s.userid
               AND u.rol<>'0'
               AND u.archive<>'1'";
-      $result1 = $conn->query($sql);
+      $result1 = $conn->query($sql1);
 
       if ($result1 !== false && $result1 -> num_rows > 0) {
         while ($row = $result1->fetch_assoc()) {
           $schoolid = $row['schoolid'];
           $userid = $row['userid'];
 
+
           if ($row['rol'] == 1) { // school admin
-            $sql = "SELECT u.*, g.groepen
-                    FROM users as u, groepen as g, koppelinggroepen as k
-                    WHERE u.schoolid=$schoolid
-                    AND u.rol<>'2'
-                    AND k.userid=u.userid
-                    AND g.groepenid=k.groepenid";
-            $result2 = $conn->query($sql);
+            $sql2 = "SELECT u.*
+                    FROM users as u
+                    WHERE u.schoolid=1
+                    AND u.archive<>'1'";
+            $result2 = $conn->query($sql2);
 
             if ($result2 !== false && $result2 -> num_rows > 0) {
-              $text = '<table class="beewaylijsttable">
-                      <tr>
-                        <th><h3>Naam</h3></th>
-                        <th><h3>Email</h3></th>
-                        <th><h3>Rol</h3></th>
-                        <th><h3>groepen</h3></th>
-                        <th><h3>geblokkeerd/verwijderd</h3></th>
-                        <th><a href="usertoevoegen.html" class="addbutton">toevoegen</a></th>
-                      </tr>';
-
-              while ($row = $result2->fetch_assoc()) {
-                if ($row["rol"] == "0") {$rol = "docent";}
-                else if ($row["rol"] == "1") {$rol = "school admin";}
-                else {$rol = "super user";}
-
-                if ($row["archive"] == "1") {$archive = "yes";}
-                else {$archive = "no";}
-
-                $text = $text . '<tr><td>'.$row["voornaam"].' '.$row["achternaam"].'</td><td>'.$row["email"].'</td><td>'.$rol.'</td><td>'.$row["groepen"].'</td><td>'.$archive.'</td><td><a href="useraanpassen.html" class="editbutton">bewerken</a></td></tr>';
-              }
-
-              echo $text = $text . "</table>";
-
-            } else {
-              echo "NOK1"; // not found
+              echo "string";
+            } else { // no users found
+              echo "NOK1";
             }
-          } elseif ($row['rol'] == 2) { // super user
-            $sql = "SELECT u.*, g.groepen
-                    FROM users as u, groepen as g, koppelinggroepen as k
-                    WHERE k.userid=u.userid
-                    AND g.groepenid=k.groepenid";
-            $result3 = $conn->query($sql);
+          }
+
+
+
+          elseif ($row['rol'] == 2) { // super user
+            $sql2 = "SELECT u.*, s.naamschool
+                    FROM users as u, scholen as s
+                    WHERE s.schoolid=u.schoolid";
+            $result3 = $conn->query($sql2);
 
             if ($result3 !== false && $result3 -> num_rows > 0) {
               $text = '<table class="beewaylijsttable">
                       <tr>
+                        <th><h3>School</h3></th>
                         <th><h3>Naam</h3></th>
                         <th><h3>Email</h3></th>
                         <th><h3>Rol</h3></th>
-                        <th><h3>groepen</h3></th>
                         <th><h3>geblokkeerd/verwijderd</h3></th>
                         <th><a href="usertoevoegen.html" class="addbutton">toevoegen</a></th>
                       </tr>';
@@ -411,26 +374,29 @@
                 if ($row["archive"] == "1") {$archive = "yes";}
                 else {$archive = "no";}
 
-                $text = $text . '<tr><td>'.$row["voornaam"].' '.$row["achternaam"].'</td><td>'.$row["email"].'</td><td>'.$rol.'</td><td>'.$row["groepen"].'</td><td>'.$archive.'</td><td><a href="useraanpassen.html" class="editbutton">bewerken</a></td></tr>';
+                if ($row["naamschool"] == "") {$schoolname = "<em>(geen)</em>";}
+                else {$schoolname = $row["naamschool"];}
+
+                $text = $text . '<tr><td>'.$schoolname.'</td><td>'.$row["voornaam"].' '.$row["achternaam"].'</td><td>'.$row["email"].'</td><td>'.$rol.'</td><td>'.$archive.'</td><td hidden>'.$row["userid"].'</td><td><a href="useraanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
               }
 
               echo $text = $text . "</table>";
 
-            } else {
-              echo "NOK1"; // not found
+            } else { // no users found
+              echo "NOK1";
             }
           } else { // no valid user found
-            echo "NOK"; // error
+            echo "NOK";
           }
         }
       } else { // no valid user found
-        echo "NOK"; // error
+        echo "NOK";
       }
   }
 
 
 
-  if (isset($_POST['AllScholen'])) //data ophalen voor scholen lijst
+  if (isset($_POST['AllScholen'])) // get data for school table (super user only)
   {
       $json = $_POST['AllScholen'];
       $json = json_decode($json, true);
@@ -496,7 +462,7 @@
 
 
 
-  if (isset($_POST['beeway'])) //data afhandelen voor opslaan beeway
+  if (isset($_POST['beeway'])) // handel saving beeway data
   {
       $json = $_POST['beeway'];
       $json = json_decode($json, true);
@@ -542,7 +508,7 @@
 
 
 
-  if (isset($_POST['getbeewayperuser'])) //
+  if (isset($_POST['getbeewayperuser'])) // get one beeway by userid and groups
   {
       $json = $_POST['getbeewayperuser'];
       $json = json_decode($json, true);
@@ -556,82 +522,83 @@
 
 
 
-// other functions
+// --------------------------------------------- other functions --------------------------------------------- //
 
 
 
 
   function SetSession($conn, $userid)
   {
-    $number = generateRandomNumber();
-    $token = RandomString($number);
+      $number = generateRandomNumber();
+      $token = RandomString($number);
 
-    $now = new datetime();
+      $now = new datetime();
 
-    if (isset($rememberme)) {
-      $now->modify('+7 day');
-    } else {
-      $now->modify('+8 hour');
-    }
+      if (isset($rememberme)) {
+        $now->modify('+7 day');
+      } else {
+        $now->modify('+8 hour');
+      }
 
-    $dt = strtotime($now->format('y-m-d h:i:s'));
+      $dt = strtotime($now->format('y-m-d h:i:s'));
 
-    $sql = "INSERT INTO session (stmp, token, userid) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $dt, $token, $userid);
-    $stmt->execute();
-    $result = $stmt->get_result();
+      $sql = "INSERT INTO session (stmp, token, userid) VALUES (?, ?, ?)";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("sss", $dt, $token, $userid);
+      $stmt->execute();
+      $result = $stmt->get_result();
 
-    return $token;
+      return $token;
   }
 
   function RandomString($length) // set random string
   {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $string = '';
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $string = '';
 
-    for ($i = 0; $i < $length; $i++) {
-      $string .= $characters[mt_rand(0, strlen($characters) - 1)];
-    }
+      for ($i = 0; $i < $length; $i++) {
+        $string .= $characters[mt_rand(0, strlen($characters) - 1)];
+      }
 
-    return $string;
+      return $string;
   }
-  function generateRandomNumber() { // Generate a random number between 50 and 100
-    $randomNumber = rand(50, 100);
-    return $randomNumber;
+
+    function generateRandomNumber() { // Generate a random number between 50 and 100
+      $randomNumber = rand(50, 100);
+      return $randomNumber;
   }
 
   function SessionCheck($conn, $token)
   {
-    $sql = "SELECT stmp
-            FROM session
-            WHERE token=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $token);
-    $stmt->execute();
-    $result = $stmt->get_result();
+      $sql = "SELECT stmp
+              FROM session
+              WHERE token=?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $token);
+      $stmt->execute();
+      $result = $stmt->get_result();
 
-    if ($result !== false && $result -> num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        $stmp = $row['stmp'];
-        $now = new datetime();
-        $dt = strtotime($now->format('y-m-d h:i:s'));
+      if ($result !== false && $result -> num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $stmp = $row['stmp'];
+          $now = new datetime();
+          $dt = strtotime($now->format('y-m-d h:i:s'));
 
-        if ($dt >= $stmp) {
-          return "NOK1"; // session expierd
+          if ($dt >= $stmp) {
+            return "NOK1"; // session expierd
 
-          $sql = "DELETE FROM session WHERE token=?";
-          $stmt = $conn->prepare($sql);
-          $stmt->bind_param("s", $token);
-          $stmt->execute();
-          $result = $stmt->get_result();
-        } else {
-          return "OK"; // session valid
+            $sql = "DELETE FROM session WHERE token=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $token);
+            $stmt->execute();
+            $result = $stmt->get_result();
+          } else {
+            return "OK"; // session valid
+          }
         }
+      } else {
+        return "NOK2"; // session not found
       }
-    } else {
-      return "NOK2"; // session not found
-    }
   }
 
 ?>

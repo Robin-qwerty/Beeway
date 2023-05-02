@@ -3,7 +3,7 @@ $(document).ready(function(){
   if (window.location.pathname !== "/Beeway/login.html") {
     var obj = {'Token' : sessionStorage.getItem("token")};
     const myJSON = JSON.stringify(obj);
-    HandelApiCall(handelsessioncheckdata, "SessionCheck", myJSON);
+    handleApiCall(handlesessioncheckdata, "SessionCheck", myJSON);
   }
 
   $("#loginbtn").on("click", function(){
@@ -18,18 +18,20 @@ $(document).ready(function(){
     var obj = {'Email' : email, 'Psw' : psw5, 'School' : school};
     const myJSON = JSON.stringify(obj);
 
-    HandelApiCall(handellogindata, "Login", myJSON);
+    handleApiCall(handlelogindata, "Login", myJSON);
   })
 
 }); // end document ready
 
-function handelsessioncheckdata (result) {
+function handlesessioncheckdata (result) {
+  // alert(result);
+
   if (result == "OK") { // session valid
     // nothing happens
   } else if (result == "NOK1") { // session expired
     var obj = {'Token' : sessionStorage.getItem("token")};
     const myJSON = JSON.stringify(obj);
-    HandelApiCall(handellogoutdata, "Logout", myJSON);
+    handleApiCall(handlelogoutdata, "Logout", myJSON);
 
     sessionStorage.clear();
     sessionStorage.setItem("error", "session verlopen, log opnieuw in");
@@ -45,7 +47,7 @@ function handelsessioncheckdata (result) {
   }
 }
 
-function handellogindata (result, div) {
+function handlelogindata (result, div) {
   // alert(result);
   if (result == "NOK1") {
     $("#errormsg").html("Selecteer een school!");
