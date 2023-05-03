@@ -1,5 +1,7 @@
 $(document).ready(function(){
-
+  if ("notification" in sessionStorage) {
+    handlenotification();
+  }
   // session check
   var obj = {'Token' : sessionStorage.getItem("token")};
   const myJSON = JSON.stringify(obj);
@@ -7,17 +9,17 @@ $(document).ready(function(){
 
 
   if (window.location.pathname == "/Beeway/beewaylijst.html") { // get all beeways the user can see
-    HandleApiCall(handlebeewaylijstdata, "AllBeeways", myJSON, "beewaylijstdata");
+    HandleApiCall(handlebeewaylistdata, "AllBeeways", myJSON, "beewaylijstdata");
   } else if (window.location.pathname == "/Beeway/klassenlijst.html") {
-
+    HandleApiCall(handlegrouplistdata, "AllGroups", myJSON, "klassenlijstdata");
   } else if (window.location.pathname == "/Beeway/vakkenlijst.html") {
-
+    HandleApiCall(handldisciplineslistdata, "AllDisciplines", myJSON, "vakkenlijstdata");
   } else if (window.location.pathname == "/Beeway/Hoofdthemalijst.html") {
-
+    HandleApiCall(handlemainthemelistdata, "AllMainthemes", myJSON, "hoofdthemalijstdata");
   } else if (window.location.pathname == "/Beeway/userlijst.html") {
-    HandleApiCall(handleuserlijstdata, "AllUsers", myJSON, "userlijstdata");
+    HandleApiCall(handleuserlistdata, "AllUsers", myJSON, "userlijstdata");
   } else if (window.location.pathname == "/Beeway/scholenlijst.html") {
-    HandleApiCall(handlescholenlijstdata, "AllScholen", myJSON, "scholenlijstdata");
+    HandleApiCall(handleschoollistdata, "AllSchools", myJSON, "scholenlijstdata");
   }
 
 // beeway lijst troep
@@ -60,92 +62,136 @@ $(document).ready(function(){
 }); // end document ready
 
 function handlesessioncheckdata (result) { // handle session check
-  console.log(result);
+  // console.log(result);
 
-  // if (result == "OK") { // session valid
-  //   // nothing happens
-  // } else if (result == "NOK1") { // session expired
-  //   var obj = {'Token' : sessionStorage.getItem("token")};
-  //   const myJSON = JSON.stringify(obj);
-  //   handleApiCall(handlelogoutdata, "Logout", myJSON);
-  //
-  //   sessionStorage.clear();
-  //   sessionStorage.setItem("error", "session verlopen, log opnieuw in");
-  //   window.location.replace("http://192.168.1.100/Beeway/login.html");
-  // } else if (result == "NOK2") { // session not found
-  //   sessionStorage.clear();
-  //   sessionStorage.setItem("error", "session error, log opnieuw in");
-  //   window.location.replace("http://192.168.1.100/Beeway/login.html");
-  // } else {
-  //   sessionStorage.clear();
-  //   sessionStorage.setItem("error", "session error, log opnieuw in");
-  //   window.location.replace("http://192.168.1.100/Beeway/login.html");
-  // }
+  if (result == "OK") { // session valid
+    // nothing happens
+  } else if (result == "NOK1") { // session expired
+    var obj = {'Token' : sessionStorage.getItem("token")};
+    const myJSON = JSON.stringify(obj);
+    HandleApiCall(handlelogoutdata, "Logout", myJSON);
+
+    sessionStorage.clear();
+    sessionStorage.setItem("notification", "session verlopen, log opnieuw in");
+    window.location.replace("http://192.168.1.100/Beeway/login.html");
+  } else if (result == "NOK2") { // session not found
+    sessionStorage.clear();
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
+    window.location.replace("http://192.168.1.100/Beeway/login.html");
+  } else {
+    sessionStorage.clear();
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
+    window.location.replace("http://192.168.1.100/Beeway/login.html");
+  }
 }
 
 
 
 
-function handlebeewaylijstdata(result, div) { // beewaylijst
+function handlebeewaylistdata(result, div) { // beewaylijst
   // alert(result);
   div = "#" + div;
 
   // if (result == "NOK") { // error
-  //   sessionStorage.setItem("error", "Er ging iets mis, probeer latter opnieuw!");
+  //   sessionStorage.setItem("notification", "Er ging iets mis, probeer latter opnieuw!");
   // } else if (result == "NOK1") { // session expired
   //   var obj = {'Token' : sessionStorage.getItem("token")};
   //   const myJSON = JSON.stringify(obj);
-  //   handleApiCall(handlelogoutdata, "Logout", myJSON);
+  //   HandleApiCall(handlelogoutdata, "Logout", myJSON);
   //
   //   sessionStorage.clear();
-  //   sessionStorage.setItem("error", "session verlopen, log opnieuw in");
+  //   sessionStorage.setItem("notification", "session verlopen, log opnieuw in");
   //   window.location.replace("http://192.168.1.100/Beeway/login.html");
   // } else if (result == "NOK2") { // session not found
   //   sessionStorage.clear();
-  //   sessionStorage.setItem("error", "session error, log opnieuw in");
+  //   sessionStorage.setItem("notification", "session error, log opnieuw in");
   //   window.location.replace("http://192.168.1.100/Beeway/login.html");
   // } else if (result == "NOK3") { // not found
-  //   sessionStorage.setItem("error", "De tabel die u probeerd te bekijken is leeg!");
+  //   sessionStorage.setItem("notification", "De tabel die u probeerd te bekijken is leeg!");
   // } else {
   //    $(div).append(result);
   // }
 }
 
-function handleuserlijstdata(result, div) { // userlijst
-  alert(result);
+function handleuserlistdata(result, div) { // userlijst for supper users and school admins
+  // alert(result);
   div = "#" + div;
 
-  if (result == "NOK") { // error
-    sessionStorage.setItem("error", "Er ging iets mis, probeer latter opnieuw!");
-  } else if (result == "NOK1") { // session expired
+  if (result == "NOK!") { // no user found
     var obj = {'Token' : sessionStorage.getItem("token")};
     const myJSON = JSON.stringify(obj);
-    handleApiCall(handlelogoutdata, "Logout", myJSON);
-
+    HandleApiCall(handlelogoutdata, "Logout", myJSON);
     sessionStorage.clear();
-    sessionStorage.setItem("error", "session verlopen, log opnieuw in");
-    window.location.replace("http://192.168.1.100/Beeway/login.html");
-  } else if (result == "NOK2") { // session not found
-    sessionStorage.clear();
-    sessionStorage.setItem("error", "session error, log opnieuw in");
-    window.location.replace("http://192.168.1.100/Beeway/login.html");
-  } else if (result == "NOK3") { // not found
-    sessionStorage.setItem("error", "De tabel die u probeerd te bekijken is leeg!");
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
+  } else if (result == "NOK") { // error
+    sessionStorage.setItem("notification", "daar mag je niet komen, pech");
+    window.location.replace("http://192.168.1.100/Beeway/beewaylijst.html");
+  } else if (result == "NOK1") { // not found
+    sessionStorage.setItem("notification", "De tabel die u probeerd te bekijken is leeg!");
+    handlenotification();
   } else {
      $(div).append(result);
   }
 }
 
-function handlescholenlijstdata(result, div) { // scholenlijst
+function handleschoollistdata(result, div) { // schools table
   // alert(result);
   div = "#" + div;
-  // alert("asdf");
-  if (result == "NOK!") { // error
-    sessionStorage.setItem("error", "Er ging iets mis, probeer latter opnieuw!");
+
+  if (result == "NOK!") { // no user found
+    var obj = {'Token' : sessionStorage.getItem("token")};
+    const myJSON = JSON.stringify(obj);
+    HandleApiCall(handlelogoutdata, "Logout", myJSON);
+    sessionStorage.clear();
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
   } else if (result == "NOK") { // error
-    sessionStorage.setItem("error", "Er ging iets mis, probeer latter opnieuw!");
+    sessionStorage.setItem("notification", "daar mag je niet komen, pech");
+    window.location.replace("http://192.168.1.100/Beeway/beewaylijst.html");
   } else if (result == "NOK1") { // not found
-    sessionStorage.setItem("error", "De tabel die u probeerd te bekijken is leeg!");
+    sessionStorage.setItem("notification", "De tabel die u probeerd te bekijken is leeg!");
+    handlenotification();
+  } else {
+     $(div).append(result);
+  }
+}
+
+function handlemainthemelistdata(result, div) { // maintheme table
+  // alert(result);
+  div = "#" + div;
+
+  if (result == "NOK!") { // no user found
+    var obj = {'Token' : sessionStorage.getItem("token")};
+    const myJSON = JSON.stringify(obj);
+    HandleApiCall(handlelogoutdata, "Logout", myJSON);
+    sessionStorage.clear();
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
+  } else if (result == "NOK") { // error
+    sessionStorage.setItem("notification", "daar mag je niet komen, pech");
+    window.location.replace("http://192.168.1.100/Beeway/beewaylijst.html");
+  } else if (result == "NOK1") { // not found
+    sessionStorage.setItem("notification", "De tabel die u probeerd te bekijken is leeg!");
+    handlenotification();
+  } else {
+     $(div).append(result);
+  }
+}
+
+function handldisciplineslistdata(result, div) { // maintheme table
+  // alert(result);
+  div = "#" + div;
+
+  if (result == "NOK!") { // no user found
+    var obj = {'Token' : sessionStorage.getItem("token")};
+    const myJSON = JSON.stringify(obj);
+    HandleApiCall(handlelogoutdata, "Logout", myJSON);
+    sessionStorage.clear();
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
+  } else if (result == "NOK") { // error
+    sessionStorage.setItem("notification", "daar mag je niet komen, pech");
+    window.location.replace("http://192.168.1.100/Beeway/beewaylijst.html");
+  } else if (result == "NOK1") { // not found
+    sessionStorage.setItem("notification", "De tabel die u probeerd te bekijken is leeg!");
+    handlenotification();
   } else {
      $(div).append(result);
   }
@@ -160,4 +206,19 @@ function handlebeewayperpersondata(result, div) {
 function handleedituserdata(result, div) {
   // alert(result);
 
+}
+
+
+function handlelogoutdata (result, div) { // hadle user logout
+  if (result == "NOK") {
+    sessionStorage.setItem("notification", "er was iets mis gegaan, pech!");
+  }
+}
+
+function handlenotification() {
+  $("#notifipopup").html('<div class="alert warning"><strong>error.</strong> ' + sessionStorage.getItem("notification") + '</div>').fadeIn();
+  setTimeout(function(){ // popup fade out
+    sessionStorage.removeItem('notification');
+    $("#notifipopup").fadeOut();
+  }, 3000);
 }

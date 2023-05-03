@@ -48,7 +48,7 @@ $(document).ready(function() {
 
     var obj = {'Token' : sessionStorage.getItem("token")};
     const myJSON = JSON.stringify(obj);
-    handleApiCall(handlelogoutdata, "Logout", myJSON);
+    HandleApiCall(handlelogoutdata, "Logout", myJSON);
 
     sessionStorage.clear();
     window.location.replace("http://192.168.1.100/Beeway/login.html");

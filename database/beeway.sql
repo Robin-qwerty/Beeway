@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 01 mei 2023 om 15:52
+-- Gegenereerd op: 03 mei 2023 om 15:29
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `beeway` (
   `beewayid` int(11) NOT NULL,
   `schoolid` int(11) NOT NULL,
-  `groepenid` varchar(11) NOT NULL,
-  `beewaynaam` varchar(155) NOT NULL,
-  `begoed` varchar(3) DEFAULT NULL,
-  `bevoldoende` varchar(3) DEFAULT NULL,
-  `beonvoldoende` varchar(3) DEFAULT NULL,
-  `hoofdthemaid` varchar(11) NOT NULL,
-  `vakgebiedid` varchar(11) NOT NULL,
-  `concreetdoel` varchar(2500) DEFAULT NULL,
+  `groupid` varchar(11) NOT NULL,
+  `beewayname` varchar(155) NOT NULL,
+  `begood` varchar(3) DEFAULT NULL,
+  `beenough` varchar(3) DEFAULT NULL,
+  `benotgood` varchar(3) DEFAULT NULL,
+  `mainthemeid` varchar(11) NOT NULL,
+  `disciplineid` varchar(11) NOT NULL,
+  `concretegoal` varchar(2500) DEFAULT NULL,
   `status` varchar(1) NOT NULL DEFAULT '0',
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) DEFAULT NULL,
@@ -52,27 +52,25 @@ CREATE TABLE `beeway` (
 -- Gegevens worden geëxporteerd voor tabel `beeway`
 --
 
-INSERT INTO `beeway` (`beewayid`, `schoolid`, `groepenid`, `beewaynaam`, `begoed`, `bevoldoende`, `beonvoldoende`, `hoofdthemaid`, `vakgebiedid`, `concreetdoel`, `status`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(15, 1, '1', 'test beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:07', 1, '2023-04-20 08:48:07', NULL, 0, NULL, NULL),
-(16, 1, '1', 'test2 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:18', 1, '2023-04-20 08:48:18', NULL, 0, NULL, NULL),
-(17, 1, '1', 'test3 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:44', 1, '2023-04-20 08:48:44', NULL, 0, NULL, NULL),
-(18, 1, '1', 'test4 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:44', 1, '2023-04-20 08:48:44', NULL, 0, NULL, NULL),
-(19, 1, '1', 'test5 beeway', '12', '13', '14', '3', '1', 'doel doel', '0', '2023-04-20 08:48:44', 1, '2023-04-20 08:48:44', NULL, 0, NULL, NULL);
+INSERT INTO `beeway` (`beewayid`, `schoolid`, `groupid`, `beewayname`, `begood`, `beenough`, `benotgood`, `mainthemeid`, `disciplineid`, `concretegoal`, `status`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, 1, '1', 'eerste beeway', '0', '12', '45', '1', '1', 'beeway doel, leuk he', '0', '2023-05-03 08:15:03', 1, '2023-05-03 08:15:03', 1, 0, NULL, NULL),
+(2, 1, '2', 'tweede beeway', '67', '12', '45', '2', '2', 'beeway doel, leuk he', '0', '2023-05-03 08:15:42', 1, '2023-05-03 08:15:42', 1, 0, NULL, NULL),
+(3, 2, '1', 'derde beeway', '23', '567', '23', '2', '2', 'beeway doel, stom he', '0', '2023-05-03 08:16:14', 1, '2023-05-03 08:16:14', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `beewayobservatie`
+-- Tabelstructuur voor tabel `beewayobservation`
 --
 
-CREATE TABLE `beewayobservatie` (
-  `observatieid` int(11) NOT NULL,
+CREATE TABLE `beewayobservation` (
+  `observationid` int(11) NOT NULL,
   `beewayid` int(11) NOT NULL,
-  `datales` varchar(2500) DEFAULT NULL,
-  `leerdoel` varchar(2500) DEFAULT NULL,
-  `evaluatie` varchar(2500) DEFAULT NULL,
-  `werkdoel` varchar(2500) DEFAULT NULL,
-  `actie` varchar(2500) DEFAULT NULL,
+  `dataclass` varchar(2500) DEFAULT NULL,
+  `learninggoal` varchar(2500) DEFAULT NULL,
+  `evaluation` varchar(2500) DEFAULT NULL,
+  `workgoal` varchar(2500) DEFAULT NULL,
+  `action` varchar(2500) DEFAULT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) NOT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -92,10 +90,10 @@ CREATE TABLE `beewayplanning` (
   `planningid` int(11) NOT NULL,
   `beewayid` varchar(11) NOT NULL,
   `planning` varchar(155) DEFAULT NULL,
-  `planningwat` varchar(2500) DEFAULT NULL,
-  `planningwie` varchar(2500) DEFAULT NULL,
+  `planningwhat` varchar(2500) DEFAULT NULL,
+  `planningwho` varchar(2500) DEFAULT NULL,
   `planningdeadline` datetime DEFAULT NULL,
-  `planninggedaan` varchar(4) DEFAULT NULL,
+  `planningdone` varchar(4) DEFAULT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) DEFAULT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -108,12 +106,12 @@ CREATE TABLE `beewayplanning` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `groepen`
+-- Tabelstructuur voor tabel `disciplines`
 --
 
-CREATE TABLE `groepen` (
-  `groepenid` int(11) NOT NULL,
-  `groepen` varchar(3) NOT NULL,
+CREATE TABLE `disciplines` (
+  `disciplineid` int(11) NOT NULL,
+  `disciplinename` varchar(55) NOT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) NOT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -124,23 +122,22 @@ CREATE TABLE `groepen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `groepen`
+-- Gegevens worden geëxporteerd voor tabel `disciplines`
 --
 
-INSERT INTO `groepen` (`groepenid`, `groepen`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, '6', '2023-04-20 09:47:56', 1, '2023-04-20 09:47:56', 1, 0, NULL, NULL);
+INSERT INTO `disciplines` (`disciplineid`, `disciplinename`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, 'rekenen', '2023-05-03 08:16:59', 1, '2023-05-03 08:16:59', 1, 0, NULL, NULL),
+(2, 'lezen', '2023-05-03 08:17:16', 1, '2023-05-03 08:17:16', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `hoofdthema`
+-- Tabelstructuur voor tabel `groups`
 --
 
-CREATE TABLE `hoofdthema` (
-  `themaid` int(11) NOT NULL,
-  `naamthema` varchar(55) NOT NULL,
-  `periode` int(2) NOT NULL,
-  `schooljaar` varchar(10) NOT NULL,
+CREATE TABLE `groups` (
+  `groupid` int(11) NOT NULL,
+  `groups` varchar(3) NOT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) NOT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -151,41 +148,46 @@ CREATE TABLE `hoofdthema` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `hoofdthema`
+-- Gegevens worden geëxporteerd voor tabel `groups`
 --
 
-INSERT INTO `hoofdthema` (`themaid`, `naamthema`, `periode`, `schooljaar`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(3, 'naam thema', 1, '1', '2023-04-28 11:34:17', 1, '2023-04-28 11:34:17', 1, 0, NULL, NULL);
+INSERT INTO `groups` (`groupid`, `groups`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, '2', '2023-05-03 08:18:01', 1, '2023-05-03 08:18:01', 1, 0, NULL, NULL),
+(2, '6', '2023-05-03 08:18:09', 1, '2023-05-03 08:18:09', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `koppelinggroepen`
+-- Tabelstructuur voor tabel `linkgroups`
 --
 
-CREATE TABLE `koppelinggroepen` (
+CREATE TABLE `linkgroups` (
   `userid` int(11) NOT NULL,
-  `groepenid` int(11) NOT NULL
+  `groupid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `koppelinggroepen`
+-- Gegevens worden geëxporteerd voor tabel `linkgroups`
 --
 
-INSERT INTO `koppelinggroepen` (`userid`, `groepenid`) VALUES
-(1, 1),
-(2, 1),
-(3, 1);
+INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES
+(3, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `scholen`
+-- Tabelstructuur voor tabel `maintheme`
 --
 
-CREATE TABLE `scholen` (
-  `schoolid` int(11) NOT NULL,
-  `naamschool` varchar(155) NOT NULL,
+CREATE TABLE `maintheme` (
+  `themeid` int(11) NOT NULL,
+  `namethemep1` varchar(55) NOT NULL,
+  `namethemep2` varchar(55) NOT NULL,
+  `namethemep3` varchar(55) NOT NULL,
+  `namethemep4` varchar(55) NOT NULL,
+  `namethemep5` varchar(55) NOT NULL,
+  `schoolyear` varchar(10) NOT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) NOT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -196,11 +198,38 @@ CREATE TABLE `scholen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `scholen`
+-- Gegevens worden geëxporteerd voor tabel `maintheme`
 --
 
-INSERT INTO `scholen` (`schoolid`, `naamschool`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, 'mijnschool', '2023-04-20 09:48:32', 1, '2023-04-20 09:48:32', 1, 0, NULL, NULL);
+INSERT INTO `maintheme` (`themeid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, 'test thema 1', '', '', '', '', '1', '2023-05-03 08:19:06', 1, '2023-05-03 08:19:06', 1, 0, NULL, NULL),
+(2, 'test thema 2', '', '', '', '', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `schools`
+--
+
+CREATE TABLE `schools` (
+  `schoolid` int(11) NOT NULL,
+  `schoolname` varchar(155) NOT NULL,
+  `createdat` datetime NOT NULL DEFAULT current_timestamp(),
+  `createdby` int(11) NOT NULL,
+  `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
+  `updatedby` int(11) NOT NULL,
+  `archive` tinyint(4) NOT NULL DEFAULT 0,
+  `deletedat` datetime DEFAULT NULL,
+  `deletedby` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `schools`
+--
+
+INSERT INTO `schools` (`schoolid`, `schoolname`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(0, '', '2023-05-03 08:19:39', 1, '2023-05-03 08:19:39', 1, 0, NULL, NULL),
+(1, 'mijnschool', '2023-05-03 08:19:49', 1, '2023-05-03 08:19:49', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -220,18 +249,7 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`sessionid`, `userid`, `stmp`, `token`) VALUES
-(117, 3, 1682927755, 'tsk6mXBSImuXYH7oxkhtxlfOKpTBYIcSxuMkJSI9W70jJnD7lyVNOUQ3JbrZ'),
-(118, 3, 1682928540, '7jVmjmR2POEnCuWhN3MTdp3SzV3Gjid1OPbELnV5lGfSnJdrM5n'),
-(119, 1, 1682933343, 'K7lzSOLoWDWK5NOZtTuXPZTWc031qu7RbVjaLqvjLBrheo2rBe3Kdv3qUO5X97sQsgN5y0ZHHe7HpuV1700cmubPMJ0'),
-(120, 1, 1682933354, 'RZUjCFFfPUGnEEPzbFgIMC0NjLuPNtS0MD0Yl9RwKVyy2Y5aEwcMJNHMbe8hSS2xOiVOTpjCTnmZRhC4'),
-(121, 1, 1682933403, 'Gri9DZoXZlV9XBOLTDJmmekPex9Uxab9GhVT5HqTvPN6QPyKkLTGvJRh1DuMQQiXef1G42bClLL5qMn'),
-(122, 1, 1682933411, 'hrFrTIG2IGRamBNbnLBKYlthyniUm5yHTXiyqumn36E0L4ZOgKedps292aZj0BnX6SIzu0vQJqKkMohs'),
-(123, 1, 1682933424, 'qpGT0LhJZOSBl5LQ3TCUF35S1wTPy1tWCVSV8UIU6jt1RzTsrIbNHGX1Knl6m5duqPUcbs6MwTbOdTers'),
-(124, 1, 1682933928, 'tBbzpwu3p0f4lchBeuQ1fdgOgC0Z7i7O8VmZZagyyuQKGY4b9UJDcP5q7OvzNM4PWf'),
-(125, 1, 1682933935, '3UHMXlBxTBV1lv8DAS8b2iwePU9O0Nk7sroDletTJvtwn3CGoAdNFwYWuO2y'),
-(126, 1, 1682934015, '2106DfxPmIIbVKVXqxuWLiZZ3MpefRduBUWxA3Df9CDt6y3R1jAaRBBBAY7o0NsYwBJItzPU69H7l8Wdym1AvqVOKAF4WxrH'),
-(127, 1, 1682934023, '8A24effYpxpiQ19mSf9mGNlE9Ep6hrcjD8XAzqwVrxTMXKaLKRz'),
-(128, 1, 1682934181, 'qPCe1yIbUgCuniJaH4oWxg0zqH1unyZwPPOhltciny3ajVgu2L8Ux7tEckVdKG8UXKHVC5jjI4TBBO71OOIzEVmL2');
+(32, 3, 1683079675, 'AT1KCoCEDNcNJ6PkAHDqxzqQBP55famUygOXFxOcYvhO9r4vLgfsvqxCxlwlthwW9HjRN6jg46lEE3V1T3yTZo1T');
 
 -- --------------------------------------------------------
 
@@ -242,11 +260,11 @@ INSERT INTO `session` (`sessionid`, `userid`, `stmp`, `token`) VALUES
 CREATE TABLE `users` (
   `userid` int(11) NOT NULL,
   `schoolid` int(11) DEFAULT NULL,
-  `voornaam` varchar(55) NOT NULL,
-  `achternaam` varchar(55) NOT NULL,
+  `firstname` varchar(55) NOT NULL,
+  `lastname` varchar(55) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `wachtwoord` varchar(100) NOT NULL,
-  `rol` tinyint(4) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `role` tinyint(4) NOT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   `createdby` int(11) NOT NULL,
   `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
@@ -260,35 +278,10 @@ CREATE TABLE `users` (
 -- Gegevens worden geëxporteerd voor tabel `users`
 --
 
-INSERT INTO `users` (`userid`, `schoolid`, `voornaam`, `achternaam`, `email`, `wachtwoord`, `rol`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, NULL, 'superuser', 'test', 'test@test.nl', '098f6bcd4621d373cade4e832627b4f6', 2, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
-(2, 1, 'admin', 'test', 'een@test.nl', '098f6bcd4621d373cade4e832627b4f6', 1, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL),
-(3, 1, 'docent', 'test', 'twee@test.nl', '098f6bcd4621d373cade4e832627b4f6', 0, '2023-04-20 09:34:01', 1, '2023-04-20 09:34:01', 1, 0, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `vakgebied`
---
-
-CREATE TABLE `vakgebied` (
-  `vakid` int(11) NOT NULL,
-  `naamvakgebied` varchar(55) NOT NULL,
-  `createdat` datetime NOT NULL DEFAULT current_timestamp(),
-  `createdby` int(11) NOT NULL,
-  `updatedat` datetime NOT NULL DEFAULT current_timestamp(),
-  `updatedby` int(11) NOT NULL,
-  `archive` tinyint(4) NOT NULL DEFAULT 0,
-  `deletedat` datetime DEFAULT NULL,
-  `deletedby` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `vakgebied`
---
-
-INSERT INTO `vakgebied` (`vakid`, `naamvakgebied`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, 'rekenen', '2023-04-28 11:30:02', 1, '2023-04-28 11:30:02', 1, 0, NULL, NULL);
+INSERT INTO `users` (`userid`, `schoolid`, `firstname`, `lastname`, `email`, `password`, `role`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, 0, 'superuser', 'test', 'test@test.nl', '098f6bcd4621d373cade4e832627b4f6', 2, '2023-05-03 08:20:53', 1, '2023-05-03 08:20:53', 1, 0, NULL, NULL),
+(2, 1, 'school admin', 'test', 'een@test.nl', '098f6bcd4621d373cade4e832627b4f6', 1, '2023-05-03 08:21:20', 1, '2023-05-03 08:21:20', 1, 0, NULL, NULL),
+(3, 1, 'docent', 'test', 'twee@test.nl', '098f6bcd4621d373cade4e832627b4f6', 0, '2023-05-03 08:21:45', 1, '2023-05-03 08:21:45', 1, 0, NULL, NULL);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -301,10 +294,10 @@ ALTER TABLE `beeway`
   ADD PRIMARY KEY (`beewayid`);
 
 --
--- Indexen voor tabel `beewayobservatie`
+-- Indexen voor tabel `beewayobservation`
 --
-ALTER TABLE `beewayobservatie`
-  ADD PRIMARY KEY (`observatieid`);
+ALTER TABLE `beewayobservation`
+  ADD PRIMARY KEY (`observationid`);
 
 --
 -- Indexen voor tabel `beewayplanning`
@@ -313,21 +306,27 @@ ALTER TABLE `beewayplanning`
   ADD PRIMARY KEY (`planningid`);
 
 --
--- Indexen voor tabel `groepen`
+-- Indexen voor tabel `disciplines`
 --
-ALTER TABLE `groepen`
-  ADD PRIMARY KEY (`groepenid`);
+ALTER TABLE `disciplines`
+  ADD PRIMARY KEY (`disciplineid`);
 
 --
--- Indexen voor tabel `hoofdthema`
+-- Indexen voor tabel `groups`
 --
-ALTER TABLE `hoofdthema`
-  ADD PRIMARY KEY (`themaid`);
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`groupid`);
 
 --
--- Indexen voor tabel `scholen`
+-- Indexen voor tabel `maintheme`
 --
-ALTER TABLE `scholen`
+ALTER TABLE `maintheme`
+  ADD PRIMARY KEY (`themeid`);
+
+--
+-- Indexen voor tabel `schools`
+--
+ALTER TABLE `schools`
   ADD PRIMARY KEY (`schoolid`);
 
 --
@@ -343,12 +342,6 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`userid`);
 
 --
--- Indexen voor tabel `vakgebied`
---
-ALTER TABLE `vakgebied`
-  ADD PRIMARY KEY (`vakid`);
-
---
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
@@ -356,13 +349,13 @@ ALTER TABLE `vakgebied`
 -- AUTO_INCREMENT voor een tabel `beeway`
 --
 ALTER TABLE `beeway`
-  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `beewayid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT voor een tabel `beewayobservatie`
+-- AUTO_INCREMENT voor een tabel `beewayobservation`
 --
-ALTER TABLE `beewayobservatie`
-  MODIFY `observatieid` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `beewayobservation`
+  MODIFY `observationid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT voor een tabel `beewayplanning`
@@ -371,28 +364,28 @@ ALTER TABLE `beewayplanning`
   MODIFY `planningid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT voor een tabel `hoofdthema`
+-- AUTO_INCREMENT voor een tabel `disciplines`
 --
-ALTER TABLE `hoofdthema`
-  MODIFY `themaid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `disciplines`
+  MODIFY `disciplineid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT voor een tabel `maintheme`
+--
+ALTER TABLE `maintheme`
+  MODIFY `themeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `session`
 --
 ALTER TABLE `session`
-  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT voor een tabel `vakgebied`
---
-ALTER TABLE `vakgebied`
-  MODIFY `vakid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

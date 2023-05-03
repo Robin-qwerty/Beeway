@@ -23,11 +23,11 @@
 
   <div class="beewaylijst">
     <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
-    <h2>Klassen beheeren <iconify-icon icon="ph:users-four-fill" style="font-size:35px;"></iconify-icon></h2>
+    <h2>Klassen beheren <iconify-icon icon="ph:users-four-fill" style="font-size:35px;"></iconify-icon></h2>
 
     <script src="script/error.js"></script>
     <div id="errormsg"></div>
-    
+
     <div class="beewaylijstopties">
       <button onclick="window.location.href='beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
@@ -42,33 +42,19 @@
       <button onclick="window.location.href='scholenlijst.html';" id="beewaylijstopties5">Scholen</button>
     </div>
     <hr>
+
     <br>
-    <table class="beewaylijsttable klassen">
+    <!-- <table class="beewaylijsttable klassen">
       <tr>
         <th><h3>Klas</h3></th>
         <th><h3>Docent(en)</h3></th>
         <th><h3>verwijderd</h3></th>
         <th><a href="klassentoevoegen.html" class="addbutton">toevoegen</a></th>
-      </tr>
-      <tr>
-        <td><b>'.$Klassen->Klas.'</b></td>
-        <td><b>'.$Klassen->Docent.'</b></td>
-        <td><b>'.$Klassen->archive.'</b></td>
-        <td><a href="klassenaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Klassen->Klas.'</b></td>
-        <td><b>'.$Klassen->Docent.'</b></td>
-        <td><b>'.$Klassen->archive.'</b></td>
-        <td><a href="klassenaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Klassen->Klas.'</b></td>
-        <td><b>'.$Klassen->Docent.'</b></td>
-        <td><b>'.$Klassen->archive.'</b></td>
-        <td><a href="klassenaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-    </table>
+      </tr> -->
+
+      <div id="klassenijstdata"></div>
+
+    <!-- </table> -->
     <hr>
   </div>
 

@@ -1,9 +1,12 @@
 $(document).ready(function(){
+  if ("notification" in sessionStorage) {
+    handlenotification()
+  }
 
   if (window.location.pathname !== "/Beeway/login.html") {
     var obj = {'Token' : sessionStorage.getItem("token")};
     const myJSON = JSON.stringify(obj);
-    handleApiCall(handlesessioncheckdata, "SessionCheck", myJSON);
+    HandleApiCall(handlesessioncheckdata, "SessionCheck", myJSON);
   }
 
   $("#loginbtn").on("click", function(){
@@ -18,7 +21,7 @@ $(document).ready(function(){
     var obj = {'Email' : email, 'Psw' : psw5, 'School' : school};
     const myJSON = JSON.stringify(obj);
 
-    handleApiCall(handlelogindata, "Login", myJSON);
+    HandleApiCall(handlelogindata, "Login", myJSON);
   })
 
 }); // end document ready
@@ -31,18 +34,18 @@ function handlesessioncheckdata (result) {
   } else if (result == "NOK1") { // session expired
     var obj = {'Token' : sessionStorage.getItem("token")};
     const myJSON = JSON.stringify(obj);
-    handleApiCall(handlelogoutdata, "Logout", myJSON);
+    HandleApiCall(handlelogoutdata, "Logout", myJSON);
 
     sessionStorage.clear();
-    sessionStorage.setItem("error", "session verlopen, log opnieuw in");
+    sessionStorage.setItem("notification", "session verlopen, log opnieuw in");
     window.location.replace("http://192.168.1.100/Beeway/login.html");
   } else if (result == "NOK2") { // session not found
     sessionStorage.clear();
-    sessionStorage.setItem("error", "session error, log opnieuw in");
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
     window.location.replace("http://192.168.1.100/Beeway/login.html");
   } else {
     sessionStorage.clear();
-    sessionStorage.setItem("error", "session error, log opnieuw in");
+    sessionStorage.setItem("notification", "session error, log opnieuw in");
     window.location.replace("http://192.168.1.100/Beeway/login.html");
   }
 }
@@ -50,9 +53,14 @@ function handlesessioncheckdata (result) {
 function handlelogindata (result, div) {
   // alert(result);
   if (result == "NOK1") {
-    $("#errormsg").html("Selecteer een school!");
+    sessionStorage.setItem("notification", "Selecteer een school!");
+    handlenotification();
   } else if (result == "NOK2") {
-    $("#errormsg").html("Het email, wachtwoord of school komen niet overeen!");
+    sessionStorage.setItem("notification", "Het email, wachtwoord of school komen niet overeen!");
+    handlenotification();
+  } else if (result == "NOK3") {
+    sessionStorage.setItem("notification", "vul een eemail en een wachtwoord in!");
+    handlenotification();
   } else {
     const obj = JSON.parse(result);
 
@@ -60,4 +68,19 @@ function handlelogindata (result, div) {
     sessionStorage.setItem("voornaam", obj['Voornaam']);
     window.location.replace("http://192.168.1.100/Beeway/beewaylijst.html");
   }
+}
+
+
+function handlelogoutdata (result, div){
+  if (result == "NOK") {
+    $("#errormsg").html("er was iets mis gegaan, pech!");
+  }
+}
+
+function handlenotification() {
+  $("#notifipopup").html('<div class="alert warning"><strong>error.</strong> ' + sessionStorage.getItem("notification") + '</div>').fadeIn();
+  setTimeout(function(){ // popup fade out
+    sessionStorage.removeItem('notification');
+    $("#notifipopup").fadeOut();
+  }, 3000);
 }

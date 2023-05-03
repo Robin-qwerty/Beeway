@@ -23,11 +23,11 @@
 
   <div class="beewaylijst">
     <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
-    <h2>Hoofdthema beheeren <iconify-icon icon="healthicons:i-training-class" style="font-size:35px;"></iconify-icon></h2>
+    <h2>Hoofdthema beheren <iconify-icon icon="healthicons:i-training-class" style="font-size:35px;"></iconify-icon></h2>
 
     <script src="script/error.js"></script>
     <div id="errormsg"></div>
-    
+
     <div class="beewaylijstopties">
       <button onclick="window.location.href='beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
@@ -42,8 +42,9 @@
       <button onclick="window.location.href='scholenlijst.html';" id="beewaylijstopties5">Scholen</button>
     </div>
     <hr>
+
     <br>
-    <table class="beewaylijsttable">
+    <!-- <table class="beewaylijsttable">
       <tr>
         <th><h3>Schooljaar</h3></th>
         <th><h3>Periode 1</h3></th>
@@ -53,38 +54,11 @@
         <th><h3>Periode 5</h3></th>
         <th><h3>verwijderd</h3></th>
         <th><a href="hoofdthematoevoegen.html" class="addbutton">toevoegen</a></th>
-      </tr>
-      <tr>
-        <td><b>'.$Hoofdthema->Schooljaar.'</b></td>
-        <td><b>'.$Hoofdthema->Periode1.'</b></td>
-        <td><b>'.$Hoofdthema->Periode2.'</b></td>
-        <td><b>'.$Hoofdthema->Periode3.'</b></td>
-        <td><b>'.$Hoofdthema->Periode4.'</b></td>
-        <td><b>'.$Hoofdthema->Periode4.'</b></td>
-        <td><b>'.$Hoofdthema->Archive.'</b></td>
-        <td><a href="hoofdthemaaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Hoofdthema->Schooljaar.'</b></td>
-        <td><b>'.$Hoofdthema->Periode1.'</b></td>
-        <td><b>'.$Hoofdthema->Periode2.'</b></td>
-        <td><b>'.$Hoofdthema->Periode3.'</b></td>
-        <td><b>'.$Hoofdthema->Periode4.'</b></td>
-        <td><b>'.$Hoofdthema->Periode4.'</b></td>
-        <td><b>'.$Hoofdthema->Archive.'</b></td>
-        <td><a href="hoofdthemaaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Hoofdthema->Schooljaar.'</b></td>
-        <td><b>'.$Hoofdthema->Periode1.'</b></td>
-        <td><b>'.$Hoofdthema->Periode2.'</b></td>
-        <td><b>'.$Hoofdthema->Periode3.'</b></td>
-        <td><b>'.$Hoofdthema->Periode4.'</b></td>
-        <td><b>'.$Hoofdthema->Periode4.'</b></td>
-        <td><b>'.$Hoofdthema->Archive.'</b></td>
-        <td><a href="hoofdthemaaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-    </table>
+      </tr> -->
+
+      <div id="hoofdthemalijstdata"></div>
+
+    <!-- </table> -->
     <hr>
   </div>
 </body>

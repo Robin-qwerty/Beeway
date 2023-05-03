@@ -446,6 +446,55 @@ input[type='checkbox']:checked {
   margin: 0;
 }
 
+
+#notifipopup {
+  display: none;
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+}
+
+/* .alert.success {
+  background-color: #04AA6D;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+.alert.info {
+  background-color: #2196F3;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+} */
+.alert.warning {
+  background-color: #ff9800;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+
 /* --- beeway letters op login.html --- */
 
 .header {

@@ -23,11 +23,11 @@
 
   <div class="beewaylijst">
     <div class="beewaylijsttitel"><h1>Welkom op het admin dashboard</h1></div>
-    <h2>Vakken beheeren <iconify-icon icon="icomoon-free:books" style="font-size:35px;"></iconify-icon></h2>
+    <h2>Vakken beheren <iconify-icon icon="icomoon-free:books" style="font-size:35px;"></iconify-icon></h2>
 
     <script src="script/error.js"></script>
     <div id="errormsg"></div>
-    
+
     <div class="beewaylijstopties">
       <button onclick="window.location.href='beewaylijst.html';" id="beewaylijstopties1">Beeway's</button>
       <b>|</b>
@@ -42,29 +42,18 @@
       <button onclick="window.location.href='scholenlijst.html';" id="beewaylijstopties5">Scholen</button>
     </div>
     <hr>
+
     <br>
-    <table class="beewaylijsttable">
+    <!-- <table class="beewaylijsttable">
       <tr>
         <th><h3>Naamvak</h3></th>
         <th><h3>verwijderd</h3></th>
         <th><a href="vakkentoevoegen.html" class="addbutton">toevoegen</a></th>
-      </tr>
-      <tr>
-        <td><b>'.$Vakgebied->Naamvak.'</b></td>
-        <td><b>'.$Vakgebied->archive.'</b></td>
-        <td><a href="vakkenaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Vakgebied->Naamvak.'</b></td>
-        <td><b>'.$Vakgebied->archive.'</b></td>
-        <td><a href="vakkenaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-      <tr>
-        <td><b>'.$Vakgebied->Naamvak.'</b></td>
-        <td><b>'.$Vakgebied->archive.'</b></td>
-        <td><a href="vakkenaanpassen.html" class="editbutton">aanpassen</a></td>
-      </tr>
-    </table>
+      </tr> -->
+
+      <div id="vakkenlijstdata"></div>
+
+    <!-- </table> -->
     <hr>
   </div>
 </body>

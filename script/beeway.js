@@ -69,7 +69,7 @@ $(document).ready(function(){
 
     var jsonString3 = JSON.stringify(data);
 
-    handleApiCall(handledata, "beeway", jsonString3);
+    HandleApiCall(handledata, "beeway", jsonString3);
     // console.log(jsonString3);
   })
 

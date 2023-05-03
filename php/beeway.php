@@ -22,8 +22,8 @@
           $stmp = $row['stmp'];
           $now = new datetime();
           $dt = strtotime($now->format('y-m-d h:i:s'));
-
-          if ($dt >= $stmp) {
+          // echo $dt . ", " . $stmp . ", ";
+          if ($dt > $stmp) {
             echo "NOK1"; // session expierd
 
             $sql2 = "DELETE FROM session WHERE token=?";
@@ -36,7 +36,7 @@
           }
         }
       } else {
-        echo "NOK2"; // session not found
+        echo "NOK2"; // session not found (invalid)
       }
   }
 
@@ -49,12 +49,12 @@
       $psw = $json['Psw'];
       $school = $json['School'];
 
-      if ($school === "0") { // superadmin login
-        $sql = "SELECT userid, voornaam
+      if ($school === "0" && $email != "" && $psw != "") { // superadmin login
+        $sql = "SELECT DISTINCT userid, firstname
                 From users
                 WHERE email=?
-                AND wachtwoord=?
-                AND rol='2'
+                AND password=?
+                AND role='2'
                 AND archive<>'1'";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ss", $email, $psw);
@@ -64,7 +64,7 @@
         if ($result !== false && $result -> num_rows > 0) {
           while ($row = $result->fetch_assoc()) {
             $userid = $row['userid'];
-            $voornaam = $row['voornaam'];
+            $voornaam = $row['firstname'];
 
             $token = SetSession($conn, $userid);
 
@@ -77,12 +77,13 @@
         } else {
           echo "NOK1"; // error
         }
-      } else { // school admin or school teatcher login
-        $sql = "SELECT u.userid, u.schoolid, u.voornaam
-                From scholen as s, users as u
-                WHERE email=?
-                AND wachtwoord=?
+      } else if ($school != "0" && $email != "" && $psw != "") { // school admin or school teatcher login
+        $sql = "SELECT DISTINCT u.userid, u.firstname
+                From users as u
+                WHERE u.email=?
+                AND u.password=?
                 AND u.schoolid=?
+                AND u.role<>'2'
                 AND u.archive<>'1'";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $email, $psw, $school);
@@ -90,9 +91,9 @@
         $result = $stmt->get_result();
 
         if ($result !== false && $result -> num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
+          if ($row = $result->fetch_assoc()) {
             $userid = $row['userid'];
-            $voornaam = $row['voornaam'];
+            $voornaam = $row['firstname'];
 
             $token = SetSession($conn, $userid);
             $jsonArrayObject = (array('Token' => $token,
@@ -104,6 +105,8 @@
           } else {
           echo "NOK2"; // error
         }
+      } else {
+        echo "NOK3"; // error
       }
   }
 
@@ -139,32 +142,37 @@
       $sessionvalid = SessionCheck($conn, $token); // session check
 
       if ($sessionvalid == "ok") {  // session OK
-
-        $sql = "SELECT s.userid, u.schoolid, u.rol
+        $sql1 = "SELECT s.userid, u.schoolid, u.rol
                 FROM session as s, users as u
-                WHERE s.token='$token'
+                WHERE s.token=?
                 AND u.archive<>'1'
                 AND u.userid=s.userid";
-        $result1 = $conn->query($sql);
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->bind_param("s", $token);
+        $stmt1->execute();
+        $result1 = $stmt1->get_result();
 
         if ($result1 !== false && $result1 -> num_rows > 0) {
           while ($row = $result1->fetch_assoc()) {
             $schoolid = $row['schoolid'];
             $userid = $row['userid'];
 
-            if ($row['rol'] == 0) { // docent
-              $sql = "SELECT g.groepen, b.*, v.naamvakgebied, h.naamthema, u.voornaam
-                      FROM koppelinggroepen as k, groepen as g, beeway as b, vakgebied as v, users as u, hoofdthema as h
-                      WHERE '$userid'=k.userid
-                      AND k.groepenid=g.groepenid
-                      AND g.groepenid=b.groepenid
-                      AND b.schoolid='$schoolid'
-                      AND v.vakid=b.vakgebiedid
-                      AND h.themaid=b.hoofdthemaid
+            if ($row['role'] == 0) { // docent
+              $sql2 = "SELECT g.groups, b.*, v.disciplinename, h.namethema, u.firstname
+                      FROM linkgroups as k, groups as g, beeway as b, disciplines as v, users as u, maintheme as h
+                      WHERE ?=k.userid
+                      AND k.groupid=g.groupid
+                      AND g.groupid=b.groupid
+                      AND b.schoolid=?
+                      AND v.disciplineid=b.disciplineid
+                      AND h.themeid=b.mainthemeid
                       AND u.userid=b.createdby
                       AND u.archive<>'1'
                       LIMIT 2";
-              $result2 = $conn->query($sql);
+              $stmt2 = $conn->prepare($sql2);
+              $stmt2->bind_param("ss", $userid, $schoolid);
+              $stmt2->execute();
+              $result2 = $stmt2->get_result();
 
               if ($result2 !== false && $result2 -> num_rows > 0) {
                 $text = '<table class="beewaylijsttable" id="bw1">
@@ -186,7 +194,7 @@
                   if ($row["archive"] == "1") {$archive = "yes";}
                   else {$archive = "no";}
 
-                  $text = $text . '<tr><td>'.$row["beewaynaam"].'</td><td>'.$row["groepen"].'</td><td>'.$row["naamvakgebied"].'</td><td>'.$row["naamthema"].'</td><td>'.$row['voornaam'].'</td><td>'.$status.'</td><td>'.$archive.'</td><td hidden>'.$row["beewayid"].'</td><td><button class="editbutton beewaybutton">bekijken</button></td></tr>';
+                  $text = $text . '<tr><td>'.$row["beewayname"].'</td><td>'.$row["groups"].'</td><td>'.$row["disciplinename"].'</td><td>'.$row["namethema"].'</td><td>'.$row['firstname'].'</td><td>'.$status.'</td><td>'.$archive.'</td><td hidden>'.$row["beewayid"].'</td><td><button class="editbutton beewaybutton">bekijken</button></td></tr>';
                 }
 
                 echo $text = $text . '</table> <button class="editbutton loadmorebeeway">more</button>';
@@ -194,15 +202,19 @@
               } else {
                 echo "NOK3"; // not found
               }
-            } elseif ($row['rol'] == 1) { // school admin
-              $sql = "SELECT b.*, g.groepen, v.naamvakgebied, h.naamthema, u.voornaam
-                      FROM beeway as b, groepen as g, vakgebied as v, hoofdthema as h, users as u
-                      WHERE b.schoolid='$schoolid'
-                      AND v.vakid=b.vakgebiedid
-                      AND h.themaid=b.hoofdthemaid
+            } elseif ($row['role'] == 1) { // school admin
+              $sql3 = "SELECT b.*, g.groups, v.disciplinename, h.namethema, u.firstname
+                      FROM beeway as b, groups as g, disciplines as v, maintheme as h, users as u
+                      WHERE b.schoolid=?
+                      AND b.groupid=g.groupid
+                      AND v.disciplineid=b.disciplineid
+                      AND h.themeid=b.mainthemeid
                       AND u.userid=b.createdby
                       AND u.archive<>'1'";
-              $result3 = $conn->query($sql);
+                      $stmt3 = $conn->prepare($sql3);
+                      $stmt3->bind_param("s", $schoolid);
+                      $stmt3->execute();
+                      $result3 = $stmt3->get_result();
 
               if ($result3 !== false && $result3 -> num_rows > 0) {
                 $text = '<table class="beewaylijsttable">
@@ -224,7 +236,7 @@
                   if ($row["archive"] == "1") {$archive = "yes";}
                   else {$archive = "no";}
 
-                  $text = $text . '<tr><td>'.$row["beewaynaam"].'</td><td>'.$row["groepen"].'</td><td>'.$row["naamvakgebied"].'</td><td>'.$row["naamthema"].'</td><td>'.$row['voornaam'].'</td><td>'.$status.'</td><td>'.$archive.'</td><td hidden>'.$row["beewayid"].'</td><td><button class="editbutton beewaybutton">bekijken</button></td></tr>';
+                  $text = $text . '<tr><td>'.$row["beewayname"].'</td><td>'.$row["groups"].'</td><td>'.$row["disciplinename"].'</td><td>'.$row["namethema"].'</td><td>'.$row['firstname'].'</td><td>'.$status.'</td><td>'.$archive.'</td><td hidden>'.$row["beewayid"].'</td><td><button class="editbutton beewaybutton">bekijken</button></td></tr>';
                 }
 
                 echo $text = $text . "</table>";
@@ -247,9 +259,9 @@
 
 
 
-  if (isset($_POST['AllKlassen'])) // get data for classes table
+  if (isset($_POST['AllGroups'])) // get data for classes table
   {
-      $json = $_POST['AllKlassen'];
+      $json = $_POST['AllGroups'];
       $json = json_decode($json, true);
       $token = $json['Token'];
 
@@ -269,45 +281,239 @@
 
 
 
-  if (isset($_POST['AllVakken'])) // get data for discipline table (super user and school admin only)
+  if (isset($_POST['AllDisciplines'])) // get data for discipline table (super user and school admin only)
   {
-      $json = $_POST['AllVakken'];
+      $json = $_POST['AllDisciplines'];
       $json = json_decode($json, true);
       $token = $json['Token'];
 
 
       $sessionvalid = SessionCheck($conn, $token); // session check
 
-      if ($sessionvalid == "ok") { // session OK
+      if ($sessionvalid == "OK") { // session OK
 
-        // code
+        $sql1 = "SELECT u.role, u.schoolid
+                FROM session as s, users as u
+                WHERE s.token=?
+                AND u.userid=s.userid
+                AND u.role<>'0'
+                AND u.archive<>'1'";
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->bind_param("s", $token);
+        $stmt1->execute();
+        $result1 = $stmt1->get_result();
+
+        if ($result1 !== false && $result1 -> num_rows > 0) {
+          if ($row = $result1->fetch_assoc()) {
+            $schoolid = $row['schoolid'];
+
+            if ($row['role'] == 1) { // school admin
+              // $sql2 = "SELECT m.*
+              //         FROM maintheme as m
+              //         WHERE m.schoolid=?
+              //         AND m.schoolid<>'0'
+              //         AND m.archive<>'1'";
+              // $stmt2 = $conn->prepare($sql2);
+              // $stmt2->bind_param("s", $schoolid);
+              // $stmt2->execute();
+              // $result2 = $stmt2->get_result();
+              //
+              // if ($result2 !== false && $result2 -> num_rows > 0) {
+              //   $text = '<table class="beewaylijsttable">
+              //           <tr>
+              //            <th><h3>Naamvak</h3></th>
+              //            <th><h3>verwijderd</h3></th>
+              //            <th><a href="vakkentoevoegen.html" class="addbutton">toevoegen</a></th>
+              //           </tr>';
+              //
+              //   while ($row = $result2->fetch_assoc()) {
+              //     if ($row["archive"] == "1") {$archive = "yes";}
+              //     else {$archive = "no";}
+              //
+              //     if ($row["schoolyear"] == "1") {$schoolyear = "2021/2022";}
+              //     else if ($row["schoolyear"] == "1") {$schoolyear = "2022/2023";}
+              //     else if ($row["schoolyear"] == "1") {$schoolyear = "2023/2024";}
+              //     else if ($row["schoolyear"] == "1") {$schoolyear = "2024/2025";}
+              //     else if ($row["schoolyear"] == "1") {$schoolyear = "2025/2026";}
+              //     else if ($row["schoolyear"] == "1") {$schoolyear = "2026/2027";}
+              //     else if ($row["schoolyear"] == "1") {$schoolyear = "2027/2028";}
+              //
+              //     $text = $text . '<tr><td>'.$schoolyear.'</td><td>'.$row["namethemep1"].'</td><td>'.$row["namethemep2"].'</td><td>'.$row["namethemep3"].'</td><td>'.$row["namethemep4"].'</td><td>'.$row["namethemep5"].'</td><td>'.$archive.'</td><td hidden>'.$row["themeid"].'</td><td><a href="useraanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
+              //   }
+              //
+              //   echo $text = $text . "</table>";
+              // } else { // no users found
+              //   echo "NOK1";
+              // }
+              echo "NOK";
+            } elseif ($row['role'] == 2) { // super user
+              $sql3 = "SELECT d.*
+                      FROM disciplines as d
+                      WHERE d.archive<>'1'";
+              $result3 = $conn->query($sql3);
+
+              if ($result3 !== false && $result3 -> num_rows > 0) {
+                $text = '<table class="beewaylijsttable">
+                        <tr>
+                        <th><h3>Naamvak</h3></th>
+                        <th><h3>verwijderd</h3></th>
+                        <th><a href="vakkentoevoegen.html" class="addbutton">toevoegen</a></th>
+                        </tr>';
+
+                while ($row = $result3->fetch_assoc()) {
+                  if ($row["archive"] == "1") {$archive = "yes";}
+                  else {$archive = "no";}
+
+                  $text = $text . '<tr><td>'.$row['disciplinename'].'</td><td>'.$archive.'</td><td hidden>'.$row["disciplineid"].'</td><td><a href="vakkenaanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
+                }
+
+                echo $text = $text . "</table>";
+              } else { // no users found
+                echo "NOK1";
+              }
+            } else { // no valid user found
+              echo "NOK";
+            }
+          }
+        } else { // no valid token found
+          echo "NOK";
+        }
 
       } elseif ($sessionvalid == "NOK1") { // session expierd
-        echo "NOK1";
+        echo "NOK!";
       } elseif ($sessionvalid == "NOK2") { // session not found
-        echo "NOK2";
+        echo "NOK!";
+      } else {
+        echo "NOK?";
       }
   }
 
 
 
-  if (isset($_POST['AllHoofdthemas'])) // get data for mainthemes table
+  if (isset($_POST['AllMainthemes'])) // get data for mainthemes table (super user and school admin only)
   {
-      $json = $_POST['AllHoofdthemas'];
+      $json = $_POST['AllMainthemes'];
       $json = json_decode($json, true);
       $token = $json['Token'];
 
 
       $sessionvalid = SessionCheck($conn, $token); // session check
 
-      if ($sessionvalid == "ok") { // session OK
+        if ($sessionvalid == "OK") { // session OK
+          $sql1 = "SELECT u.role, u.schoolid
+                  FROM session as s, users as u
+                  WHERE s.token=?
+                  AND u.userid=s.userid
+                  AND u.role<>'0'
+                  AND u.archive<>'1'";
+          $stmt1 = $conn->prepare($sql1);
+          $stmt1->bind_param("s", $token);
+          $stmt1->execute();
+          $result1 = $stmt1->get_result();
 
-        // code
+          if ($result1 !== false && $result1 -> num_rows > 0) {
+            if ($row = $result1->fetch_assoc()) {
+              $schoolid = $row['schoolid'];
 
+              if ($row['role'] == 1) { // school admin
+                $sql2 = "SELECT m.*
+                        FROM maintheme as m
+                        WHERE m.schoolid=?
+                        AND m.schoolid<>'0'
+                        AND m.archive<>'1'";
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2->bind_param("s", $schoolid);
+                $stmt2->execute();
+                $result2 = $stmt2->get_result();
+
+                if ($result2 !== false && $result2 -> num_rows > 0) {
+                  $text = '<table class="beewaylijsttable">
+                          <tr>
+                            <th><h3>Schooljaar</h3></th>
+                            <th><h3>Periode 1</h3></th>
+                            <th><h3>Periode 2</h3></th>
+                            <th><h3>Periode 3</h3></th>
+                            <th><h3>Periode 4</h3></th>
+                            <th><h3>Periode 5</h3></th>
+                            <th><h3>verwijderd</h3></th>
+                            <th><a href="hoofdthematoevoegen.html" class="addbutton">toevoegen</a></th>
+                          </tr>';
+
+                  while ($row = $result2->fetch_assoc()) {
+                    if ($row["archive"] == "1") {$archive = "yes";}
+                    else {$archive = "no";}
+
+                    if ($row["schoolyear"] == "1") {$schoolyear = "2021/2022";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2022/2023";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2023/2024";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2024/2025";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2025/2026";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2026/2027";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2027/2028";}
+
+                    $text = $text . '<tr><td>'.$schoolyear.'</td><td>'.$row["namethemep1"].'</td><td>'.$row["namethemep2"].'</td><td>'.$row["namethemep3"].'</td><td>'.$row["namethemep4"].'</td><td>'.$row["namethemep5"].'</td><td>'.$archive.'</td><td hidden>'.$row["themeid"].'</td><td><a href="hoofdthemaaanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
+                  }
+
+                  echo $text = $text . "</table>";
+                } else { // no users found
+                  echo "NOK1";
+                }
+              } elseif ($row['role'] == 2) { // super user
+                $sql3 = "SELECT m.*, s.schoolname
+                        FROM maintheme as m, schools as s
+                        WHERE m.schoolid=s.schoolid
+                        AND m.schoolid<>'0'
+                        AND m.archive<>'1'";
+                $result3 = $conn->query($sql3);
+
+                if ($result3 !== false && $result3 -> num_rows > 0) {
+                  $text = '<table class="beewaylijsttable">
+                          <tr>
+                            <th><h3>Schooljaar</h3></th>
+                            <th><h3>Periode 1</h3></th>
+                            <th><h3>Periode 2</h3></th>
+                            <th><h3>Periode 3</h3></th>
+                            <th><h3>Periode 4</h3></th>
+                            <th><h3>Periode 5</h3></th>
+                            <th><h3>verwijderd</h3></th>
+                            <th><a href="hoofdthematoevoegen.html" class="addbutton">toevoegen</a></th>
+                          </tr>';
+
+                  while ($row = $result3->fetch_assoc()) {
+                    if ($row["archive"] == "1") {$archive = "yes";}
+                    else {$archive = "no";}
+
+                    if ($row["schoolname"] == "") {$schoolname = "<em>(geen)</em>";}
+                    else {$schoolname = $row["schoolname"];}
+
+                    if ($row["schoolyear"] == "1") {$schoolyear = "2021/2022";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2022/2023";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2023/2024";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2024/2025";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2025/2026";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2026/2027";}
+                    else if ($row["schoolyear"] == "1") {$schoolyear = "2027/2028";}
+
+                    $text = $text . '<tr><td>'.$row['schoolname'].'</td><td>'.$schoolyear.'</td><td>'.$row["namethemep1"].'</td><td>'.$row["namethemep2"].'</td><td>'.$row["namethemep3"].'</td><td>'.$row["namethemep4"].'</td><td>'.$row["namethemep5"].'</td><td>'.$archive.'</td><td hidden>'.$row["themeid"].'</td><td><a href="useraanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
+                  }
+
+                  echo $text = $text . "</table>";
+                } else { // no users found
+                  echo "NOK1";
+                }
+              } else { // no valid user found
+                echo "NOK";
+              }
+            }
+          } else { // no valid token found
+            echo "NOK";
+          }
       } elseif ($sessionvalid == "NOK1") { // session expierd
-        echo "NOK1";
+        echo "NOK!";
       } elseif ($sessionvalid == "NOK2") { // session not found
-        echo "NOK2";
+        echo "NOK!";
+      } else {
+        echo "NOK?";
       }
   }
 
@@ -319,110 +525,147 @@
       $json = json_decode($json, true);
       $token = $json['Token'];
 
-      $sql1 = "SELECT s.userid, u.rol, u.schoolid
-              FROM session as s, users as u
-              WHERE s.token='$token'
-              AND u.userid=s.userid
-              AND u.rol<>'0'
-              AND u.archive<>'1'";
-      $result1 = $conn->query($sql1);
+      $sessionvalid = SessionCheck($conn, $token); // session check
 
-      if ($result1 !== false && $result1 -> num_rows > 0) {
-        while ($row = $result1->fetch_assoc()) {
-          $schoolid = $row['schoolid'];
-          $userid = $row['userid'];
+      if ($sessionvalid == "OK") { // session OK
+        $sql1 = "SELECT u.role, u.schoolid
+                FROM session as s, users as u
+                WHERE s.token=?
+                AND u.userid=s.userid
+                AND u.role<>'0'
+                AND u.archive<>'1'";
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->bind_param("s", $token);
+        $stmt1->execute();
+        $result1 = $stmt1->get_result();
 
+        if ($result1 !== false && $result1 -> num_rows > 0) {
+          if ($row = $result1->fetch_assoc()) {
+            $schoolid = $row['schoolid'];
 
-          if ($row['rol'] == 1) { // school admin
-            $sql2 = "SELECT u.*
-                    FROM users as u
-                    WHERE u.schoolid=1
-                    AND u.archive<>'1'";
-            $result2 = $conn->query($sql2);
+            if ($row['role'] == 1) { // school admin
+              $sql2 = "SELECT u.*, s.schoolname
+                      FROM users as u, schools as s
+                      WHERE u.schoolid=?
+                      AND s.schoolid=u.schoolid
+                      AND u.schoolid<>'0'
+                      AND u.archive<>'1'";
+              $stmt2 = $conn->prepare($sql2);
+              $stmt2->bind_param("s", $schoolid);
+              $stmt2->execute();
+              $result2 = $stmt2->get_result();
 
-            if ($result2 !== false && $result2 -> num_rows > 0) {
-              echo "string";
-            } else { // no users found
-              echo "NOK1";
-            }
-          }
+              if ($result2 !== false && $result2 -> num_rows > 0) {
+                $text = '<table class="beewaylijsttable">
+                        <tr>
+                          <th><h3>School</h3></th>
+                          <th><h3>Naam</h3></th>
+                          <th><h3>Email</h3></th>
+                          <th><h3>Rol</h3></th>
+                          <th><h3>geblokkeerd/verwijderd</h3></th>
+                          <th><a href="usertoevoegen.html" class="addbutton">toevoegen</a></th>
+                        </tr>';
 
+                while ($row = $result2->fetch_assoc()) {
+                  if ($row["role"] == "0") {$rol = "docent";}
+                  else if ($row["role"] == "1") {$rol = "school admin";}
+                  else {$rol = "super user";}
 
+                  if ($row["archive"] == "1") {$archive = "yes";}
+                  else {$archive = "no";}
 
-          elseif ($row['rol'] == 2) { // super user
-            $sql2 = "SELECT u.*, s.naamschool
-                    FROM users as u, scholen as s
-                    WHERE s.schoolid=u.schoolid";
-            $result3 = $conn->query($sql2);
+                  if ($row["schoolname"] == "") {$schoolname = "<em>(geen)</em>";}
+                  else {$schoolname = $row["schoolname"];}
 
-            if ($result3 !== false && $result3 -> num_rows > 0) {
-              $text = '<table class="beewaylijsttable">
-                      <tr>
-                        <th><h3>School</h3></th>
-                        <th><h3>Naam</h3></th>
-                        <th><h3>Email</h3></th>
-                        <th><h3>Rol</h3></th>
-                        <th><h3>geblokkeerd/verwijderd</h3></th>
-                        <th><a href="usertoevoegen.html" class="addbutton">toevoegen</a></th>
-                      </tr>';
+                  $text = $text . '<tr><td>'.$schoolname.'</td><td>'.$row["firstname"].' '.$row["lastname"].'</td><td>'.$row["email"].'</td><td>'.$rol.'</td><td>'.$archive.'</td><td hidden>'.$row["userid"].'</td><td><a href="useraanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
+                }
 
-              while ($row = $result3->fetch_assoc()) {
-                if ($row["rol"] == "0") {$rol = "docent";}
-                else if ($row["rol"] == "1") {$rol = "school admin";}
-                else {$rol = "super user";}
-
-                if ($row["archive"] == "1") {$archive = "yes";}
-                else {$archive = "no";}
-
-                if ($row["naamschool"] == "") {$schoolname = "<em>(geen)</em>";}
-                else {$schoolname = $row["naamschool"];}
-
-                $text = $text . '<tr><td>'.$schoolname.'</td><td>'.$row["voornaam"].' '.$row["achternaam"].'</td><td>'.$row["email"].'</td><td>'.$rol.'</td><td>'.$archive.'</td><td hidden>'.$row["userid"].'</td><td><a href="useraanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
+                echo $text = $text . "</table>";
+              } else { // no users found
+                echo "NOK1";
               }
+            } elseif ($row['role'] == 2) { // super user
+              $sql3 = "SELECT u.*, s.schoolname
+                      FROM users as u, schools as s
+                      WHERE s.schoolid=u.schoolid";
+              $result3 = $conn->query($sql3);
 
-              echo $text = $text . "</table>";
+              if ($result3 !== false && $result3 -> num_rows > 0) {
+                $text = '<table class="beewaylijsttable">
+                        <tr>
+                          <th><h3>School</h3></th>
+                          <th><h3>Naam</h3></th>
+                          <th><h3>Email</h3></th>
+                          <th><h3>Rol</h3></th>
+                          <th><h3>geblokkeerd/verwijderd</h3></th>
+                          <th><a href="usertoevoegen.html" class="addbutton">toevoegen</a></th>
+                        </tr>';
 
-            } else { // no users found
-              echo "NOK1";
+                while ($row = $result3->fetch_assoc()) {
+                  if ($row["role"] == "0") {$rol = "docent";}
+                  else if ($row["role"] == "1") {$rol = "school admin";}
+                  else {$rol = "super user";}
+
+                  if ($row["archive"] == "1") {$archive = "yes";}
+                  else {$archive = "no";}
+
+                  if ($row["schoolname"] == "") {$schoolname = "<em>(geen)</em>";}
+                  else {$schoolname = $row["schoolname"];}
+
+                  $text = $text . '<tr><td>'.$schoolname.'</td><td>'.$row["firstname"].' '.$row["lastname"].'</td><td>'.$row["email"].'</td><td>'.$rol.'</td><td>'.$archive.'</td><td hidden>'.$row["userid"].'</td><td><a href="useraanpassen.html" class="editbutton edituser">bewerken</a></td></tr>';
+                }
+
+                echo $text = $text . "</table>";
+              } else { // no users found
+                echo "NOK1";
+              }
+            } else { // no valid user found
+              echo "NOK";
             }
-          } else { // no valid user found
-            echo "NOK";
           }
+        } else { // no valid token found
+          echo "NOK";
         }
-      } else { // no valid user found
-        echo "NOK";
+      } elseif ($sessionvalid == "NOK1") { // session expierd
+        echo "NOK!";
+      } elseif ($sessionvalid == "NOK2") { // session not found
+        echo "NOK!";
+      } else {
+        echo "NOK?";
       }
   }
 
 
 
-  if (isset($_POST['AllScholen'])) // get data for school table (super user only)
+  if (isset($_POST['AllSchools'])) // get data for school table (super user only)
   {
-      $json = $_POST['AllScholen'];
+      $json = $_POST['AllSchools'];
       $json = json_decode($json, true);
       $token = $json['Token'];
 
-
       $sessionvalid = SessionCheck($conn, $token); // session check
 
-      if ($sessionvalid == "ok") { // session OK
-
-        $sql = "SELECT u.rol
+      if ($sessionvalid == "OK") { // session OK
+        $sql1 = "SELECT u.role
                 FROM session as s, users as u
-                WHERE s.token='$token'
+                WHERE s.token=?
                 AND u.userid=s.userid
-                AND u.rol='2'
+                AND u.role='2'
                 AND u.archive<>'1'";
-        $result1 = $conn->query($sql);
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->bind_param("s", $token);
+        $stmt1->execute();
+        $result1 = $stmt1->get_result();
 
         if ($result1 !== false && $result1 -> num_rows > 0) {
           while ($row = $result1->fetch_assoc()) {
-            $rol = $row['rol'];
+            $rol = $row['role'];
 
             if ($rol == 2) { // super user
-              $sql = "SELECT s.*
-                      FROM scholen as s";
-              $result2 = $conn->query($sql);
+              $sql2 = "SELECT s.*
+                      FROM schools as s
+                      WHERE schoolid<>0";
+              $result2 = $conn->query($sql2);
 
               if ($result2 !== false && $result2 -> num_rows > 0) {
                 $text = '<table class="beewaylijsttable">
@@ -437,26 +680,27 @@
                   if ($row["archive"] == "1") {$archive = "yes";}
                   else {$archive = "no";}
 
-                  $text = $text . '<tr><td>'.$row["naamschool"].'</td><td>'.$archive.'</td><td><a href="schoolaanpassen.html" class="editbutton">users bekijken</a></td><td><a href="schoolaanpassen.html" class="editbutton">bewerken</a></td></tr>';
+                  $text = $text . '<tr><td>'.$row["schoolname"].'</td><td>'.$archive.'</td><td><a href="schoolaanpassen.html" class="editbutton">users bekijken</a></td><td><a href="schoolaanpassen.html" class="editbutton">bewerken</a></td></tr>';
                 }
 
                 echo $text = $text . "</table>";
-
               } else {
-                echo "NOK1"; // not found
+                echo "NOK1"; // no schools found
               }
             } else { // no valid user found
-              echo "NOK!"; // error
+              echo "NOK!";
             }
           }
         } else { // no valid user found
-          echo "NOK!"; // error
+          echo "NOK";
         }
 
       } elseif ($sessionvalid == "NOK1") { // session expierd
-        echo "NOK1";
+        echo "NOK!";
       } elseif ($sessionvalid == "NOK2") { // session not found
-        echo "NOK2";
+        echo "NOK!";
+      } else {
+        echo "NOK?";
       }
   }
 
@@ -527,8 +771,7 @@
 
 
 
-  function SetSession($conn, $userid)
-  {
+  function SetSession($conn, $userid) { // set a session when user logs in
       $number = generateRandomNumber();
       $token = RandomString($number);
 
@@ -537,7 +780,7 @@
       if (isset($rememberme)) {
         $now->modify('+7 day');
       } else {
-        $now->modify('+8 hour');
+        $now->modify('+1 hour');
       }
 
       $dt = strtotime($now->format('y-m-d h:i:s'));
@@ -551,8 +794,8 @@
       return $token;
   }
 
-  function RandomString($length) // set random string
-  {
+
+  function RandomString($length) { // set random string
       $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $string = '';
 
@@ -563,13 +806,12 @@
       return $string;
   }
 
-    function generateRandomNumber() { // Generate a random number between 50 and 100
-      $randomNumber = rand(50, 100);
-      return $randomNumber;
+  function generateRandomNumber() { // Generate a random number between 50 and 100
+    $randomNumber = rand(80, 100);
+    return $randomNumber;
   }
 
-  function SessionCheck($conn, $token)
-  {
+  function SessionCheck($conn, $token) { // set a user session in the database
       $sql = "SELECT stmp
               FROM session
               WHERE token=?";
