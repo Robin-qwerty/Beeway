@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 03 mei 2023 om 15:29
+-- Gegenereerd op: 04 mei 2023 om 09:56
 -- Serverversie: 10.4.27-MariaDB
 -- PHP-versie: 8.2.0
 
@@ -182,6 +182,7 @@ INSERT INTO `linkgroups` (`userid`, `groupid`) VALUES
 
 CREATE TABLE `maintheme` (
   `themeid` int(11) NOT NULL,
+  `schoolid` varchar(11) NOT NULL,
   `namethemep1` varchar(55) NOT NULL,
   `namethemep2` varchar(55) NOT NULL,
   `namethemep3` varchar(55) NOT NULL,
@@ -201,9 +202,10 @@ CREATE TABLE `maintheme` (
 -- Gegevens worden geëxporteerd voor tabel `maintheme`
 --
 
-INSERT INTO `maintheme` (`themeid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
-(1, 'test thema 1', '', '', '', '', '1', '2023-05-03 08:19:06', 1, '2023-05-03 08:19:06', 1, 0, NULL, NULL),
-(2, 'test thema 2', '', '', '', '', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL);
+INSERT INTO `maintheme` (`themeid`, `schoolid`, `namethemep1`, `namethemep2`, `namethemep3`, `namethemep4`, `namethemep5`, `schoolyear`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
+(1, '1', 'test thema 1', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:06', 1, '2023-05-03 08:19:06', 1, 0, NULL, NULL),
+(2, '1', 'test thema 2', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL),
+(3, '2', 'test thema 3', 'naam p2', 'naam p3', 'naam p4', 'naam p5', '1', '2023-05-03 08:19:14', 1, '2023-05-03 08:19:14', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -229,7 +231,8 @@ CREATE TABLE `schools` (
 
 INSERT INTO `schools` (`schoolid`, `schoolname`, `createdat`, `createdby`, `updatedat`, `updatedby`, `archive`, `deletedat`, `deletedby`) VALUES
 (0, '', '2023-05-03 08:19:39', 1, '2023-05-03 08:19:39', 1, 0, NULL, NULL),
-(1, 'mijnschool', '2023-05-03 08:19:49', 1, '2023-05-03 08:19:49', 1, 0, NULL, NULL);
+(1, 'mijnschool', '2023-05-03 08:19:49', 1, '2023-05-03 08:19:49', 1, 0, NULL, NULL),
+(2, 'nietmijnschool', '2023-05-03 16:06:18', 1, '2023-05-03 16:06:18', 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -249,7 +252,9 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`sessionid`, `userid`, `stmp`, `token`) VALUES
-(32, 3, 1683079675, 'AT1KCoCEDNcNJ6PkAHDqxzqQBP55famUygOXFxOcYvhO9r4vLgfsvqxCxlwlthwW9HjRN6jg46lEE3V1T3yTZo1T');
+(33, 1, 1683081342, 'zoK0qBUFT6ewH0l51D1mYGr0Fc6cc1wTQaXWy6N2IuqNESwSkgtpYaQBbzF5zU10YqDgluKkDQmX42w70WqQLubxQ66eUDO'),
+(35, 1, 1683183916, 'NFOfRVSq50tjS3RVORt97vf8SA5JPcyh9fEQVhG9Skdy9OJDh46GSZZYdyljOTv1S7WovIYeD2khwHIacREcc7uUH9BBnDj4'),
+(38, 1, 1683189003, '1Y2afFyhHbgMdIpQNQXuTJnUz11036RRUMbnIftGXh6MLDbv6nDQ8LTOe1Fi5cGhHJRLwsZKRg2EE6n7MPeRzH3');
 
 -- --------------------------------------------------------
 
@@ -373,13 +378,13 @@ ALTER TABLE `disciplines`
 -- AUTO_INCREMENT voor een tabel `maintheme`
 --
 ALTER TABLE `maintheme`
-  MODIFY `themeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `themeid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `session`
 --
 ALTER TABLE `session`
-  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `sessionid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`

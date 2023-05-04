@@ -280,13 +280,11 @@
   }
 
 
-
   if (isset($_POST['AllDisciplines'])) // get data for discipline table (super user and school admin only)
   {
       $json = $_POST['AllDisciplines'];
       $json = json_decode($json, true);
       $token = $json['Token'];
-
 
       $sessionvalid = SessionCheck($conn, $token); // session check
 
@@ -387,7 +385,6 @@
         echo "NOK?";
       }
   }
-
 
 
   if (isset($_POST['AllMainthemes'])) // get data for mainthemes table (super user and school admin only)
@@ -518,7 +515,6 @@
   }
 
 
-
   if (isset($_POST['AllUsers'])) // get data for user table (school admins and super users only)
   {
       $json = $_POST['AllUsers'];
@@ -636,7 +632,6 @@
   }
 
 
-
   if (isset($_POST['AllSchools'])) // get data for school table (super user only)
   {
       $json = $_POST['AllSchools'];
@@ -705,7 +700,6 @@
   }
 
 
-
   if (isset($_POST['beeway'])) // handel saving beeway data
   {
       $json = $_POST['beeway'];
@@ -751,7 +745,6 @@
   }
 
 
-
   if (isset($_POST['getbeewayperuser'])) // get one beeway by userid and groups
   {
       $json = $_POST['getbeewayperuser'];
@@ -769,6 +762,38 @@
 // --------------------------------------------- other functions --------------------------------------------- //
 
 
+
+  function SessionCheck($conn, $token) { // set a user session in the database
+      $sql = "SELECT stmp
+              FROM session
+              WHERE token=?";
+      $stmt = $conn->prepare($sql);
+      $stmt->bind_param("s", $token);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      if ($result !== false && $result -> num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $stmp = $row['stmp'];
+          $now = new datetime();
+          $dt = strtotime($now->format('y-m-d h:i:s'));
+
+          if ($dt >= $stmp) {
+            return "NOK1"; // session expierd
+
+            $sql = "DELETE FROM session WHERE token=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $token);
+            $stmt->execute();
+            $result = $stmt->get_result();
+          } else {
+            return "OK"; // session valid
+          }
+        }
+      } else {
+        return "NOK2"; // session not found
+      }
+  }
 
 
   function SetSession($conn, $userid) { // set a session when user logs in
@@ -805,42 +830,9 @@
 
       return $string;
   }
-
   function generateRandomNumber() { // Generate a random number between 50 and 100
     $randomNumber = rand(80, 100);
     return $randomNumber;
-  }
-
-  function SessionCheck($conn, $token) { // set a user session in the database
-      $sql = "SELECT stmp
-              FROM session
-              WHERE token=?";
-      $stmt = $conn->prepare($sql);
-      $stmt->bind_param("s", $token);
-      $stmt->execute();
-      $result = $stmt->get_result();
-
-      if ($result !== false && $result -> num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          $stmp = $row['stmp'];
-          $now = new datetime();
-          $dt = strtotime($now->format('y-m-d h:i:s'));
-
-          if ($dt >= $stmp) {
-            return "NOK1"; // session expierd
-
-            $sql = "DELETE FROM session WHERE token=?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("s", $token);
-            $stmt->execute();
-            $result = $stmt->get_result();
-          } else {
-            return "OK"; // session valid
-          }
-        }
-      } else {
-        return "NOK2"; // session not found
-      }
   }
 
 ?>
